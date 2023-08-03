@@ -272,7 +272,7 @@ class _SubjectsWiseListState extends State<SubjectsWiseList>
         customSizedBox(100.0),
         nameText(),
         smallSizedBox,
-        AppWidgets.elevatedButtonForCalender(selectedDay: widget.date),
+        StudentAppWidgets.elevatedButtonForCalender(selectedDay: widget.date),
         smallSizedBox,
         smallSizedBox,
         listView(),

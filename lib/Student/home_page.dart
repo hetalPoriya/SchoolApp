@@ -6,30 +6,30 @@
 // import 'package:flutter_svg/svg.dart';
 // import 'package:get/get.dart';
 // import 'package:intl/intl.dart';
-// import 'package:school_app/Student/activities.dart';
-// import 'package:school_app/Student/assignments.dart';
-// import 'package:school_app/Student/attendance.dart';
-// import 'package:school_app/Student/activity_details.dart';
-// import 'package:school_app/Student/document.dart';
-// import 'package:school_app/Student/feeds.dart';
-// import 'package:school_app/Student/message.dart';
-// import 'package:school_app/Student/my_profile.dart';
-// import 'package:school_app/Student/notification.dart';
-// import 'package:school_app/Student/pickupcard.dart';
-// import 'package:school_app/Student/video.dart';
-// import 'package:school_app/Student/view_events.dart';
-// import 'package:school_app/Student/profile_page.dart';
-// import 'package:school_app/Student/todays_work.dart';
-// import 'package:school_app/utils/animated_navigation.dart';
-// import 'package:school_app/utils/colors.dart';
-// import 'package:school_app/utils/constants.dart';
-// import 'package:school_app/utils/widgets/custom_app_bar.dart';
-// import 'package:school_app/utils/widgets/custom_drawer.dart';
-// import 'package:school_app/utils/widgets/custom_page.dart';
-// import 'package:school_app/utils/images.dart';
-// import 'package:school_app/utils/strings.dart';
-// import 'package:school_app/utils/utility.dart';
-// import 'package:school_app/utils/widgets/shimmerWidget.dart';
+// import 'package:little_angels/Student/activities.dart';
+// import 'package:little_angels/Student/assignments.dart';
+// import 'package:little_angels/Student/attendance.dart';
+// import 'package:little_angels/Student/activity_details.dart';
+// import 'package:little_angels/Student/document.dart';
+// import 'package:little_angels/Student/feeds.dart';
+// import 'package:little_angels/Student/message.dart';
+// import 'package:little_angels/Student/my_profile.dart';
+// import 'package:little_angels/Student/notification.dart';
+// import 'package:little_angels/Student/pickupcard.dart';
+// import 'package:little_angels/Student/video.dart';
+// import 'package:little_angels/Student/view_events.dart';
+// import 'package:little_angels/Student/profile_page.dart';
+// import 'package:little_angels/Student/todays_work.dart';
+// import 'package:little_angels/utils/animated_navigation.dart';
+// import 'package:little_angels/utils/colors.dart';
+// import 'package:little_angels/utils/constants.dart';
+// import 'package:little_angels/utils/widgets/custom_app_bar.dart';
+// import 'package:little_angels/utils/widgets/custom_drawer.dart';
+// import 'package:little_angels/utils/widgets/custom_page.dart';
+// import 'package:little_angels/utils/images.dart';
+// import 'package:little_angels/utils/strings.dart';
+// import 'package:little_angels/utils/utility.dart';
+// import 'package:little_angels/utils/widgets/shimmerWidget.dart';
 // import 'package:shimmer/shimmer.dart';
 //
 // import '../Controller/dailyActivityController.dart';
@@ -142,7 +142,7 @@
 //
 //   _init() async {
 //     bool isConnected = await nr.checkConnectivity();
-// 
+//
 //     if (isConnected) {
 //       WidgetsBinding.instance.addPostFrameCallback((_) {
 //         dailyActivityController.getStuActivity();
@@ -1153,31 +1153,31 @@
 // // import 'package:flutter_svg/svg.dart';
 // // import 'package:get/get.dart';
 // // import 'package:intl/intl.dart';
-// // import 'package:school_app/Student/activities.dart';
-// // import 'package:school_app/Student/assignments.dart';
-// // import 'package:school_app/Student/attendance.dart';
-// // import 'package:school_app/Student/activity_details.dart';
-// // import 'package:school_app/Student/document.dart';
-// // import 'package:school_app/Student/feeds.dart';
-// // import 'package:school_app/Student/message.dart';
-// // import 'package:school_app/Student/my_profile.dart';
-// // import 'package:school_app/Student/notification.dart';
-// // import 'package:school_app/Student/pickupcard.dart';
-// // import 'package:school_app/Student/subjects.dart';
-// // import 'package:school_app/Student/video.dart';
-// // import 'package:school_app/Student/view_events.dart';
-// // import 'package:school_app/Student/profile_page.dart';
-// // import 'package:school_app/Student/todays_work.dart';
-// // import 'package:school_app/utils/animated_navigation.dart';
-// // import 'package:school_app/utils/colors.dart';
-// // import 'package:school_app/utils/constants.dart';
-// // import 'package:school_app/utils/widgets/custom_app_bar.dart';
-// // import 'package:school_app/utils/widgets/custom_drawer.dart';
-// // import 'package:school_app/utils/widgets/custom_page.dart';
-// // import 'package:school_app/utils/images.dart';
-// // import 'package:school_app/utils/strings.dart';
-// // import 'package:school_app/utils/utility.dart';
-// // import 'package:school_app/utils/widgets/shimmerWidget.dart';
+// // import 'package:little_angels/Student/activities.dart';
+// // import 'package:little_angels/Student/assignments.dart';
+// // import 'package:little_angels/Student/attendance.dart';
+// // import 'package:little_angels/Student/activity_details.dart';
+// // import 'package:little_angels/Student/document.dart';
+// // import 'package:little_angels/Student/feeds.dart';
+// // import 'package:little_angels/Student/message.dart';
+// // import 'package:little_angels/Student/my_profile.dart';
+// // import 'package:little_angels/Student/notification.dart';
+// // import 'package:little_angels/Student/pickupcard.dart';
+// // import 'package:little_angels/Student/subjects.dart';
+// // import 'package:little_angels/Student/video.dart';
+// // import 'package:little_angels/Student/view_events.dart';
+// // import 'package:little_angels/Student/profile_page.dart';
+// // import 'package:little_angels/Student/todays_work.dart';
+// // import 'package:little_angels/utils/animated_navigation.dart';
+// // import 'package:little_angels/utils/colors.dart';
+// // import 'package:little_angels/utils/constants.dart';
+// // import 'package:little_angels/utils/widgets/custom_app_bar.dart';
+// // import 'package:little_angels/utils/widgets/custom_drawer.dart';
+// // import 'package:little_angels/utils/widgets/custom_page.dart';
+// // import 'package:little_angels/utils/images.dart';
+// // import 'package:little_angels/utils/strings.dart';
+// // import 'package:little_angels/utils/utility.dart';
+// // import 'package:little_angels/utils/widgets/shimmerWidget.dart';
 // // import 'package:shimmer/shimmer.dart';
 // //
 // // import '../Controller/dailyActivityController.dart';
@@ -1372,7 +1372,7 @@
 // //
 // //   _init() async {
 // //     bool isConnected = await nr.checkConnectivity();
-// // 
+// //
 // //     if (isConnected) {
 // //       WidgetsBinding.instance.addPostFrameCallback((_) {
 // //         dailyActivityController.getStuActivity();
@@ -2983,35 +2983,31 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:school_app/Student/activities.dart';
 import 'package:school_app/Student/assignments.dart';
-import 'package:school_app/Student/attendance.dart';
-import 'package:school_app/Student/activity_details.dart';
 import 'package:school_app/Student/document.dart';
 import 'package:school_app/Student/feeds.dart';
 import 'package:school_app/Student/message.dart';
-import 'package:school_app/Student/my_profile.dart';
-import 'package:school_app/Student/notification.dart';
 import 'package:school_app/Student/pickupcard.dart';
-import 'package:school_app/Student/video.dart';
-import 'package:school_app/Student/view_events.dart';
-import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/Student/todays_work.dart';
-import 'package:school_app/utils/animated_navigation.dart';
+import 'package:school_app/Student/video.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
-import 'package:school_app/utils/widgets/custom_app_bar.dart';
-import 'package:school_app/utils/widgets/custom_drawer.dart';
-import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/utility.dart';
+import 'package:school_app/utils/widgets/custom_app_bar.dart';
+import 'package:school_app/utils/widgets/custom_drawer.dart';
 import 'package:school_app/utils/widgets/shimmerWidget.dart';
+
 import 'package:shimmer/shimmer.dart';
 
 import '../Controller/dailyActivityController.dart';
 import '../Controller/loginController.dart';
 import '../utils/network_handler.dart';
+import 'activities.dart';
+import 'attendance.dart';
+import 'view_events.dart';
 
 class StudentHome extends StatefulWidget {
   final String? id;
@@ -3034,75 +3030,6 @@ class _StudentHomeState extends State<StudentHome>
   var loginController = Get.put(LoginController());
   var dailyActivityController = Get.put(DailyActivityController());
 
-  final List<Map<String, dynamic>> _data = [
-    {
-      'title': "Today's Work",
-      'icon': AssetImages.todaysWork,
-      'color': const LinearGradient(colors: [Colors.orange, Color(0xFFFFCC80)]),
-      'page': const TodaysWork(
-        name: "Today's Work",
-      )
-    },
-    {
-      'title': "Video",
-      'icon': AssetImages.video,
-      'color': const LinearGradient(colors: [Colors.green, Color(0xFFA5D6A7)]),
-      'page': const Video(
-        name: "Video",
-      )
-    },
-    {
-      'title': "Messages",
-      'icon': AssetImages.messages,
-      'color': const LinearGradient(colors: [Colors.red, Color(0xFFEF9A9A)]),
-      'page': const Message(
-        name: "Message",
-      )
-    },
-    {
-      'title': "Assignments",
-      'icon': AssetImages.messageAssignment,
-      'color': const LinearGradient(colors: [Colors.blue, Color(0xFF90CAF9)]),
-      'page': const Assignments(
-        name: "Assignments",
-      )
-    },
-    {
-      'title': "Attendance",
-      'icon': AssetImages.drawerAttendence,
-      'color':
-      const LinearGradient(colors: [Colors.deepPurple, Color(0xFFB39DDB)]),
-      'page': const Attendance(
-        name: "Attendance",
-      )
-    },
-    {
-      'title': "View Events",
-      'icon': AssetImages.assessmentCert,
-      'color': const LinearGradient(colors: [Colors.pink, Color(0xFFF48FB1)]),
-      'page': const ViewEvents(
-        name: "View Events",
-      )
-    },
-    {
-      'title': "Feeds",
-      'icon': AssetImages.newsFeeds,
-      'color': const LinearGradient(colors: [Colors.orange, Color(0xFFFFCC80)]),
-      'page': const Feeds()
-    },
-    {
-      'title': "Documents",
-      'icon': AssetImages.documents,
-      'color': const LinearGradient(colors: [Colors.green, Color(0xFFA5D6A7)]),
-      'page': const Documents()
-    },
-    {
-      'title': "Pickup Card",
-      'icon': AssetImages.drawerPickUpCard,
-      'color': const LinearGradient(colors: [Colors.red, Color(0xFFEF9A9A)]),
-      'page': const Pickupcard()
-    },
-  ];
 
   final ScrollController scrollController = ScrollController();
   bool showBar = true;
@@ -3195,460 +3122,108 @@ class _StudentHomeState extends State<StudentHome>
           childAspectRatio: 1,
         ),
         children: [
-          InkWell(
-            splashColor: ColorConstants.kTransparentColor,
-            highlightColor: ColorConstants.kTransparentColor,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const TodaysWork(
-                      name: "Today's Work",
-                    )),
-              );
-            },
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 10.0, 8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                        colors: [Colors.orange, Color(0xFFFFCC80)]),
-                    borderRadius: containeBorderRadius,
-                  ),
-                  child: Obx(
-                        () => dailyActivityController.isLoading.value
-                        ? ShimmerWidget.rectangular(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                    )
-                        : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          AssetImages.todaysWork,
-                          width: 50.0,
-                          height: 50.0,
-                        ),
-                        Text(
-                          "Today's Work",
-                          maxLines: 1,
-                          textAlign: TextAlign.center,
-                          style: buttonTextStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-          ),
-          InkWell(
-            splashColor: ColorConstants.kTransparentColor,
-            highlightColor: ColorConstants.kTransparentColor,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const Video(
-                      name: "Video",
-                    )),
-              );
-            },
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 10.0, 8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                        colors: [Colors.green, Color(0xFFA5D6A7)]),
-                    borderRadius: containeBorderRadius,
-                  ),
-                  child: Obx(
-                        () => dailyActivityController.isLoading.value
-                        ? ShimmerWidget.rectangular(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                    )
-                        : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          AssetImages.video,
-                          width: 50.0,
-                          height: 50.0,
-                        ),
-                        Text(
-                          "Video",
-                          maxLines: 1,
-                          textAlign: TextAlign.center,
-                          style: buttonTextStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-          ),
-          InkWell(
-            splashColor: ColorConstants.kTransparentColor,
-            highlightColor: ColorConstants.kTransparentColor,
-            onTap: () {
-              dailyActivityController.stuUpdateCounter("message");
-              dailyActivityController.messageCount(0);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const Message(
-                      name: "Message",
-                    )),
-              );
-            },
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 10.0, 8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                        colors: [Colors.red, Color(0xFFEF9A9A)]),
-                    borderRadius: containeBorderRadius,
-                  ),
-                  child: Obx(() => dailyActivityController.isLoading.value
-                      ? ShimmerWidget.rectangular(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                  )
-                      : badges.Badge(
-                    showBadge:
-                    dailyActivityController.messageCount != 0
-                        ? true
-                        : false,
-                    badgeContent: SizedBox(
-                        width: 20, //height: 20, //badge size
-                        child: Center(
-                          //aligh badge content to center
-                          child: Text(
-                              "${dailyActivityController.messageCount}",
-                              style: const TextStyle(
-                                  color:
-                                  Colors.white, //badge font color
-                                  fontSize: 20 //badge font size
-                              )),
-                        )),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          AssetImages.messages,
-                          width: 50.0,
-                          height: 50.0,
-                        ),
-                        Text(
-                          "Messages",
-                          maxLines: 1,
-                          textAlign: TextAlign.center,
-                          style: buttonTextStyle,
-                        ),
-                      ],
-                    ),
+          StudentAppWidgets.homeScreenTabs(
+          context: context, onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const TodaysWork(
+                    name: "Today's Work",
                   )),
-                )),
-          ),
-          InkWell(
-            splashColor: ColorConstants.kTransparentColor,
-            highlightColor: ColorConstants.kTransparentColor,
-            onTap: () {
-              dailyActivityController.stuUpdateCounter("assignment");
-              dailyActivityController.assignmentCount(0);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const Assignments(
-                      name: "Assignments",
-                    )),
-              );
-            },
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 10.0, 8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                        colors: [Colors.blue, Color(0xFF90CAF9)]),
-                    borderRadius: containeBorderRadius,
-                  ),
-                  child: Obx(() => dailyActivityController.isLoading.value
-                      ? ShimmerWidget.rectangular(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                  )
-                      : badges.Badge(
-                    showBadge:
-                    dailyActivityController.assignmentCount != 0
-                        ? true
-                        : false,
-                    badgeContent: const SizedBox(
-                        width: 20, //height: 20, //badge size
-                        child: const Align(
-                          //
-                          alignment: Alignment
-                              .center, // aligh badge content to center
-                          child: Text("3",
-                              style: TextStyle(
-                                  color:
-                                  Colors.white, //badge font color
-                                  fontSize: 20 //badge font size
-                              )),
-                        )),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          AssetImages.messageAssignment,
-                          width: 50.0,
-                          height: 50.0,
-                        ),
-                        Text(
-                          "Assignments",
-                          maxLines: 1,
-                          textAlign: TextAlign.center,
-                          style: buttonTextStyle,
-                        ),
-                      ],
-                    ),
+            );
+          }, icon: AssetImages.todaysWork, text: "Today's Work", dailyActivityController: dailyActivityController,color: [Colors.orange, Color(0xFFFFCC80)]),
+
+          StudentAppWidgets.homeScreenTabs(context: context, onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const Video(
+                    name: "Video",
                   )),
-                )),
-          ),
-          InkWell(
-            splashColor: ColorConstants.kTransparentColor,
-            highlightColor: ColorConstants.kTransparentColor,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const Attendance(
-                      name: "Attendance",
-                    )),
-              );
-            },
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 10.0, 8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                        colors: [Colors.deepPurple, Color(0xFFB39DDB)]),
-                    borderRadius: containeBorderRadius,
-                  ),
-                  child: Obx(
-                        () => dailyActivityController.isLoading.value
-                        ? ShimmerWidget.rectangular(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                    )
-                        : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          AssetImages.drawerAttendence,
-                          width: 45.0,
-                          height: 45.0,
-                        ),
-                        Text(
-                          "Attendance",
-                          maxLines: 1,
-                          textAlign: TextAlign.center,
-                          style: buttonTextStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-          ),
-          InkWell(
-            splashColor: ColorConstants.kTransparentColor,
-            highlightColor: ColorConstants.kTransparentColor,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const ViewEvents(
-                      name: "View Events",
-                    )),
-              );
-            },
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 10.0, 8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                        colors: [Colors.pink, Color(0xFFF48FB1)]),
-                    borderRadius: containeBorderRadius,
-                  ),
-                  child: Obx(
-                        () => dailyActivityController.isLoading.value
-                        ? ShimmerWidget.rectangular(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                    )
-                        : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          AssetImages.assessmentCert,
-                          width: 50.0,
-                          height: 50.0,
-                        ),
-                        Text(
-                          "View Events",
-                          maxLines: 1,
-                          textAlign: TextAlign.center,
-                          style: buttonTextStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-          ),
-          InkWell(
-            splashColor: ColorConstants.kTransparentColor,
-            highlightColor: ColorConstants.kTransparentColor,
-            onTap: () {
-              dailyActivityController.stuUpdateCounter("event");
-              dailyActivityController.stuUpdateCounter("other");
-              dailyActivityController.eventCount(0);
-              dailyActivityController.otherCount(0);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Feeds()),
-              );
-            },
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 10.0, 8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                        colors: [Colors.orange, Color(0xFFFFCC80)]),
-                    borderRadius: containeBorderRadius,
-                  ),
-                  child: Obx(() => dailyActivityController.isLoading.value
-                      ? ShimmerWidget.rectangular(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                  )
-                      : badges.Badge(
-                    showBadge: (dailyActivityController.otherCount !=
-                        0 ||
-                        dailyActivityController.eventCount != 0)
-                        ? true
-                        : false,
-                    badgeContent: SizedBox(
-                        width: 20, //height: 20, //badge size
-                        child: Center(
-                          //aligh badge content to center
-                          child: Text(
-                              "${dailyActivityController.otherCount.value + dailyActivityController.eventCount.value}",
-                              style: const TextStyle(
-                                  color:
-                                  Colors.white, //badge font color
-                                  fontSize: 20 //badge font size
-                              )),
-                        )),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          AssetImages.newsFeeds,
-                          width: 50.0,
-                          height: 50.0,
-                        ),
-                        Text(
-                          "Feeds",
-                          maxLines: 1,
-                          textAlign: TextAlign.center,
-                          style: buttonTextStyle,
-                        ),
-                      ],
-                    ),
+            );
+          }, icon:  AssetImages.video,text:  "Video", dailyActivityController: dailyActivityController,color: [Colors.green, Color(0xFFA5D6A7)]),
+
+
+          StudentAppWidgets.homeScreenBadgeTabs(context: context, onTap: () {
+            dailyActivityController.stuUpdateCounter("message");
+            dailyActivityController.messageCount(0);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const Message(
+                    name: "Message",
                   )),
+            );
+          }, icon:  AssetImages.messages, text:  "Messages", dailyActivityController: dailyActivityController, showBadgeOrNot: dailyActivityController.messageCount != 0
+              ? true
+              : false, badgeText: "${dailyActivityController.messageCount}",color: [Colors.red, Color(0xFFEF9A9A)]) ,
+
+
+          StudentAppWidgets.homeScreenBadgeTabs(context: context, onTap: () {
+            dailyActivityController.stuUpdateCounter("assignment");
+            dailyActivityController.assignmentCount(0);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const Assignments(
+                    name: "Assignments",
+                  )),
+            );
+          }, icon:   AssetImages.messageAssignment, text:  "Assignments", dailyActivityController: dailyActivityController,
+            showBadgeOrNot: dailyActivityController.assignmentCount != 0
+                ? true
+                : false, badgeText: "${dailyActivityController.assignmentCount}",color: [Colors.blue, Color(0xFF90CAF9)]),
+
+        StudentAppWidgets.homeScreenTabs(context: context, onTap:  () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const Attendance(
+                  name: "Attendance",
                 )),
-          ),
-          InkWell(
-            splashColor: ColorConstants.kTransparentColor,
-            highlightColor: ColorConstants.kTransparentColor,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Documents()),
-              );
-            },
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 10.0, 8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                        colors: [Colors.green, Color(0xFFA5D6A7)]),
-                    borderRadius: containeBorderRadius,
-                  ),
-                  child: Obx(
-                        () => dailyActivityController.isLoading.value
-                        ? ShimmerWidget.rectangular(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                    )
-                        : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          AssetImages.documents,
-                          width: 50.0,
-                          height: 50.0,
-                        ),
-                        Text(
-                          "Documents",
-                          maxLines: 1,
-                          textAlign: TextAlign.center,
-                          style: buttonTextStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-          ),
-          InkWell(
-            splashColor: ColorConstants.kTransparentColor,
-            highlightColor: ColorConstants.kTransparentColor,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Pickupcard()),
-              );
-            },
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 10.0, 8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                        colors: [Colors.red, Color(0xFFEF9A9A)]),
-                    borderRadius: containeBorderRadius,
-                  ),
-                  child: Obx(
-                        () => dailyActivityController.isLoading.value
-                        ? ShimmerWidget.rectangular(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                    )
-                        : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          AssetImages.drawerPickUpCard,
-                          width: 45.0,
-                          height: 45.0,
-                        ),
-                        Text(
-                          "Pickup Card",
-                          maxLines: 1,
-                          textAlign: TextAlign.center,
-                          style: buttonTextStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-          )
+          );
+        }, icon: AssetImages.drawerAttendence, text: "Attendance",isSvg: true, dailyActivityController: dailyActivityController,color:[Colors.deepPurple, Color(0xFFB39DDB)] ),
+
+          StudentAppWidgets.homeScreenTabs(context: context, onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ViewEvents(
+                    name: "View Events",
+                  )),
+            );
+          }, icon:     AssetImages.assessmentCert, text:   "View Events", dailyActivityController: dailyActivityController, color:  [Colors.pink, Color(0xFFF48FB1)]),
+
+          StudentAppWidgets.homeScreenBadgeTabs(context: context, onTap: () {
+            dailyActivityController.stuUpdateCounter("event");
+            dailyActivityController.stuUpdateCounter("other");
+            dailyActivityController.eventCount(0);
+            dailyActivityController.otherCount(0);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Feeds()),
+            );
+          }, icon:  AssetImages.newsFeeds, text:   "Feeds", dailyActivityController: dailyActivityController, showBadgeOrNot:  (dailyActivityController.otherCount !=
+              0 ||
+              dailyActivityController.eventCount != 0)
+              ? true
+              : false, badgeText: "${dailyActivityController.otherCount.value + dailyActivityController.eventCount.value}",color:  [Colors.orange, Color(0xFFFFCC80)]),
+
+          StudentAppWidgets.homeScreenTabs(context: context, onTap:  () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Documents()),
+            );
+          }, icon:  AssetImages.documents, text: "Documents", dailyActivityController: dailyActivityController,color: [Colors.green, Color(0xFFA5D6A7)] ),
+
+          StudentAppWidgets.homeScreenTabs(context: context, onTap:  () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Pickupcard()),
+            );
+          }, icon:   AssetImages.drawerPickUpCard, text:  "Pickup Card", dailyActivityController: dailyActivityController,isSvg: true,color:[Colors.red, Color(0xFFEF9A9A)] ),
+
+
         ],
       ),
     );
@@ -3823,11 +3398,11 @@ class _StudentHomeState extends State<StudentHome>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              const Activity(
-                                                                title: "activities",
-                                                                id: '1',
-                                                                name: "Activity",
-                                                              )),
+                                                          const Activity(
+                                                            title: "activities",
+                                                            id: '1',
+                                                            name: "Activity",
+                                                          )),
                                                     );
                                                   },
                                                   child:Card(
@@ -3921,11 +3496,11 @@ class _StudentHomeState extends State<StudentHome>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              const Activity(
-                                                                title: "activities",
-                                                                id: '2',
-                                                                name: "Activity",
-                                                              )),
+                                                          const Activity(
+                                                            title: "activities",
+                                                            id: '2',
+                                                            name: "Activity",
+                                                          )),
                                                     );
                                                   },
                                                   child:Card(
@@ -3956,13 +3531,13 @@ class _StudentHomeState extends State<StudentHome>
                                                               ),
                                                               const SizedBox(width: 20,),
                                                               Column(children: [
-                                                                 Text(
+                                                                Text(
                                                                   dailyActivityController.other_activities[index].activityTitle,
                                                                   style: const TextStyle(fontWeight: FontWeight.bold),
                                                                 ),
                                                                 Text(
-                                                                    dailyActivityController.other_activities[index].activitySubject
-                                                                      ,maxLines: 2,
+                                                                  dailyActivityController.other_activities[index].activitySubject
+                                                                  ,maxLines: 2,
                                                                   overflow: TextOverflow.ellipsis,
                                                                 ),
                                                               ],),
@@ -4050,7 +3625,7 @@ class _StudentHomeState extends State<StudentHome>
     dateText() => Text(
       '(${DateFormat('dd MMMM yyyy').format(DateTime.now())})',
       style: textButtonTextStyle.copyWith(
-       fontSize: 12
+          fontSize: 12
       ),
     );
 
@@ -4174,31 +3749,31 @@ class _StudentHomeState extends State<StudentHome>
 // import 'package:flutter_svg/svg.dart';
 // import 'package:get/get.dart';
 // import 'package:intl/intl.dart';
-// import 'package:school_app/Student/activities.dart';
-// import 'package:school_app/Student/assignments.dart';
-// import 'package:school_app/Student/attendance.dart';
-// import 'package:school_app/Student/activity_details.dart';
-// import 'package:school_app/Student/document.dart';
-// import 'package:school_app/Student/feeds.dart';
-// import 'package:school_app/Student/message.dart';
-// import 'package:school_app/Student/my_profile.dart';
-// import 'package:school_app/Student/notification.dart';
-// import 'package:school_app/Student/pickupcard.dart';
-// import 'package:school_app/Student/subjects.dart';
-// import 'package:school_app/Student/video.dart';
-// import 'package:school_app/Student/view_events.dart';
-// import 'package:school_app/Student/profile_page.dart';
-// import 'package:school_app/Student/todays_work.dart';
-// import 'package:school_app/utils/animated_navigation.dart';
-// import 'package:school_app/utils/colors.dart';
-// import 'package:school_app/utils/constants.dart';
-// import 'package:school_app/utils/widgets/custom_app_bar.dart';
-// import 'package:school_app/utils/widgets/custom_drawer.dart';
-// import 'package:school_app/utils/widgets/custom_page.dart';
-// import 'package:school_app/utils/images.dart';
-// import 'package:school_app/utils/strings.dart';
-// import 'package:school_app/utils/utility.dart';
-// import 'package:school_app/utils/widgets/shimmerWidget.dart';
+// import 'package:little_angels/Student/activities.dart';
+// import 'package:little_angels/Student/assignments.dart';
+// import 'package:little_angels/Student/attendance.dart';
+// import 'package:little_angels/Student/activity_details.dart';
+// import 'package:little_angels/Student/document.dart';
+// import 'package:little_angels/Student/feeds.dart';
+// import 'package:little_angels/Student/message.dart';
+// import 'package:little_angels/Student/my_profile.dart';
+// import 'package:little_angels/Student/notification.dart';
+// import 'package:little_angels/Student/pickupcard.dart';
+// import 'package:little_angels/Student/subjects.dart';
+// import 'package:little_angels/Student/video.dart';
+// import 'package:little_angels/Student/view_events.dart';
+// import 'package:little_angels/Student/profile_page.dart';
+// import 'package:little_angels/Student/todays_work.dart';
+// import 'package:little_angels/utils/animated_navigation.dart';
+// import 'package:little_angels/utils/colors.dart';
+// import 'package:little_angels/utils/constants.dart';
+// import 'package:little_angels/utils/widgets/custom_app_bar.dart';
+// import 'package:little_angels/utils/widgets/custom_drawer.dart';
+// import 'package:little_angels/utils/widgets/custom_page.dart';
+// import 'package:little_angels/utils/images.dart';
+// import 'package:little_angels/utils/strings.dart';
+// import 'package:little_angels/utils/utility.dart';
+// import 'package:little_angels/utils/widgets/shimmerWidget.dart';
 // import 'package:shimmer/shimmer.dart';
 //
 // import '../Controller/dailyActivityController.dart';

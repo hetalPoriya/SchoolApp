@@ -139,7 +139,7 @@ class _TodaysWorkDateWiseDataState extends State<TodaysWorkDateWiseData> {
                   .format(widget.todaysWorkController.todayWork[i].workDate)
                   .compareTo(DateFormat("dd-MM-yy").format(widget.date)) ==
               0)
-            AppWidgets.todaysWorkContainer(
+            StudentAppWidgets.todaysWorkContainer(
                 subjectName: todaysWorkController.todayWork[i].subjectsName,
                 description: todaysWorkController.todayWork[i].description)
         // Column(
@@ -194,7 +194,7 @@ class _TodaysWorkDateWiseDataState extends State<TodaysWorkDateWiseData> {
                   smallSizedBox,
 
                   mediumSizedBox,
-                  AppWidgets.elevatedButtonForCalender(
+                  StudentAppWidgets.elevatedButtonForCalender(
                       selectedDay: widget.date),
                   largeSizedBox,
                   // subjectButton(),

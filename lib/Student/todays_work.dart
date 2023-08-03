@@ -1189,7 +1189,7 @@ class _TodaysWorkState extends State<TodaysWork> {
               .format(todaysWorkController.todayWork[i].workDate)
               .compareTo(DateFormat("dd-MM-yy").format(_selectedDay)) ==
               0)
-            AppWidgets.todaysWorkContainer(
+            StudentAppWidgets.todaysWorkContainer(
                 subjectName: todaysWorkController.todayWork[i].subjectsName,
                 // teacherName: todaysWorkController.todayWork[i].teacherName,
                 description: todaysWorkController.todayWork[i].description)

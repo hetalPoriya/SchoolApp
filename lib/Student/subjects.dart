@@ -594,7 +594,7 @@ class _SubjectsState extends State<Subjects>
         customSizedBox(100.0),
         nameText(),
         smallSizedBox,
-        AppWidgets.elevatedButtonForCalender(selectedDay: _selectedDay),
+        StudentAppWidgets.elevatedButtonForCalender(selectedDay: _selectedDay),
         smallSizedBox,
         smallSizedBox,
         listView(),

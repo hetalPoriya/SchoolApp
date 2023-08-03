@@ -110,7 +110,7 @@ class Details {
     gender: json["gender"],
     dob: DateTime.parse(json["dob"]),
     addmissionId: json["addmission_id"],
-    siblingId: json["sibling_id"] == null ? null : json["sibling_id"],
+    siblingId: json["sibling_id"] == null ? 0 : json["sibling_id"],
   );
 
   Map<String, dynamic> toJson() => {
