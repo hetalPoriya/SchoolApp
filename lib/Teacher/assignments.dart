@@ -210,384 +210,379 @@ class _TeacherAssignmentsState extends State<TeacherAssignments> {
 
 buildTabBarView(context) {
   var assignmentController = Get.put(AssignmentController());
-  return SizedBox(
-    height: MediaQuery.of(context).size.height * 0.4,
-    child: MediaQuery.removePadding(
-      context: context,
-      removeTop: true,
-      child: Obx(
-      () =>TabBarView(
-        key: ValueKey(DateTime.now().toString()),
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          assignmentController.checked_assignments.length==0?
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset("assets/no-data.gif"),
-              smallSizedBox,
-              Text("There are no pending assignments", style: TextStyle(color: Colors.purple[800],fontFamily: 'Roboto',),)
-            ],
-          ):
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: assignmentController.checked_assignments.length,
-            itemBuilder: (context, index) {
-              return InkWell(
-                // onTap: () => AnimatedNavigation.pushAnimatedNavigation(
-                //     context, AssignmentInbox()),
-                child: Card(
-                  color: ColorConstants.kGreyColor100,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset(
-                          AssetImages.folder,
-                          height: 30,
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            Text(
-                              "${assignmentController.checked_assignments[index].assignmentTitle}",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 12,fontFamily: 'Roboto',),
-                            ),
-                            smallSizedBox,
-                            Row(
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                const Icon(
-                                  Icons.class_,
-                                  color: Colors.pink,
-                                  size: 18.0,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "Class: ${assignmentController.checked_assignments[index].className}",
-                                  style: const TextStyle(
-                                      color: Colors.black, fontSize: 12,fontFamily: 'Roboto',),
-                                ),
-                                const SizedBox(width: 20),
-                                const Icon(
-                                  Icons.punch_clock,
-                                  color: Colors.pink,
-                                  size: 18.0,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "Section: ${assignmentController.checked_assignments[index].sectionName}",
-                                  style: const TextStyle(
-                                      color: Colors.black, fontSize: 12,fontFamily: 'Roboto',),
-                                ),
-                              ],
-                            ),
-                            smallSizedBox,
-                            Row(
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                const Icon(
-                                  Icons.check,
-                                  color: Colors.pink,
-                                  size: 18.0,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "Subject: ${assignmentController.checked_assignments[index].subjectName}",
-                                  style: const TextStyle(
-                                      color: Colors.black, fontSize: 12,fontFamily: 'Roboto',),
-                                ),
-                              ],
-                            ),
-                            smallSizedBox,
-                            Text(
-                              "Assignment Doc Link",
-                              style:
-                                  TextStyle(color: Colors.blue, fontSize: 12,fontFamily: 'Roboto',),
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 30),
-                        Column(
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            const Text(
-                              "Action",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Roboto',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            InkWell(
-                              onTap: () =>
-                                  AnimatedNavigation.pushAnimatedNavigation(
-                                      context, ActionAssignment()),
-                              child: const Icon(
-                                Icons.remove_red_eye,
-                                size: 20,
+  return Obx(
+  () =>Expanded(
+    child: TabBarView(
+      key: ValueKey(DateTime.now().toString()),
+      physics: const NeverScrollableScrollPhysics(),
+      children: [
+        assignmentController.checked_assignments.length==0?
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("assets/no-data.gif"),
+            smallSizedBox,
+            Text("There are no pending assignments", style: TextStyle(color: Colors.purple[800],fontFamily: 'Roboto',),)
+          ],
+        ):
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: assignmentController.checked_assignments.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+              // onTap: () => AnimatedNavigation.pushAnimatedNavigation(
+              //     context, AssignmentInbox()),
+              child: Card(
+                color: ColorConstants.kGreyColor100,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SvgPicture.asset(
+                        AssetImages.folder,
+                        height: 30,
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          Text(
+                            "${assignmentController.checked_assignments[index].assignmentTitle}",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12,fontFamily: 'Roboto',),
+                          ),
+                          smallSizedBox,
+                          Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Icon(
+                                Icons.class_,
                                 color: Colors.pink,
+                                size: 18.0,
                               ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Class: ${assignmentController.checked_assignments[index].className}",
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 12,fontFamily: 'Roboto',),
+                              ),
+                              const SizedBox(width: 20),
+                              const Icon(
+                                Icons.punch_clock,
+                                color: Colors.pink,
+                                size: 18.0,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Section: ${assignmentController.checked_assignments[index].sectionName}",
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 12,fontFamily: 'Roboto',),
+                              ),
+                            ],
+                          ),
+                          smallSizedBox,
+                          Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Icon(
+                                Icons.check,
+                                color: Colors.pink,
+                                size: 18.0,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Subject: ${assignmentController.checked_assignments[index].subjectName}",
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 12,fontFamily: 'Roboto',),
+                              ),
+                            ],
+                          ),
+                          smallSizedBox,
+                          Text(
+                            "Assignment Doc Link",
+                            style:
+                                TextStyle(color: Colors.blue, fontSize: 12,fontFamily: 'Roboto',),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 30),
+                      Column(
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          const Text(
+                            "Action",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.bold),
+                          ),
+                          InkWell(
+                            onTap: () =>
+                                AnimatedNavigation.pushAnimatedNavigation(
+                                    context, ActionAssignment()),
+                            child: const Icon(
+                              Icons.remove_red_eye,
+                              size: 20,
+                              color: Colors.pink,
                             ),
-                          ],
-                        )
-                      ],
-                    ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                 ),
-              );
-            },
-          ),
-          assignmentController.unchecked_assignments.length==0?
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset("assets/no-data.gif"),
-              smallSizedBox,
-              Text("There are no pending assignments", style: TextStyle(color: Colors.purple[800],fontFamily: 'Roboto',),)
-            ],
-          ):ListView.builder(
-            shrinkWrap: true,
-            itemCount: assignmentController.unchecked_assignments.length,
-            itemBuilder: (context, index) {
-              return InkWell(
-                // onTap: () => AnimatedNavigation.pushAnimatedNavigation(
-                //     context, AssignmentInbox()),
-                child: Card(
-                  color: ColorConstants.kGreyColor100,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset(
-                          AssetImages.folder,
-                          height: 30,
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            Text(
-                              "${assignmentController.unchecked_assignments[index].assignmentTitle}",
-                              style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontWeight: FontWeight.bold, fontSize: 12),
-                            ),
-                            smallSizedBox,
-                            Row(
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                const Icon(
-                                  Icons.class_,
-                                  color: Colors.pink,
-                                  size: 18.0,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "Class: ${assignmentController.unchecked_assignments[index].className}",
-                                  style: const TextStyle(
-                                      fontFamily: 'Roboto',
-                                      color: Colors.black, fontSize: 12),
-                                ),
-                                const SizedBox(width: 20),
-                                const Icon(
-                                  Icons.punch_clock,
-                                  color: Colors.pink,
-                                  size: 18.0,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "Section: ${assignmentController.unchecked_assignments[index].sectionName}",
-                                  style: const TextStyle(
-                                      fontFamily: 'Roboto',
-                                      color: Colors.black, fontSize: 12),
-                                ),
-                              ],
-                            ),
-                            smallSizedBox,
-                            Row(
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                const Icon(
-                                  Icons.check,
-                                  color: Colors.pink,
-                                  size: 18.0,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "Subject: ${assignmentController.unchecked_assignments[index].subjectName}",
-                                  style: const TextStyle(
-                                      fontFamily: 'Roboto',
-                                      color: Colors.black, fontSize: 12),
-                                ),
-                              ],
-                            ),
-                            smallSizedBox,
-                            Text(
-                              "Assignment Doc Link",
-                              style:
-                                  TextStyle(color: Colors.blue, fontSize: 12,fontFamily: 'Roboto',),
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 30),
-                        const Text(
-                          "Action",
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold,fontFamily: 'Roboto',),
-                        ),
-                      ],
-                    ),
+              ),
+            );
+          },
+        ),
+        assignmentController.unchecked_assignments.length==0?
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("assets/no-data.gif"),
+            smallSizedBox,
+            Text("There are no pending assignments", style: TextStyle(color: Colors.purple[800],fontFamily: 'Roboto',),)
+          ],
+        ):ListView.builder(
+          shrinkWrap: true,
+          itemCount: assignmentController.unchecked_assignments.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+              // onTap: () => AnimatedNavigation.pushAnimatedNavigation(
+              //     context, AssignmentInbox()),
+              child: Card(
+                color: ColorConstants.kGreyColor100,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SvgPicture.asset(
+                        AssetImages.folder,
+                        height: 30,
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          Text(
+                            "${assignmentController.unchecked_assignments[index].assignmentTitle}",
+                            style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          smallSizedBox,
+                          Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Icon(
+                                Icons.class_,
+                                color: Colors.pink,
+                                size: 18.0,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Class: ${assignmentController.unchecked_assignments[index].className}",
+                                style: const TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Colors.black, fontSize: 12),
+                              ),
+                              const SizedBox(width: 20),
+                              const Icon(
+                                Icons.punch_clock,
+                                color: Colors.pink,
+                                size: 18.0,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Section: ${assignmentController.unchecked_assignments[index].sectionName}",
+                                style: const TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Colors.black, fontSize: 12),
+                              ),
+                            ],
+                          ),
+                          smallSizedBox,
+                          Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Icon(
+                                Icons.check,
+                                color: Colors.pink,
+                                size: 18.0,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Subject: ${assignmentController.unchecked_assignments[index].subjectName}",
+                                style: const TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Colors.black, fontSize: 12),
+                              ),
+                            ],
+                          ),
+                          smallSizedBox,
+                          Text(
+                            "Assignment Doc Link",
+                            style:
+                                TextStyle(color: Colors.blue, fontSize: 12,fontFamily: 'Roboto',),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 30),
+                      const Text(
+                        "Action",
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold,fontFamily: 'Roboto',),
+                      ),
+                    ],
                   ),
                 ),
-              );
-            },
-          ),
-          assignmentController.all_assignments.length==0?
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset("assets/no-data.gif"),
-              smallSizedBox,
-              Text("There are no pending assignments", style: TextStyle(color: Colors.purple[800],fontFamily: 'Roboto',),)
-            ],
-          ):ListView.builder(
-            shrinkWrap: true,
-            itemCount: assignmentController.all_assignments.length,
-            itemBuilder: (context, index) {
-              return InkWell(
-                // onTap: () => AnimatedNavigation.pushAnimatedNavigation(
-                //     context, AssignmentInbox()),
-                child: Card(
-                  color: ColorConstants.kGreyColor100,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset(
-                          AssetImages.folder,
-                          height: 30,
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            Text(
-                              "${assignmentController.all_assignments[index].assignmentTitle}",
-                              style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontWeight: FontWeight.bold, fontSize: 12),
-                            ),
-                            smallSizedBox,
-                            Row(
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                const Icon(
-                                  Icons.class_,
-                                  color: Colors.pink,
-                                  size: 18.0,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "Class: ${assignmentController.all_assignments[index].className}",
-                                  style: const TextStyle(
-                                      fontFamily: 'Roboto',
-                                      color: Colors.black, fontSize: 12),
-                                ),
-                                const SizedBox(width: 20),
-                                const Icon(
-                                  Icons.punch_clock,
-                                  color: Colors.pink,
-                                  size: 18.0,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "Section: ${assignmentController.all_assignments[index].sectionName}",
-                                  style: const TextStyle(
-                                      fontFamily: 'Roboto',
-                                      color: Colors.black, fontSize: 12),
-                                ),
-                              ],
-                            ),
-                            smallSizedBox,
-                            Row(
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                const Icon(
-                                  Icons.check,
-                                  color: Colors.pink,
-                                  size: 18.0,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "Subject: ${assignmentController.all_assignments[index].subjectName}",
-                                  style: const TextStyle(
-                                      fontFamily: 'Roboto',
-                                      color: Colors.black, fontSize: 12),
-                                ),
-                              ],
-                            ),
-                            smallSizedBox,
-                            Text(
-                              "Assignment Doc Link",
-                              style:
-                                  TextStyle(fontFamily: 'Roboto',color: Colors.blue, fontSize: 12),
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 30),
-                      ],
-                    ),
+              ),
+            );
+          },
+        ),
+        assignmentController.all_assignments.length==0?
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("assets/no-data.gif"),
+            smallSizedBox,
+            Text("There are no pending assignments", style: TextStyle(color: Colors.purple[800],fontFamily: 'Roboto',),)
+          ],
+        ):ListView.builder(
+          shrinkWrap: true,
+          itemCount: assignmentController.all_assignments.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+              // onTap: () => AnimatedNavigation.pushAnimatedNavigation(
+              //     context, AssignmentInbox()),
+              child: Card(
+                color: ColorConstants.kGreyColor100,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SvgPicture.asset(
+                        AssetImages.folder,
+                        height: 30,
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          Text(
+                            "${assignmentController.all_assignments[index].assignmentTitle}",
+                            style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          smallSizedBox,
+                          Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Icon(
+                                Icons.class_,
+                                color: Colors.pink,
+                                size: 18.0,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Class: ${assignmentController.all_assignments[index].className}",
+                                style: const TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Colors.black, fontSize: 12),
+                              ),
+                              const SizedBox(width: 20),
+                              const Icon(
+                                Icons.punch_clock,
+                                color: Colors.pink,
+                                size: 18.0,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Section: ${assignmentController.all_assignments[index].sectionName}",
+                                style: const TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Colors.black, fontSize: 12),
+                              ),
+                            ],
+                          ),
+                          smallSizedBox,
+                          Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Icon(
+                                Icons.check,
+                                color: Colors.pink,
+                                size: 18.0,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Subject: ${assignmentController.all_assignments[index].subjectName}",
+                                style: const TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Colors.black, fontSize: 12),
+                              ),
+                            ],
+                          ),
+                          smallSizedBox,
+                          Text(
+                            "Assignment Doc Link",
+                            style:
+                                TextStyle(fontFamily: 'Roboto',color: Colors.blue, fontSize: 12),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 30),
+                    ],
                   ),
                 ),
-              );
-            },
-          ),
-        ],
-      ),
-      ),
+              ),
+            );
+          },
+        ),
+      ],
     ),
+  ),
   );
 }

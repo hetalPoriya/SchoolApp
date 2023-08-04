@@ -21,6 +21,7 @@ class ColorConstants {
   static const Color color2LightPink = Color(0xffF8807E);
   static const Color color3Orange = Color(0xffFA915F);
   static const Color color4LightBlue = Color(0xff97C4D6);
+  static const Color calenderColor = Color(0xffDBB7B6);
 
   static const List<Color> colorsList = [
     color1Purple,

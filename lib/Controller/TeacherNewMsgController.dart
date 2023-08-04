@@ -37,7 +37,7 @@ class TeacherNewMsgController extends GetxController{
     
       if(data["error"] == 1){
         var data_details = teacherClassesSectionsModelFromJson(response);
-        status = RxString(data_details.status);
+        status = RxString(data_details.status ?? '');
         error(data_details.error);
         classesSections(data_details.classesSections);
         classesSections.forEach((item) {

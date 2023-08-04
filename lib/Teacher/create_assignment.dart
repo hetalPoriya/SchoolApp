@@ -5,13 +5,24 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:school_app/Controller/TeacherNewMsgController.dart';
+import 'package:school_app/Controller/assignmentController.dart';
+import 'package:school_app/Controller/teacherMarkAttendanceController.dart';
+import 'package:school_app/Model/teacherClassesSectionsModel.dart';
 import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/animated_navigation.dart';
+
+import 'package:school_app/utils/student/app_widget.dart';
+import 'package:school_app/utils/student/dropdown_widget.dart';
+import 'package:school_app/utils/widgets/custom_drop_down.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
 import 'package:school_app/utils/utility.dart';
+import 'package:school_app/utils/widgets/form_validator.dart';
+import 'package:school_app/utils/widgets/widgets.dart';
 
 class CreateAssignment extends StatefulWidget {
   const CreateAssignment({
@@ -23,44 +34,36 @@ class CreateAssignment extends StatefulWidget {
 }
 
 class _CreateAssignmentState extends State<CreateAssignment> {
-  String? selectedValue;
-  List<String> items = [
-    'I',
-    'II',
-    'III',
-  ];
-  String? selectedValue1;
-  List<String> section = [
-    'A',
-    'B',
-    'C',
-  ];
-  String? selectedValue2;
-  List<String> student = [
-    'Amar',
-    'Select Student',
-  ];
-  String? selectedValue3;
-  List<String> status = [
-    'Active',
-    'Disabled',
-  ];
+  String? classValue;
+  String? subjectValue;
+  String? sectionValue;
+
+
+  var teacherMarkAttendanceController =
+      Get.put(TeacherMarkAttendanceController());
+
+  var assignmentController =
+      Get.put(AssignmentController());
 
   TextEditingController _urlController = TextEditingController();
   TextEditingController _fileController = TextEditingController();
-  TextEditingController _expiredateController = TextEditingController();
-  TextEditingController _dateController = TextEditingController();
+  TextEditingController _expiredateController = TextEditingController(text: DateFormat("dd-MM-yyyy").format(DateTime.now()));
+  TextEditingController _dateController = TextEditingController(text: DateFormat("dd-MM-yyy").format(DateTime.now()));
   TextEditingController _titleController = TextEditingController();
   TextEditingController _studentController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   DateTime todayDate = DateTime.now();
-  late DateTime _dateTime;
+
 
   FilePickerResult? result;
   String? _fileName;
   PlatformFile? Pickedfile;
   bool isLoading = false;
   File? fileToDisplay;
+
+  ClassesSection? selectedValue;
 
   void PickFile() async {
     try {
@@ -76,7 +79,9 @@ class _CreateAssignmentState extends State<CreateAssignment> {
         Pickedfile = result!.files.first;
         fileToDisplay = File(Pickedfile!.path.toString());
 
-        //log('File Nmae $_fileName');
+        log('File Nmae $_fileName');
+        log('File Nmae $Pickedfile');
+        log('File Nmae $fileToDisplay');
       }
       setState(() {
         isLoading = false;
@@ -85,6 +90,13 @@ class _CreateAssignmentState extends State<CreateAssignment> {
     } catch (e) {
       //log(e);
     }
+  }
+
+  @override
+  void initState() {
+
+    teacherMarkAttendanceController.getClassesSections();
+    super.initState();
   }
 
   @override
@@ -127,517 +139,109 @@ class _CreateAssignmentState extends State<CreateAssignment> {
               ),
             ),
           ),
-          body: ListView(
-            padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
-            children: [
-              Center(
-                child: Text(
-                  "Create Assignment",
-                  style:deepPurpleStyle
+          body: Form(
+            key: _formKey,
+            child: ListView(
+              padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
+              children: [
+                Center(
+                  child: Text("Create Assignment", style: deepPurpleStyle),
                 ),
-              ),
-              const Divider(color: Colors.grey),
-              smallSizedBox,
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.symmetric(vertical: 3),
-                child: Row(
-                  children: [
-                     Text(
-                      "Title:",
-                      style:mediumStyle
-                    ),
-                    const Icon(
-                      Icons.star,
-                      size: 8,
-                      color: Colors.red,
-                    )
-                  ],
-                ),
-              ),
-              TextField(
-                  controller: _titleController,
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                    hintText: ("Assignment Title"),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                    ),
-                    isDense: true,
-                  )),
-              smallSizedBox,
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Row(
-                  children: [
-                     Text(
-                      "Class:",
-                      style: mediumStyle,
-                    ),
-                    const Icon(
-                      Icons.star,
-                      size: 8,
-                      color: Colors.red,
-                    )
-                  ],
-                ),
-              ),
-              DropdownButtonHideUnderline(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 4.0, vertical: 6.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: DropdownButton(
-                    // dropdownColor: Colors.grey,
-                    focusColor: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    isExpanded: true,
-                    isDense: true,
-                    hint: Text(
-                      'Select Class',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13,
-                        fontFamily: 'Roboto',
-                        color: Theme.of(context).hintColor,
+                smallSizedBox,
+                StudentAppWidgets.titleTextMarked(text: 'Title:'),
+                StudentAppWidgets.textFormFieldWidget(
+                    hintText: "Assignment Title",
+                    validator: FormValidator.emptyFieldValidation(value: _titleController.text),
+                    textEditingController: _titleController),
+                smallSizedBox,
+                StudentAppWidgets.titleTextMarked(text: 'Class:'),
+                DropDownWidget.classesDropDown(),
+                smallSizedBox,
+                StudentAppWidgets.titleTextMarked(text: 'Section:'),
+                DropDownWidget.sectionDropDown(),
+                smallSizedBox,
+                StudentAppWidgets.titleTextMarked(text: 'Subject:'),
+                DropDownWidget.subjectDropDown(),
+                smallSizedBox,
+
+                StudentAppWidgets.titleText(text:   "Link:",),
+                StudentAppWidgets.textFormFieldWidget(hintText: "Link", textEditingController: _urlController),
+
+                smallSizedBox,
+                StudentAppWidgets.titleTextMarked(text: "Descriptions:"),
+                StudentAppWidgets.textFormFieldWidget(hintText: "Description", textEditingController: _descriptionController,validator: FormValidator.emptyFieldValidation(value: _descriptionController.text),),
+
+                smallSizedBox,
+                StudentAppWidgets.titleText(text: 'Schedule Date'),
+                StudentAppWidgets.textFormFieldWidget(hintText:'Schedule Date' , textEditingController: _dateController,readOnly: true,onTap:() =>
+                 StudentAppWidgets.calenderView(context: context,dateTime: todayDate,dateController: _dateController)
+                 ),
+
+                smallSizedBox,
+                StudentAppWidgets.titleText(text:  "Expire Date",),
+                StudentAppWidgets.textFormFieldWidget(hintText:'Expire Date' , textEditingController: _expiredateController,readOnly: true,onTap:() =>  StudentAppWidgets.calenderView(context: context,dateTime: todayDate,dateController: _expiredateController)
+                 ),
+
+                smallSizedBox,
+                StudentAppWidgets.titleText(text:  "Status:"),
+            DropDownWidget.statusDropdown(),
+                smallSizedBox,
+                StudentAppWidgets.titleText(text: 'Upload Image:'),
+
+                StudentAppWidgets.textFormFieldWidget(hintText: "No File Chosen", textEditingController: _fileController,suffixIcon: GestureDetector(
+                  onTap: (){
+                    PickFile();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: Container(
+                      width: 90,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(5.0),
+                            bottomRight: Radius.circular(5)),
                       ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    items: items
-                        .map((item) => DropdownMenuItem<String>(
-                              value: item,
-                              child: Text(
-                                item,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ))
-                        .toList(),
-                    value: selectedValue,
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedValue = value!;
-                      });
-                    },
-                  ),
-                ),
-              ),
-              smallSizedBox,
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Row(
-                  children: [
-                    const Text(
-                      "Subject:",
-                      style: TextStyle(
-                        fontSize: 15,
+                      child: const Center(
+                        child: Text('Choose file'),
                       ),
                     ),
-                    const Icon(
-                      Icons.star,
-                      size: 8,
-                      color: Colors.red,
-                    )
-                  ],
-                ),
-              ),
-              DropdownButtonHideUnderline(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 4.0, vertical: 6.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
                   ),
-                  child: DropdownButton(
-                    focusColor: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    isExpanded: true,
-                    isDense: true,
-                    hint: Text(
-                      'Select Subject',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13,
-                        color: Theme.of(context).hintColor,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    items: section
-                        .map((section) => DropdownMenuItem<String>(
-                              value: section,
-                              child: Text(
-                                section,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ))
-                        .toList(),
-                    value: selectedValue1,
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedValue1 = value!;
-                      });
-                    },
-                  ),
-                ),
-              ),
-              smallSizedBox,
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Row(
-                  children: [
-                    const Text(
-                      "Section:",
-                      style: TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
-                    const Icon(
-                      Icons.star,
-                      size: 8,
-                      color: Colors.red,
-                    )
-                  ],
-                ),
-              ),
-              DropdownButtonHideUnderline(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 4.0, vertical: 6.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: DropdownButton(
-                    focusColor: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    isExpanded: true,
-                    isDense: true,
-                    hint: Text(
-                      'Select Section',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13,
-                        color: Theme.of(context).hintColor,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    items: section
-                        .map((section) => DropdownMenuItem<String>(
-                              value: section,
-                              child: Text(
-                                section,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ))
-                        .toList(),
-                    value: selectedValue1,
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedValue1 = value!;
-                      });
-                    },
-                  ),
-                ),
-              ),
-              smallSizedBox,
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.symmetric(vertical: 3),
-                child: const Text(
-                  "Upload Image:",
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 35,
-                child: TextField(
-                    onTap: () {
-                      PickFile();
-                    },
-                    controller: _fileController,
-                    readOnly: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 5),
-                      hintText: ("No File Chosen"),
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Container(
-                          width: 90,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: const BorderRadius.only(
-                                topRight: Radius.circular(5.0),
-                                bottomRight: Radius.circular(5)),
-                          ),
-                          child: const Center(
-                            child: Text('Choose file'),
-                          ),
+                ),),
+
+
+                largeSizedBox,
+                smallSizedBox,
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 50, right: 50),
+                    child: ElevatedButton(
+                      onPressed: () {
+
+                        if(_formKey.currentState!.validate()){
+                          assignmentController.createTeacherAssignment(title: _titleController.value.text,description: _descriptionController.value.text,date: _dateController.value.text,expireDate: _expiredateController.value.text,link: _urlController.value.text,activeStatus: statusValue
+                            ,file: fileToDisplay?.path,path: _fileController.value.text);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        maximumSize: Size(150, 50),
+                        minimumSize: Size(150, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
+                        primary: const Color.fromRGBO(105, 80, 255, 1.0),
                       ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      ),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      ),
-                      isDense: true,
-                    )),
-              ),
-              smallSizedBox,
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.symmetric(vertical: 3),
-                child: const Text(
-                  "Link:",
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              TextField(
-                  controller: _urlController,
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                    hintText: ("Link"),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                    ),
-                    isDense: true,
-                  )),
-              smallSizedBox,
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.symmetric(vertical: 3),
-                child: Row(
-                  children: [
-                    const Text(
-                      "Descriptions:",
-                      style: TextStyle(
-                        fontSize: 15,
+                      child: const Text(
+                        "Add",
+                        style: TextStyle(fontSize: 12),
                       ),
                     ),
-                    const Icon(
-                      Icons.star,
-                      size: 8,
-                      color: Colors.red,
-                    )
-                  ],
-                ),
-              ),
-              TextField(
-                  controller: _descriptionController,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: 2,
-                  cursorWidth: 2.0,
-                  // textAlign: TextAlign.left,
-                  decoration: const InputDecoration(
-                    hintText: "Description",
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                    ),
-                    //isDense: true,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                    ),
-                  )),
-              smallSizedBox,
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.symmetric(vertical: 3),
-                child: const Text(
-                  "Schedule Date",
-                  style: TextStyle(
-                    fontSize: 15,
                   ),
                 ),
-              ),
-              TextField(
-                  onTap: () {
-                    showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1999),
-                      lastDate: DateTime(2040),
-                    ).then((date) {
-                      setState(() {
-                        _dateTime = date!;
-                        _dateController.text =
-                            DateFormat('dd-MM-yyyy').format(date);
-                      });
-                    });
-                  },
-                  controller: _dateController,
-                  readOnly: true,
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                    //  hintText: (_dateTime==null ? 'nothing':_dateTime.toString()),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                    ),
-                    isDense: true,
-                  )),
-              smallSizedBox,
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.symmetric(vertical: 3),
-                child: const Text(
-                  "Expire Date",
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              TextField(
-                  onTap: () {
-                    showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1999),
-                      lastDate: DateTime(2040),
-                    ).then((date) {
-                      setState(() {
-                        _dateTime = date!;
-                        _expiredateController.text =
-                            DateFormat('dd-MM-yyyy').format(date);
-                      });
-                    });
-                  },
-                  controller: _expiredateController,
-                  readOnly: true,
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                    ),
-                    isDense: true,
-                  )),
-              smallSizedBox,
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: const Text(
-                  "Status:",
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              DropdownButtonHideUnderline(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 4.0, vertical: 6.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: DropdownButton(
-                    focusColor: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    isExpanded: true,
-                    isDense: true,
-                    hint: Text(
-                      'Select Status',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13,
-                        color: Theme.of(context).hintColor,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    items: status
-                        .map((status) => DropdownMenuItem<String>(
-                              value: status,
-                              child: Text(
-                                status,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ))
-                        .toList(),
-                    value: selectedValue3,
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedValue3 = value!;
-                      });
-                    },
-                  ),
-                ),
-              ),
-              largeSizedBox,
-              smallSizedBox,
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 50, right: 50),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      log(_urlController.text);
-                      log(_dateController.text);
-                      log(_expiredateController.text);
-                      log(_descriptionController.text);
-                      log(_titleController.text);
-                      log(_fileController.text);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      primary: const Color.fromRGBO(105, 80, 255, 1.0),
-                    ),
-                    child: const Text(
-                      "Add",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                ),
-              ),
-              smallSizedBox,
-            ],
+                smallSizedBox,
+              ],
+            ),
           ),
         ));
   }

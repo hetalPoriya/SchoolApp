@@ -1,7 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
-
-import 'package:get/get.dart';
+import 'package:dio/dio.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/instance_manager.dart';
+import 'package:school_app/Controller/teacherMarkAttendanceController.dart';
 import 'package:school_app/Model/teacherAssignmentModel.dart';
 import '../Model/assignmentModel.dart';
 import '../utils/network_handler.dart';
@@ -18,6 +22,9 @@ class AssignmentController extends GetxController{
   var all_assignments = [].obs;
   var isLoading = false.obs;
   var loginController = Get.put(LoginController());
+  var teacherMarkAttendanceController = Get.put(TeacherMarkAttendanceController());
+
+
   Future getStuAssignment() async {
     try{
       isLoading(true);
@@ -75,4 +82,45 @@ class AssignmentController extends GetxController{
       isLoading(false);
     }
   }
+
+  Future createTeacherAssignment({required String title,required String description,String? link,String? date,String? expireDate,String? activeStatus,String? path,String? file,bool? isImage}) async {
+    try{
+      isLoading(true);
+      log("Inside Teacher Assignment Controller");
+
+      log('tilte ${title}');
+      log('tilte ${path}');
+      log('tilte ${file}');
+      var response = await NetworkHandler.post(FormData.fromMap({
+        'teacher_id':loginController.teacherId.value,
+        'title':title ?? '',
+        'class_id':teacherMarkAttendanceController.classId.value ?? '',
+        'subject_id':teacherMarkAttendanceController.subjectId.value ?? '',
+        'section_id':teacherMarkAttendanceController.sectionId.value ?? '',
+        'link':link ?? '',
+        'description':description ?? '',
+        'schedule_date':date ?? '',
+        'expire_date':expireDate ?? '',
+        if(isImage == true && path.toString().isNotEmpty) 'media': await MultipartFile.fromFile(path.toString(),
+            filename: file),
+        if(isImage == false && path.toString().isNotEmpty) 'video':await MultipartFile.fromFile(path.toString(),
+      filename: file),
+        'status':activeStatus ?? 1,
+      }), "create_assignment");
+      var data = json.decode(response);
+      //log(data);
+
+      if(data["error"] == 1){
+        Get.back();
+      }
+      else{
+        error(data["error"]);
+        status(data["status"]!);
+      }
+    }finally{
+      isLoading(false);
+    }
+  }
+
+
 }

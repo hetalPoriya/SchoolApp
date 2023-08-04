@@ -3,14 +3,14 @@ import 'package:school_app/utils/colors.dart';
 
 class CustomDropDown extends StatelessWidget {
   var items;
-  final selectedValue;
+  final  selectedValue;
   final String hintText;
   final Function(dynamic)? onChanged;
 
   CustomDropDown({
     Key? key,
     required this.items,
-    required this.selectedValue,
+     this.selectedValue,
     required this.onChanged,
     this.hintText = '',
   }) : super(

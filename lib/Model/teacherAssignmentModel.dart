@@ -38,7 +38,7 @@
       status: json["status"],
       checkedAssignments:json["checked_assignments"] != 'Not found' ? List<CheckedAssignment>.from(json["checked_assignments"].map((x) => CheckedAssignment.fromJson(x))) : [],
       uncheckedAssignments: json["unchecked_assignments"] != 'Not found' ?List<CheckedAssignment>.from(json["unchecked_assignments"].map((x) => CheckedAssignment.fromJson(x))) : [],
-      allUploadedAssignments: json["unchecked_assignments"] != 'Not found' ?List<AllUploadedAssignment>.from(json["all_uploaded_assignments"].map((x) => AllUploadedAssignment.fromJson(x))) : [],
+      allUploadedAssignments: json["all_uploaded_assignments"] != 'Not found' ?List<AllUploadedAssignment>.from(json["all_uploaded_assignments"].map((x) => AllUploadedAssignment.fromJson(x))) : [],
     );
 
     Map<String, dynamic> toJson() => {
@@ -66,7 +66,7 @@
     String assignmentTitle;
     String assignmentDescription;
     String assignmentImage;
-    String assignmentLink;
+    dynamic assignmentLink;
     DateTime assignmentExpiryDate;
     String assignmentActiveStatus;
     String className;
@@ -77,7 +77,7 @@
       assignmentTitle: json["assignment_title"],
       assignmentDescription: json["assignment_description"],
       assignmentImage: json["assignment_image"],
-      assignmentLink: json["assignment_link"] == null ? null : json["assignment_link"],
+      assignmentLink: json["assignment_link"],
       assignmentExpiryDate: DateTime.parse(json["assignment_expiry_date"]),
       assignmentActiveStatus: json["assignment_active_status"],
       className: json["class_name"],
