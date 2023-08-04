@@ -13,7 +13,7 @@ class DropDownWidget {
     'Active',
     'Disabled',
   ];
-  static String statusValue = 'Active';
+  static String statusValue = '';
 
   static var teacherMarkAttendanceController =
       Get.put(TeacherMarkAttendanceController());
@@ -151,7 +151,7 @@ class DropDownWidget {
         }),
   ));
 
-  static statusDropdown({String? value}) => Obx(() => DropdownButtonFormField<String>(
+  static statusDropdown() => Obx(() => DropdownButtonFormField<String>(
     decoration: inputDec(hintText: 'Select Status'),
     value: statusValue,
     onChanged: ( newValue) {
@@ -170,7 +170,12 @@ class DropDownWidget {
                 ),
               ],
             ),
-            onTap: onTap
+            onTap: () async {
+
+              statusValue =
+                  statusModel[index];
+
+            },
           );
         }),
   ));

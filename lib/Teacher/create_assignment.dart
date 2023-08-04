@@ -38,6 +38,11 @@ class _CreateAssignmentState extends State<CreateAssignment> {
   String? subjectValue;
   String? sectionValue;
 
+  String? statusValue = 'Active';
+  List<String> status = [
+    'Active',
+    'Disabled',
+  ];
 
   var teacherMarkAttendanceController =
       Get.put(TeacherMarkAttendanceController());
@@ -62,6 +67,7 @@ class _CreateAssignmentState extends State<CreateAssignment> {
   PlatformFile? Pickedfile;
   bool isLoading = false;
   File? fileToDisplay;
+  bool? isImage;
 
   ClassesSection? selectedValue;
 
@@ -85,6 +91,12 @@ class _CreateAssignmentState extends State<CreateAssignment> {
       }
       setState(() {
         isLoading = false;
+        if(_fileName.toString().contains('.jpg') || _fileName.toString().contains('.png')){
+          log('enter');
+          isImage= true;
+        }else{
+          isImage = false;
+        }
         _fileController.text = _fileName!;
       });
     } catch (e) {
@@ -184,7 +196,23 @@ class _CreateAssignmentState extends State<CreateAssignment> {
 
                 smallSizedBox,
                 StudentAppWidgets.titleText(text:  "Status:"),
-            DropDownWidget.statusDropdown(),
+              CustomDropDown(    items: status
+                  .map((status) => DropdownMenuItem<String>(
+                value: status,
+                child: Text(
+                  status,
+                  style: const TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ))
+                  .toList(),
+                hintText: 'Select Status',
+                onChanged: ( value) {
+               setState(() {
+                 statusValue = value!;
+               });
+                },),
                 smallSizedBox,
                 StudentAppWidgets.titleText(text: 'Upload Image:'),
 
@@ -221,7 +249,7 @@ class _CreateAssignmentState extends State<CreateAssignment> {
 
                         if(_formKey.currentState!.validate()){
                           assignmentController.createTeacherAssignment(title: _titleController.value.text,description: _descriptionController.value.text,date: _dateController.value.text,expireDate: _expiredateController.value.text,link: _urlController.value.text,activeStatus: statusValue
-                            ,file: fileToDisplay?.path,path: _fileController.value.text);
+                            ,file: fileToDisplay?.path,path: _fileController.value.text,isImage: isImage);
                         }
                       },
                       style: ElevatedButton.styleFrom(

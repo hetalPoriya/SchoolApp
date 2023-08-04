@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -14,6 +15,7 @@ import 'loginController.dart';
 class AssignmentController extends GetxController{
   var error = 0.obs;
   var status = ''.obs;
+  Dio dio = Dio();
   var past_assignments = [].obs;
   var submitted_assignments = [].obs;
   var pending_assignments = [].obs;
@@ -85,13 +87,15 @@ class AssignmentController extends GetxController{
 
   Future createTeacherAssignment({required String title,required String description,String? link,String? date,String? expireDate,String? activeStatus,String? path,String? file,bool? isImage}) async {
     try{
+
       isLoading(true);
       log("Inside Teacher Assignment Controller");
 
       log('tilte ${title}');
       log('tilte ${path}');
       log('tilte ${file}');
-      var response = await NetworkHandler.post(FormData.fromMap({
+      log('tilte ${isImage}');
+      var formData = FormData.fromMap({
         'teacher_id':loginController.teacherId.value,
         'title':title ?? '',
         'class_id':teacherMarkAttendanceController.classId.value ?? '',
@@ -101,22 +105,29 @@ class AssignmentController extends GetxController{
         'description':description ?? '',
         'schedule_date':date ?? '',
         'expire_date':expireDate ?? '',
-        if(isImage == true && path.toString().isNotEmpty) 'media': await MultipartFile.fromFile(path.toString(),
-            filename: file),
-        if(isImage == false && path.toString().isNotEmpty) 'video':await MultipartFile.fromFile(path.toString(),
-      filename: file),
+        if(isImage == true && file.toString().isNotEmpty) 'media': await MultipartFile.fromFile(file.toString(),
+            filename: path),
+        if(isImage == false && file.toString().isNotEmpty) 'video':await MultipartFile.fromFile(file.toString(),
+            filename: path),
         'status':activeStatus ?? 1,
-      }), "create_assignment");
-      var data = json.decode(response);
-      //log(data);
+      });
+      Dio dio = new Dio();
 
-      if(data["error"] == 1){
+      log('FomDate ${formData.fields.toString()}');
+      var token = await NetworkHandler.getToken("bearerToken");
+      dio.options.headers['content-type'] = 'application/json';
+      dio.options.headers["authorization"] = "Bearer ${token}";
+
+      var response = await dio.post(NetworkHandler.buildImageUrl("create_assignment"),data:formData);
+
+      log('Repose ${response.data.toString()}');
+
+      if(response.data["error"] == 1){
         Get.back();
       }
-      else{
-        error(data["error"]);
-        status(data["status"]!);
-      }
+
+    }catch(e){
+      log('E ${e.toString()}');
     }finally{
       isLoading(false);
     }
