@@ -23,7 +23,7 @@ class TeacherMarkAttendanceController extends GetxController {
 
   ClassesSection? classValue;
   ClassesSection? sectionValue;
-  Subject? subjectValue;
+  SubjectByClass? subjectValue;
 
 
   var students = [].obs;
@@ -138,6 +138,7 @@ class TeacherMarkAttendanceController extends GetxController {
         error(data_details.error);
         subject(data_details.subjects);
         subjectValue= subject.first;
+        subjectId.value = subjectValue?.id ?? 0;
       } else {
         error(data["error"]);
         status(data["status"]);

@@ -13,6 +13,7 @@ class CalEventController extends GetxController{
   var calender_events = [].obs;
   var isLoading = false.obs;
   var loginController = Get.put(LoginController());
+
   Future getStuEvent() async {
     try{
       isLoading(true);

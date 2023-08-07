@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -91,10 +92,8 @@ class AssignmentController extends GetxController{
       isLoading(true);
       log("Inside Teacher Assignment Controller");
 
-      log('tilte ${title}');
-      log('tilte ${path}');
-      log('tilte ${file}');
-      log('tilte ${isImage}');
+
+
       var formData = FormData.fromMap({
         'teacher_id':loginController.teacherId.value,
         'title':title ?? '',
@@ -118,15 +117,23 @@ class AssignmentController extends GetxController{
       dio.options.headers['content-type'] = 'application/json';
       dio.options.headers["authorization"] = "Bearer ${token}";
 
-      var response = await dio.post(NetworkHandler.buildImageUrl("create_assignment"),data:formData);
+      var response = await dio.post(NetworkHandler.buildImageUrl("create_assignment"),data:formData,options: Options(headers:  {
+      "Content-type": "application/json",
+      "authorization": "Bearer $token"
+      }));
 
-      log('Repose ${response.data.toString()}');
+      log('Repose ${response.data}');
 
-      if(response.data["error"] == 1){
+      var data = json.decode(response.data);
+
+
+      if(data["error"] == 1){
         Get.back();
+        status = RxString(data["status"]);
+        error(data["error"]);
       }
 
-    }catch(e){
+    }on DioException catch (e){
       log('E ${e.toString()}');
     }finally{
       isLoading(false);

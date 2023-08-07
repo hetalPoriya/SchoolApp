@@ -112,6 +112,8 @@ class AssetImages {
   static const submit = "assets/messages/submit.jpg";
   static const upload = "assets/messages/upload.png";
   static const video1 = "assets/messages/video1.png";
+  static const youtubeVideo = "assets/messages/youtube-video.png";
+  static const img = "assets/messages/img.png";
   static const mark = "assets/messages/mark.jpg";
   static const create1 = "assets/messages/create1.gif";
   static const notification1 = "assets/messages/notification1.gif";

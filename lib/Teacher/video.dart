@@ -1,5 +1,7 @@
 // ignore_for_file: unused_import, prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:better_player/better_player.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -57,8 +59,7 @@ class _TeacherVideoState extends State<TeacherVideo> {
 
     if (isConnected) {
       videoController.getTeacherVideos();
-    }
-    else{
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: Duration(days: 1),
         behavior: SnackBarBehavior.floating,
@@ -118,7 +119,7 @@ class _TeacherVideoState extends State<TeacherVideo> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(AssetImages.video1),
+                  image: AssetImage(AssetImages.youtubeVideo),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -132,96 +133,93 @@ class _TeacherVideoState extends State<TeacherVideo> {
             ),
           ),
         ),
-        body: Obx(
-          () => videoController.isLoading ==true?
-          Center(
-          child: Image.asset(
-          "assets/loading.gif",
-          height: 425.0,
-          width: 425.0,
-          fit: BoxFit.fitHeight,
-          )
-          ):DefaultTabController(
-            length: videoController.videos.length,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 60, bottom: 10, left: 15, right: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  smallSizedBox,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: Obx(() => videoController.isLoading == true
+            ? Center(
+                child: Image.asset(
+                "assets/loading.gif",
+                height: 425.0,
+                width: 425.0,
+                fit: BoxFit.fitHeight,
+              ))
+            : DefaultTabController(
+                length: videoController.videos.length,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      top: 60, bottom: 10, left: 15, right: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("VIDEOS", style: titleTextStyle),
-                      // SvgPicture.asset(AssetImages.search, height: 25),
-                      ElevatedButton(
-                        onPressed: () =>
-                            AnimatedNavigation.pushAnimatedNavigation(
-                                context, UploadVideo()),
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
+                      smallSizedBox,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("VIDEOS", style: titleTextStyle),
+                          // SvgPicture.asset(AssetImages.search, height: 25),
+                          ElevatedButton(
+                            onPressed: () =>
+                                AnimatedNavigation.pushAnimatedNavigation(
+                                    context, UploadVideo()),
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              primary: Colors.deepPurple,
+                            ),
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                const Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                  size: 18.0,
+                                ),
+                                Text(
+                                  "Add new video",
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Roboto',
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          primary: Colors.deepPurple,
-                        ),
-                        child: Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            const Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 18.0,
-                            ),
-                            Text(
-                              "Add new video",
-                              style:
-                              const TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Roboto',),
-                            ),
-                          ],
-                        ),
+                        ],
                       ),
+                      divider,
+                      smallSizedBox,
+                      Padding(
+                        padding: const EdgeInsets.only(right: 5),
+                        child: videoController.status == "Videos not found"
+                            ? noVideoFound()
+                            : TabBar(
+                                // ignore: prefer_const_literals_to_create_immutables
+                                tabs: [
+                                  for (var entry
+                                      in videoController.videos.entries)
+                                    Tab(
+                                      text: entry.key,
+                                    )
+                                ],
+                                isScrollable: true,
+                                indicator: BoxDecoration(
+                                  color: Color.fromARGB(255, 238, 220, 241),
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                indicatorPadding: EdgeInsets.only(
+                                    top: 8, bottom: 10, left: 4, right: 4),
+                                labelColor: ColorConstants.kHeadingTextColor,
+                                labelStyle: mediumStyle,
+                                unselectedLabelColor:
+                                    ColorConstants.kBlackColor,
+                              ),
+                      ),
+                      const SizedBox(height: 10),
+                      buildTabBarView(),
                     ],
                   ),
-                  divider,
-                  smallSizedBox,
-                  Padding(
-                    padding: const EdgeInsets.only(right: 5),
-                    child: videoController.status == "Videos not found"?
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/no-data.gif"),
-                        smallSizedBox,
-                        Text("No Videos Found", style: TextStyle(color: Colors.purple[800], fontFamily: 'Roboto',),)
-                      ],
-                    )
-                        : TabBar(
-                      // ignore: prefer_const_literals_to_create_immutables
-                      tabs: [
-                        for (var entry in videoController.videos.entries)
-                          Tab(
-                            text: entry.key,
-                          )
-                      ],
-                      isScrollable: true,
-                      indicator: BoxDecoration(
-                        color: Color.fromARGB(255, 238, 220, 241),
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      indicatorPadding:
-                      EdgeInsets.only(top: 8, bottom: 10, left: 4, right: 4),
-                      labelColor: ColorConstants.kHeadingTextColor,
-                      labelStyle: mediumStyle,
-                      unselectedLabelColor: ColorConstants.kBlackColor,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  videoController.status == "Videos not found"? SizedBox(): buildTabBarView(),
-                ],
-              ),
-            ),
-          )),
+                ),
+              )),
       ),
     );
     //   ),
@@ -229,88 +227,100 @@ class _TeacherVideoState extends State<TeacherVideo> {
   }
 
   buildTabBarView() {
-    return Obx(
-            () => videoController.isLoading ==true?
-        Center(
+    for (var entry in videoController.videos.entries)
+      log('entry ${entry.value}');
+    return Obx(() => videoController.isLoading == true
+        ? Center(
             child: Image.asset(
-              "assets/loading.gif",
-              height: 425.0,
-              width: 425.0,
-              fit: BoxFit.fitHeight,
-            )
-        ):SizedBox(
-          height: MediaQuery.of(context).size.height -
-              MediaQuery.of(context).size.height * 0.60,
-          child: MediaQuery.removePadding(
-            context: context,
-            removeTop: true,
+            "assets/loading.gif",
+            height: 425.0,
+            width: 425.0,
+            fit: BoxFit.fitHeight,
+          ))
+        : Expanded(
             child: TabBarView(
               key: ValueKey(DateTime.now().toString()),
               //physics: const NeverScrollableScrollPhysics(),
               children: [
                 for (var entry in videoController.videos.entries)
-                  ListView(
-                    //crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          //childAspectRatio: 16 / 9,
-                        ),
-                        itemCount: entry.value.length,
-                        itemBuilder: (context, index) => InkWell(
-                            onTap: () {
-                              AnimatedNavigation.pushAnimatedNavigation(
-                                context,
-                                TeacherYoutubeVideoPlayer(
-                                  url: entry.value[index]["video_link"],
-                                  index: index,
-                                  value: entry.key,
-                                ),
-                              );
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                largeSizedBox,
-                                Text(
-                                  "${entry.value[index]["video_description"]}",
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(fontWeight: FontWeight.bold,fontFamily: 'Roboto',),
-                                ),
-                                largeSizedBox,
-                                Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      child: Image.asset(
-                                        AssetImages.english,
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                    Image.asset(
-                                      AssetImages.videoIcon,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                        ),
-                      ),
-                      largeSizedBox,
-                      divider,
-                    ],
-                  ),
+                  entry.value.length == 0
+                      ? noVideoFound()
+                      : GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 12,crossAxisSpacing: 12),
+                    shrinkWrap: true,
+
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: entry.value.length,
+                    itemBuilder: (context, index) =>   videoWidget(index: index, entry: entry))
+
               ],
             ),
-          ),
+          ));
+  }
+
+  videoWidget({required int index, required MapEntry entry }){
+    return  InkWell(
+        onTap: () {
+          AnimatedNavigation.pushAnimatedNavigation(
+            context,
+            TeacherYoutubeVideoPlayer(
+              url: entry.value[index]["video_link"],
+              index: index,
+              value: entry.key,
+            ),
+          );
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            smallerSizedBox,
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius:
+                  BorderRadius.circular(12.0),
+                  child: Image.asset(
+                    AssetImages.english,
+                    fit: BoxFit.fill,
+                    height: 120,
+
+                  ),
+                ),
+                Image.asset(
+                  AssetImages.videoIcon,
+                ),
+              ],
+            ),
+            smallSizedBox,
+            Text(
+              "  ${entry.value[index]["video_description"]}",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Roboto',
+              ),
+            ),
+          ],
         ));
+  }
+
+
+  noVideoFound() {
+    return Column(
+      children: [
+        Image.asset("assets/no-data.gif"),
+        smallSizedBox,
+        Text(
+          "No Videos Found",
+          style: TextStyle(
+            color: Colors.purple[800],
+            fontFamily: 'Roboto',
+          ),
+        )
+      ],
+    );
   }
 }

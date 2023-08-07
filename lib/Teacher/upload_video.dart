@@ -11,12 +11,16 @@ import 'package:school_app/Controller/uploadVideoController.dart';
 import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/Teacher/video.dart';
 import 'package:school_app/utils/animated_navigation.dart';
+import 'package:school_app/utils/student/app_widget.dart';
+import 'package:school_app/utils/student/dropdown_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
 import 'package:school_app/utils/utility.dart';
 import 'package:multiselect/multiselect.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
+import 'package:school_app/utils/widgets/form_validator.dart';
+import 'package:school_app/utils/widgets/widgets.dart';
 
 import '../utils/network_handler.dart';
 
@@ -56,6 +60,7 @@ class _UploadVideoState extends State<UploadVideo> {
   DateTime todayDate = DateTime.now();
   var uploadVideoController = Get.put(UploadVideoController());
   NetworkHandler nr = NetworkHandler();
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     _init();
@@ -151,201 +156,63 @@ class _UploadVideoState extends State<UploadVideo> {
                     fit: BoxFit.fitHeight,
                   ),
                 )
-              : ListView(
-                  padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-                  children: [
-                     Center(
-                      child: Text(
-                        "Upload Video",
-                        style: deepPurpleStyle,
-                      ),
-                    ),
-                    const Divider(color: Colors.grey),
-                    smallSizedBox,
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 15, top: 6, bottom: 5),
-                      child:  Text(
-                        "Class:",
-                        //textAlign: TextAlign.end,
-                        style: mediumStyle
-                      ),
-                    ),
-                    DropdownButtonHideUnderline(
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 4.0, vertical: 10.0),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          //  border: InputBorder.none,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: DropdownButton(
-                          focusColor: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(10),
-                          isExpanded: true,
-                          isDense: true,
-                          hint: Padding(
-                            padding: const EdgeInsets.only(left: 15),
-                            child: Text(
-                              'Select Class',
-                              style: TextStyle(
-                                //fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                                fontFamily: 'Roboto',
-                                color: Theme.of(context).hintColor,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          items: [
-                            for (var i in uploadVideoController.classes)
-                              DropdownMenuItem<String>(
-                                value: i.classId.toString(),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 12),
-                                  child: Text(
-                                    i.className,
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: 'Roboto',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          ],
-                          value: selectedValue,
-                          onChanged: (String? value) async {
-                            uploadVideoController.classId(int.parse(value!));
-                            await uploadVideoController.getSubjectStudent();
-                            setState(() {
-                              log(value);
-                              selectedValue = value;
-                            });
-                          },
+              : Form(
+            key: _formKey,
+                  child: ListView(
+                    padding:
+                        const EdgeInsets.only(top: 20, left: 15, right: 15),
+                    children: [
+                      Center(
+                        child: Text(
+                          "Upload Video",
+                          style: deepPurpleStyle,
                         ),
                       ),
-                    ),
-                    // ignore: prefer_const_constructors
-                    Visibility(
-                      visible: uploadVideoController.isSubjectVisible.value,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 15, bottom: 5, top: 6),
-                            child:  Text(
-                              "Subjects:",
-                              style: mediumStyle
-                            ),
-                          ),
-                          DropdownButtonHideUnderline(
-                            child: Container(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 4.0, vertical: 10.0),
-                              decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                //  border: InputBorder.none,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: DropdownButton(
-                                focusColor: Colors.grey[100],
-                                borderRadius: BorderRadius.circular(10),
-                                isExpanded: true,
-                                isDense: true,
-                                hint: Padding(
-                                  padding: const EdgeInsets.only(left: 15),
-                                  child: Text(
-                                    'Select Subjects',
-                                    style: TextStyle(
-                                      //fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      fontFamily: 'Roboto',
-                                      color: Theme.of(context).hintColor,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                items: [
-                                  for (var i in uploadVideoController.subjects)
-                                    DropdownMenuItem<String>(
-                                      value: i.subjectId.toString(),
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 12),
-                                        child: Text(
-                                          i.subjectName,
-                                          style:  TextStyle(
-                                            fontSize: 14,
-                                            fontFamily: 'Roboto',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                                value: selectedValue1,
-                                onChanged: (String? value) {
-                                  setState(() {
-                                    uploadVideoController
-                                        .subjectId(int.parse(value!));
-                                    selectedValue1 = value;
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 15, top: 6, bottom: 5),
-                      child:  Text(
-                        "Video URL:",
-                        //textAlign: TextAlign.end,
-                        style: mediumStyle
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: TextFormField(
-                        controller: uploadVideoController.videoUrlController,
-                        decoration: const InputDecoration(
-                          hintText: "Enter URL",
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.all(15.0),
-                        ),
-                      ),
-                    ),
-                    smallSizedBox,
-                    Visibility(
+                      const Divider(color: Colors.grey),
+                      smallSizedBox,
+                      StudentAppWidgets.titleTextMarked(text: 'Class:'),
+                      DropDownWidget.teacherClassesDropDown(),
+                      Visibility(
                         visible: uploadVideoController.isSubjectVisible.value,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 15, right: 15, top: 0),
-                              child: MultiSelectFormField(
+                            smallSizedBox,
+                            StudentAppWidgets.titleText(text: "Subjects:"),
+                            DropDownWidget.getSubjectFromClassesDropDown(),
+                          ],
+                        ),
+                      ),
+                      smallSizedBox,
+                      StudentAppWidgets.titleText(text: "Video URL:"),
+                      StudentAppWidgets.textFormFieldWidget(
+                          hintText: 'Enter URL',
+                          textEditingController:
+                              uploadVideoController.videoUrlController,validator: FormValidator.emptyFieldValidation(value: uploadVideoController.videoUrlController.text)),
+                      Visibility(
+                          visible: uploadVideoController.isSubjectVisible.value,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              smallSizedBox,
+                              MultiSelectFormField(
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.grey, width: 0.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                                 autovalidate: AutovalidateMode.disabled,
-                                chipBackGroundColor: Colors.blue,
+                                chipBackGroundColor: Colors.grey,
                                 chipLabelStyle: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Roboto',
                                     color: Colors.white),
-                                dialogTextStyle:
-                                    TextStyle(fontWeight: FontWeight.bold,fontFamily: 'Roboto',),
+                                dialogTextStyle: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Roboto',
+                                ),
                                 checkBoxActiveColor: Colors.blue,
                                 checkBoxCheckColor: Colors.white,
                                 dialogShapeBorder: RoundedRectangleBorder(
@@ -353,7 +220,10 @@ class _UploadVideoState extends State<UploadVideo> {
                                         Radius.circular(12.0))),
                                 title: Text(
                                   "Students",
-                                  style: TextStyle(fontSize: 16,fontFamily: 'Roboto',),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: 'Roboto',
+                                  ),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.length == 0) {
@@ -375,59 +245,42 @@ class _UploadVideoState extends State<UploadVideo> {
                                 hintWidget: Text('Please choose one or more'),
                                 initialValue: _myStudents,
                                 onSaved: (value) {
-                                  log(value);
                                   if (value == null) return;
-                                  uploadVideoController.studentId(value);
+                                  uploadVideoController.studentIdList(value);
                                   setState(() {
                                     _myStudents = value;
                                   });
                                 },
                               ),
-                            ),
-                          ],
-                        )),
-                    smallSizedBox,
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 15, right: 15, top: 6, bottom: 5),
-                      child:  Text(
-                        "Descriptions:",
-                        style: mediumStyle
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15),
-                      child: TextField(
-                          controller: uploadVideoController.videoDescController,
-                          keyboardType: TextInputType.multiline,
-                          maxLines: 2,
-                          cursorWidth: 2.0,
-                          // textAlign: TextAlign.left,
-                          decoration: const InputDecoration(
-                            hintText: "Description",
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0),
-                            ),
-                            //isDense: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0),
-                            ),
+                            ],
                           )),
-                    ),
-                    largeSizedBox,
-                    smallSizedBox,
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 50, right: 50),
+                      smallSizedBox,
+                      StudentAppWidgets.titleText(text: "Descriptions:"),
+                      StudentAppWidgets.textFormFieldWidget(
+                        hintText: "Description",
+                        textEditingController:
+                            uploadVideoController.videoDescController,
+                        validator: FormValidator.emptyFieldValidation(value: uploadVideoController.videoDescController.text)
+                      ),
+                      largeSizedBox,
+                      smallSizedBox,
+                      Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            ElevatedButton(
+                            SizedBox(width: 20,),
+                            Expanded(
+                                child: StudentAppWidgets
+                                    .elevatedButtonWithVisibility(
+                              context: context,
+                              isVisible:
+                                  uploadVideoController.isUploadLoading.value,
+                              text: "Submit",
                               onPressed: () async {
                                 bool isConnected = await nr.checkConnectivity();
                                 if (isConnected) {
+
+                                if(_formKey.currentState!.validate()){
                                   await uploadVideoController.uploadVideo();
                                   SchedulerBinding.instance
                                       .addPostFrameCallback((_) {
@@ -439,6 +292,7 @@ class _UploadVideoState extends State<UploadVideo> {
                                       name: "Video",
                                     ));
                                   });
+                                }
                                 } else {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(
@@ -476,65 +330,20 @@ class _UploadVideoState extends State<UploadVideo> {
                                   ));
                                 }
                               },
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      "Submit",
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Visibility(
-                                        visible: uploadVideoController
-                                            .isUploadLoading.value,
-                                        child: SizedBox(
-                                            height: 15,
-                                            width: 15,
-                                            child: CircularProgressIndicator(
-                                              color: Colors.white,
-                                            ))),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                  ]),
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                primary:
-                                    const Color.fromRGBO(105, 80, 255, 1.0),
-                              ),
+                            )),
+                            SizedBox(width: 20,),
+                            Expanded(
+                              child: StudentAppWidgets.elevatedButton(
+                                  context: context,
+                                  text: "Close",
+                                  onPressed: () => Navigator.of(context).pop()),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: ElevatedButton(
-                                child: Row(
-                                  children: [
-                                    const Text(
-                                      "Close",
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                                onPressed: () => Navigator.of(context).pop(),
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  primary:
-                                      const Color.fromRGBO(105, 80, 255, 1.0),
-                                ),
-                              ),
-                            ),
-                            largeSizedBox,
+            SizedBox(width: 20,),
                           ],
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ))),
     );
   }

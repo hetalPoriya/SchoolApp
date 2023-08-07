@@ -3,7 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_app/Controller/teacherMarkAttendanceController.dart';
+import 'package:school_app/Controller/uploadVideoController.dart';
 import 'package:school_app/Model/getSubjectByClass.dart';
+import 'package:school_app/Model/getSubjectStudentClassModel.dart';
+import 'package:school_app/Model/getTeacherClassesModel.dart';
 import 'package:school_app/Model/teacherClassesSectionsModel.dart';
 
 
@@ -17,6 +20,7 @@ class DropDownWidget {
 
   static var teacherMarkAttendanceController =
       Get.put(TeacherMarkAttendanceController());
+  static var uploadVideoController = Get.put(UploadVideoController());
 
   static inputDec({required String hintText}) => InputDecoration(
       focusColor: Colors.white,
@@ -114,10 +118,10 @@ class DropDownWidget {
             }),
       ));
 
-  static subjectDropDown() => Obx(() => DropdownButtonFormField<Subject>(
+  static subjectDropDown() => Obx(() => DropdownButtonFormField<SubjectByClass>(
     decoration: inputDec(hintText: 'Select Subject'),
     value: teacherMarkAttendanceController.subjectValue,
-    onChanged: (Subject? newValue) {
+    onChanged: (SubjectByClass? newValue) {
       teacherMarkAttendanceController.subjectValue = newValue!;
     },
     items: teacherMarkAttendanceController.subject == []
@@ -125,13 +129,13 @@ class DropDownWidget {
         : List.generate(
         teacherMarkAttendanceController.subject.length,
             (index) {
-          return DropdownMenuItem<Subject>(
+          return DropdownMenuItem<SubjectByClass>(
             value: teacherMarkAttendanceController.subject[index],
             child: Row(
               children: [
                 Text(
                   teacherMarkAttendanceController
-                      .subject[index].name
+                        .subject[index].name
                       .toString(),
                 ),
               ],
@@ -144,7 +148,7 @@ class DropDownWidget {
                         .subject[index].id;
               teacherMarkAttendanceController.subjectName.value =
                   teacherMarkAttendanceController
-                      .classesSections[index].name
+                      .subject[index].name
                       .toString();
             },
           );
@@ -179,5 +183,79 @@ class DropDownWidget {
           );
         }),
   ));
+
+
+  //upload video
+  static teacherClassesDropDown() => Obx(() => DropdownButtonFormField<Class>(
+    decoration: inputDec(hintText: 'Select Class'),
+    value: uploadVideoController.classValue,
+    onChanged: (Class? newValue) {
+      uploadVideoController.classValue = newValue!;
+    },
+    items: uploadVideoController.classes == []
+        ? []
+        : List.generate(
+        uploadVideoController.classes.length,
+            (index) {
+          return DropdownMenuItem<Class>(
+            value: uploadVideoController.classes[index],
+            child: Row(
+              children: [
+                Text(
+                  uploadVideoController
+                      .classes[index].className
+                      .toString(),
+                ),
+              ],
+            ),
+            onTap: () async {
+              log('class id${uploadVideoController.classes[index].classId}');
+              log('class id${uploadVideoController.classes[index].className}');
+
+              uploadVideoController.classId.value =
+                  uploadVideoController
+                      .classes[index].classId;
+
+              uploadVideoController.getSubjectStudent();
+            },
+          );
+        }),
+  ));
+
+  static getSubjectFromClassesDropDown() => Obx(() => DropdownButtonFormField<Subject>(
+    decoration: inputDec(hintText: 'Select Subject'),
+    value: uploadVideoController.subjectValue,
+    onChanged: (Subject? newValue) {
+      uploadVideoController.subjectValue = newValue!;
+    },
+    items: uploadVideoController.subjects == []
+        ? []
+        : List.generate(
+        uploadVideoController.subjects.length,
+            (index) {
+          return DropdownMenuItem<Subject>(
+            value: uploadVideoController.subjects[index],
+            child: Row(
+              children: [
+                Text(
+                  uploadVideoController
+                      .subjects[index].subjectName
+                      .toString(),
+                ),
+              ],
+            ),
+            onTap: () async {
+              log('class id${uploadVideoController.subjects[index].subjectName}');
+              log('class id${uploadVideoController.subjects[index].subjectId}');
+
+              uploadVideoController.subjectId.value =
+                  uploadVideoController
+                      .subjects[index].subjectId;
+
+            },
+          );
+        }),
+  ));
+
 
 }

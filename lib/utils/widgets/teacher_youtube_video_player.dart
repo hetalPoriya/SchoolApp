@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_app/Controller/videoController.dart';
 import 'package:school_app/utils/utility.dart';
+import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -41,7 +42,7 @@ class _TeacherYoutubeVideoPlayerState extends State<TeacherYoutubeVideoPlayer> {
     super.initState();
 
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(widget.url!)!,
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.url ?? '') ?? 'ss',
       flags: const YoutubePlayerFlags(
         mute: false,
         autoPlay: true,
@@ -83,15 +84,13 @@ class _TeacherYoutubeVideoPlayerState extends State<TeacherYoutubeVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-        body: YoutubePlayerBuilder(
+    return CustomScaffold(
+ child: YoutubePlayerBuilder(
       player: YoutubePlayer(
         controller: _controller,
         showVideoProgressIndicator: true,
 
         // progressColors: ProgressColors(
-        //     playedColor: Colors.amber,
         //     handleColor: Colors.amberAccent,
         // ),
         onReady: () {

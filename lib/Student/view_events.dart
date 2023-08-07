@@ -7,6 +7,7 @@ import 'package:school_app/Student/event_details.dart';
 import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -73,14 +74,6 @@ class _ViewEventsState extends State<ViewEvents> {
     }
   }
 
-  final List<Map<String, dynamic>> _eventslist = [
-    {'title': 'Surfing', 'Description': 'abc'},
-    {'title': 'Runnig', 'Description': 'abc'},
-    {'title': 'Tennis', 'Description': 'abc'},
-    {'title': 'Surfing', 'Description': 'abc'},
-    {'title': 'Runnig', 'Description': 'abc'},
-    {'title': 'Tennis', 'Description': 'abc'},
-  ];
   DateTime todayDate = DateTime.now();
   final DateFormat formatter = DateFormat('EEEE');
   final DateFormat formatter1 = DateFormat('dMMMM');
@@ -116,104 +109,36 @@ class _ViewEventsState extends State<ViewEvents> {
                       removeTop: true,
                       // removeBottom: true,
                       // removeBottom: true,
-                      child: calEventController.calender_events.length == 0
-                          ? Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/no-data.gif"),
-                                smallSizedBox,
-                                Text(
-                                  "There are no events",
-                                  style: TextStyle(color: Colors.purple[800]),
-                                )
-                              ],
-                            )
-                          : calEventController.status ==
-                                  "Calender events not found"
-                              ? Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset("assets/no-data.gif"),
-                                    smallSizedBox,
-                                    Text(
-                                      "There are no events",
-                                      style:
-                                          TextStyle(color: Colors.purple[800]),
-                                    )
-                                  ],
-                                )
-                              : ListView.builder(
+                      child: (calEventController.calender_events.length == 0 || calEventController.status ==
+                          "Calender events not found")
+                          ? StudentAppWidgets.noDataFound(text: 'There are no events')
+                          : ListView.builder(
                                   scrollDirection: Axis.vertical,
                                   shrinkWrap: true,
                                   itemCount:
                                       calEventController.calender_events.length,
                                   itemBuilder: (context, index) {
-                                    return GestureDetector(
+                                    return StudentAppWidgets.eventCard(
                                         onTap: () {
                                           AnimatedNavigation
                                               .pushAnimatedNavigation(
-                                                  context,
-                                                  EventDetails(
-                                                    id: index,
-                                                  ));
+                                              context,
+                                              EventDetails(
+                                                id: index,
+                                              ));
                                         },
-                                        child: Card(
-                                          color: ColorConstants.kGreyColor100,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                smallerSizedBox,
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      calEventController
-                                                          .calender_events[
-                                                              index]
-                                                          .eventTitle,
-                                                      style: const TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                    Center(
-                                                      child: Container(
-                                                        child: Align(
-                                                          alignment: Alignment
-                                                              .topRight,
-                                                          child: Text(
-                                                            DateFormat(
-                                                                    'dd/MM/yyyy')
-                                                                .format(calEventController
-                                                                    .calender_events[
-                                                                        index]
-                                                                    .eventDate),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                mediumSizedBox,
-                                                Text(
-                                                  calEventController
-                                                      .calender_events[index]
-                                                      .eventDescription,
-                                                ),
-                                                smallerSizedBox,
-                                              ],
-                                            ),
-                                          ),
-                                        ));
+                                        title: calEventController
+                                            .calender_events[
+                                        index]
+                                            .eventTitle,
+                                        eventDate:
+                                        calEventController
+                                            .calender_events[
+                                        index]
+                                            .eventDate,
+                                        description: calEventController
+                                            .calender_events[index]
+                                            .eventDescription);
                                   },
                                 ),
                     ),

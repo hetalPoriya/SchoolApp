@@ -61,11 +61,13 @@ class VideoController extends GetxController{
         videos(video_details.videos);
 
         for (var entry in videos.entries) {
-          log(entry.key);
-          log(entry.value);
-          for (var videoentry in entry.value){
-            log(videoentry["video_link"]);
+
+          if(entry.value != []){
+            for (var videoentry in entry.value){
+              log(videoentry["video_link"]);
+            }
           }
+
         }
       }
       else{

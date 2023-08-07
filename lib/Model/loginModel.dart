@@ -102,7 +102,7 @@ class Details {
   int siblingId;
 
   factory Details.fromJson(Map<String, dynamic> json) => Details(
-    studentId: json["student_id"] == null ? null : json["student_id"],
+    studentId: json["student_id"] == null ? 0 : json["student_id"],
     studentName: json["student_name"],
     email: json["email"],
     className: json["class_name"],

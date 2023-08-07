@@ -210,17 +210,18 @@ class StudentAppWidgets {
           required TextEditingController textEditingController,
           Widget? suffixIcon,
           VoidCallback? onTap,
-            TextInputAction? textInputAction,
-            TextInputType? keyboardType,
-          bool? readOnly,String? Function(String?)? validator}) =>
+          TextInputAction? textInputAction,
+          TextInputType? keyboardType,
+          bool? readOnly,
+          String? Function(String?)? validator}) =>
       TextFormField(
         controller: textEditingController,
         onTap: onTap,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: validator,
         readOnly: readOnly ?? false,
-        textInputAction: textInputAction ??TextInputAction.next,
-        keyboardType: keyboardType ??TextInputType.text,
+        textInputAction: textInputAction ?? TextInputAction.next,
+        keyboardType: keyboardType ?? TextInputType.text,
         decoration: InputDecoration(
           focusColor: Colors.white,
           suffixIcon: suffixIcon,
@@ -237,35 +238,33 @@ class StudentAppWidgets {
             borderSide: const BorderSide(color: Colors.grey, width: 0.5),
             borderRadius: BorderRadius.circular(10),
           ),
-
           hintText: hintText,
         ),
       );
 
   static calenderView(
-          {required BuildContext context,
-          DateTime? dateTime,
-          TextEditingController? dateController}){
+      {required BuildContext context,
+      DateTime? dateTime,
+      TextEditingController? dateController}) {
     return showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1999),
       lastDate: DateTime(2040),
-
       builder: (context, child) {
         return Theme(
             data: Theme.of(context).copyWith(
-
-
-              textTheme: TextTheme( displayMedium:mediumStyle.copyWith(color: Colors.black) ),
-              colorScheme: ColorScheme.light(
+              textTheme: TextTheme(
+                  displayMedium: mediumStyle.copyWith(color: Colors.black)),
+              colorScheme: const ColorScheme.light(
                 primary: ColorConstants.calenderColor, // <-- SEE HERE
                 onPrimary: Colors.white, // <-- SEE HERE
                 onSurface: Colors.black, // <-- SEE HERE
               ),
               textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
-                  foregroundColor:ColorConstants.calenderColor, // button text color
+                  foregroundColor:
+                      ColorConstants.calenderColor, // button text color
                 ),
               ),
             ),
@@ -273,8 +272,223 @@ class StudentAppWidgets {
       },
     ).then((date) {
       dateTime = date!;
-      dateController?.text =
-          DateFormat('dd-MM-yyyy').format(date);
+      dateController?.text = DateFormat('dd-MM-yyyy').format(date);
     });
   }
+
+  static elevatedButtonWithVisibility(
+          {required BuildContext context,
+          required bool isVisible,
+          required String text,
+          required VoidCallback onPressed,
+          Color? color}) =>
+      SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: 40,
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            backgroundColor: color ?? const Color.fromRGBO(105, 80, 255, 1.0),
+          ),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Text(
+                    text,
+                    overflow: TextOverflow.ellipsis,
+                    style: mediumStyle.copyWith(color: Colors.white),
+                  ),
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                Visibility(
+                    visible: isVisible,
+                    child: const SizedBox(
+                        height: 15,
+                        width: 15,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ))),
+              ]),
+        ),
+      );
+
+  static elevatedButton({required BuildContext context,required String text,required VoidCallback onPressed,Color? color})=>SizedBox(
+    width: MediaQuery.of(context).size.width,
+    height: 40,
+    child: ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        backgroundColor:
+        color??  const Color.fromRGBO(105, 80, 255, 1.0),
+      ),
+      child:Text(
+        text,
+        overflow: TextOverflow.ellipsis,
+        style: mediumStyle.copyWith(color: Colors.white),
+      ),
+    ),
+  );
+
+
+  static eventCard({required String title, required DateTime eventDate,required String description,required VoidCallback onTap}) => GestureDetector(
+    onTap: onTap,
+    child: Card(
+      color: Colors.white,
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius:
+        BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(   horizontal: 8.0,vertical: 10),
+        child: Column(
+          crossAxisAlignment:
+          CrossAxisAlignment.start,
+          children: [
+            smallerSizedBox,
+            Row(
+              mainAxisAlignment:
+              MainAxisAlignment
+                  .spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight:
+                      FontWeight.bold),
+                ),
+                Center(
+                  child: Container(
+                    child: Align(
+                      alignment: Alignment
+                          .topRight,
+                      child: Text(
+                        DateFormat(
+                            'MMM dd yyyy')
+                            .format(eventDate),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            mediumSizedBox,
+            Text(
+              description,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            smallerSizedBox,
+          ],
+        ),
+      ),
+    ),
+  );
+
+  static eventCardDetails({required String title, required DateTime eventDate,required String description}) => ListView(
+    padding: const EdgeInsets.symmetric(horizontal: 10),
+    children: [
+      largeSizedBox,
+      const Divider(color: Colors.grey),
+      largeSizedBox,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+           title,
+            style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 18),
+          ),
+        ],
+      ),
+      smallerSizedBox,
+      Text(
+        DateFormat('dd MMMM yyyy').format(eventDate),
+        style: const TextStyle(
+          fontSize: 14.0,
+          color: Colors.grey,),
+      ),
+      largeSizedBox,
+      Text(
+        description,
+        style: const TextStyle(fontSize: 15),
+      ),
+      largeSizedBox,
+    ],
+  );
+
+  static noDataFound({required String text}) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Image.asset("assets/no-data.gif"),
+      smallSizedBox,
+      Text(
+        text,
+        style:
+        TextStyle(color: Colors.purple[800]),
+      )
+    ],
+  );
+
+  static loadingWidget() => Center(
+    child: Image.asset(
+      "assets/loading.gif",
+      height: 425.0,
+      width: 425.0,
+      fit: BoxFit.fitHeight,
+    ),
+  );
+
+  static addButton({required VoidCallback onTap,required String text,required String title}) => Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+       Text(
+        title,
+        style: const TextStyle(
+          color: Colors.deepPurple,
+          fontSize: 35,
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.bold,
+          decorationThickness: 2.0,
+          decorationStyle: TextDecorationStyle.solid,
+        ),
+      ),
+      ElevatedButton(
+        onPressed:onTap,
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          backgroundColor: Colors.deepPurple,
+        ),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 18.0,
+            ),
+            Text(
+              text,
+              style: const TextStyle(fontWeight: FontWeight.bold,fontFamily: "Roboto"),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
 }

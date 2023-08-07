@@ -11,7 +11,6 @@ import 'package:school_app/Controller/teacherEventController.dart';
 import 'package:school_app/Student/event_details.dart';
 import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/Teacher/home.dart';
-import 'package:school_app/Teacher/teacher_particular_event.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
@@ -22,16 +21,15 @@ import 'package:school_app/utils/strings.dart';
 import 'package:school_app/utils/utility.dart';
 import 'package:school_app/utils/widgets/widgets.dart';
 
-class TeacherEvents extends StatefulWidget {
-  final String? id;
-  final String? name;
-  const TeacherEvents({Key? key, this.id, this.name}) : super(key: key);
+class TeacherParticularEvent extends StatefulWidget {
+  final int id;
+  const TeacherParticularEvent({Key? key, required this.id}) : super(key: key);
 
   @override
-  State<TeacherEvents> createState() => _TeacherEventsState();
+  State<TeacherParticularEvent> createState() => _TeacherParticularEventState();
 }
 
-class _TeacherEventsState extends State<TeacherEvents> {
+class _TeacherParticularEventState extends State<TeacherParticularEvent> {
   var teacherEventController = Get.put(TeacherEventController());
   DateTime todayDate = DateTime.now();
   final DateFormat formatter = DateFormat('EEEE');
@@ -57,9 +55,7 @@ class _TeacherEventsState extends State<TeacherEvents> {
               size: 35,
               color: Colors.white,
             ),
-            onPressed: () =>
-                AnimatedNavigation.pushReplacementAnimatedNavigation(
-                    context, const TeacherHome()),
+            onPressed: () =>Get.back(),
           ),
           toolbarHeight: 150,
           centerTitle: true,
@@ -94,37 +90,35 @@ class _TeacherEventsState extends State<TeacherEvents> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             StudentAppWidgets.addButton(onTap: (){}, text: 'Add Event', title: "Event List"),
-              divider,
-              Obx(() => teacherEventController.isLoading.value == true
-                  ? StudentAppWidgets.loadingWidget()
-                  : Expanded(
-                child: MediaQuery.removePadding(
-                  context: context,
-                  removeTop: true,
-                  child:teacherEventController.eventList.length == 0 ? StudentAppWidgets.noDataFound(text: 'There are no events ') : ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: teacherEventController.eventList.length,
-                    itemBuilder: (context, index) {
-                      return StudentAppWidgets.eventCard(
-                          onTap: () {
-                            AnimatedNavigation
-                                .pushAnimatedNavigation(
-                                context,
-                                TeacherParticularEvent(
-                                  id: index,
-                                ));
-                          },
-                          title: teacherEventController.eventList[index].title,
-                          eventDate:
-                          teacherEventController.eventList[index].eventDate,
-                          description: teacherEventController
-                              .eventList[index].description);
-                    },
+              Center(
+                child: Text(
+                  "Events List",
+                  style: TextStyle(
+                    color: Colors.deepPurple,
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                    decorationThickness: 2.0,
+                    decorationStyle: TextDecorationStyle.solid,
+                    // wordSpacing: 8,
+                    //letterSpacing: 2,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    // shadows: [
+                    //   Shadow(
+                    //       color: Colors.black,
+                    //       blurRadius: 2.0,
+                    //       offset: Offset(3, 1))
+                    // ]
                   ),
                 ),
-              ),),
+              ),
+
+              Expanded(
+                child: StudentAppWidgets.eventCardDetails(title: teacherEventController.eventList[widget.id].title,
+                    eventDate:
+                    teacherEventController.eventList[widget.id].eventDate,
+                    description: teacherEventController
+                        .eventList[widget.id].description),
+              ),
               const SizedBox(
                 height: 10,
               ),

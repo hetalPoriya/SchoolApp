@@ -23,7 +23,7 @@ class ToSubjectByClassModel {
 class SubjectByClasseModel {
   int? error;
   String? status;
-  List<Subject>? subjects;
+  List<SubjectByClass>? subjects;
 
   SubjectByClasseModel({
     this.error,
@@ -34,7 +34,7 @@ class SubjectByClasseModel {
   factory SubjectByClasseModel.fromJson(Map<String, dynamic> json) => SubjectByClasseModel(
     error: json["error"],
     status: json["status"],
-    subjects: json["subjects"] == null ? [] : List<Subject>.from(json["subjects"]!.map((x) => Subject.fromJson(x))),
+    subjects: json["subjects"] == null ? [] : List<SubjectByClass>.from(json["subjects"]!.map((x) => SubjectByClass.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -44,7 +44,7 @@ class SubjectByClasseModel {
   };
 }
 
-class Subject {
+class SubjectByClass {
   int? id;
   String? name;
   int? classId;
@@ -53,7 +53,7 @@ class Subject {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  Subject({
+  SubjectByClass({
     this.id,
     this.name,
     this.classId,
@@ -63,7 +63,7 @@ class Subject {
     this.updatedAt,
   });
 
-  factory Subject.fromJson(Map<String, dynamic> json) => Subject(
+  factory SubjectByClass.fromJson(Map<String, dynamic> json) => SubjectByClass(
     id: json["id"],
     name: json["name"],
     classId: json["class_id"],
