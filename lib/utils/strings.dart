@@ -203,4 +203,41 @@ static const search = 'Search';
 static const videosNotFound = 'Videos not found';
 static const eventList = 'Events list';
 static const calenderEventsNotFound = 'Calender events not found';
+
+//teacher
+//action assignment
+static const viewSubmissionDetails='View Submission Details';
+static const uploadedDocuments='Uploaded Documents';
+static const selectStatus='Select Status';
+static const accept='Accept';
+static const remarks='Remarks';
+static const test='Test';
+
+//add event
+static const createEvent = 'Create Event';
+static const eventTitle = 'Event Title';
+static const eventDescription = 'Event Description';
+static const scheduleDate = 'Schedule Date';
+
+//add test
+static const createTest = 'Create Test';
+static const testName = 'Test Name:';
+static const inputTestName = 'Input Test Name';
+static const validTill = 'Valid till';
+static const addQnA = 'Add QnA';
+static const noFileChosen = 'No File Chosen';
+static const answer = 'Answer:';
+static const selectAnswer = 'Select Answer';
+static const uploadFile = 'Upload File:';
+static const assignStudents = 'Assign Students';
+
+//assignment
+static String addAssignment = 'Add Assignment';
+static String checkedAssignments = 'Checked \n Assignments';
+static String uncheckedAssignments = 'Unchecked \n Assignments';
+static String allUploadedAssignments = 'All Uploaded \n Assignments';
+static String thereAreNoPendingAssignments = 'There are no pending assignments';
+
+//attendance
+
 }

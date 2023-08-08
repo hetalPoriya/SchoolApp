@@ -116,7 +116,7 @@ class _AddTestState extends State<AddTest> {
             state: currentStep > 0 ? StepState.complete : StepState.indexed,
             isActive: currentStep >= 0,
             title: const Text(
-              "Create Test",
+              Strings.createTest,
               style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
             ),
             content: ListView(
@@ -124,19 +124,19 @@ class _AddTestState extends State<AddTest> {
               physics: AlwaysScrollableScrollPhysics(),
               children: [
 
-                StudentAppWidgets.titleTextMarked(text: 'Test Name:'),
+                StudentAppWidgets.titleTextMarked(text: Strings.test),
                 StudentAppWidgets.textFormFieldWidget(
-                    hintText: 'Input Test Name',
+                    hintText: Strings.inputTestName,
                     textEditingController: _testNameController),
                 smallSizedBox,
-                StudentAppWidgets.titleTextMarked(text: 'Class:'),
+                StudentAppWidgets.titleTextMarked(text: Strings.classStrings),
                 DropDownWidget.classesDropDown(),
                 smallSizedBox,
-                StudentAppWidgets.titleTextMarked(text: 'Subject:'),
+                StudentAppWidgets.titleTextMarked(text: Strings.subject),
                 DropDownWidget.subjectDropDown(),
 
                 smallSizedBox,
-                StudentAppWidgets.titleTextMarked(text: 'Valid till'),
+                StudentAppWidgets.titleTextMarked(text: Strings.validTill),
                 StudentAppWidgets.textFormFieldWidget(
                     hintText: "dd-mm-yyyy",
                     textEditingController: _validtillController,
@@ -150,7 +150,7 @@ class _AddTestState extends State<AddTest> {
         Step(
             state: currentStep > 1 ? StepState.complete : StepState.indexed,
             isActive: currentStep >= 1,
-            title: const Text("Add QnA",
+            title: const Text(Strings.addQnA,
                 style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
             content: ListView(
               shrinkWrap: true,
@@ -159,7 +159,7 @@ class _AddTestState extends State<AddTest> {
                 Row(
                   children: [
                     Text(
-                      "Test Name:",
+  Strings.testName,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
@@ -172,7 +172,7 @@ class _AddTestState extends State<AddTest> {
                 Row(
                   children: [
                     Text(
-                      "Class:",
+                      Strings.classStrings,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
@@ -185,7 +185,7 @@ class _AddTestState extends State<AddTest> {
                 Row(
                   children: [
                     Text(
-                      "Subject:",
+                      Strings.subject,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
@@ -198,7 +198,7 @@ class _AddTestState extends State<AddTest> {
                 Row(
                   children: [
                     Text(
-                      "Valid till:",
+                      "${Strings.validTill}:",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
@@ -216,7 +216,7 @@ class _AddTestState extends State<AddTest> {
                         value: _option1Controller.text)),
                 smallerSizedBox,
                 StudentAppWidgets.textFormFieldWidget(
-                    hintText: " No File Chosen",
+                    hintText: Strings.noFileChosen,
                     textEditingController: _file1Controller,
                     readOnly: true,
                     onTap: () => PickFile(),
@@ -230,7 +230,7 @@ class _AddTestState extends State<AddTest> {
                         value: _option2Controller.text)),
                 smallerSizedBox,
                 StudentAppWidgets.textFormFieldWidget(
-                    hintText: " No File Chosen",
+                    hintText: Strings.noFileChosen,
                     textEditingController: _file2Controller,
                     readOnly: true,
                     onTap: () => PickFile(),
@@ -244,7 +244,7 @@ class _AddTestState extends State<AddTest> {
                         value: _option3Controller.text)),
                 smallerSizedBox,
                 StudentAppWidgets.textFormFieldWidget(
-                    hintText: " No File Chosen",
+                    hintText: Strings.noFileChosen,
                     textEditingController: _file3Controller,
                     readOnly: true,
                     onTap: () => PickFile(),
@@ -258,16 +258,16 @@ class _AddTestState extends State<AddTest> {
                         value: _option4Controller.text)),
                 smallerSizedBox,
                 StudentAppWidgets.textFormFieldWidget(
-                    hintText: " No File Chosen",
+                    hintText: Strings.noFileChosen,
                     textEditingController: _file4Controller,
                     readOnly: true,
                     onTap: () => PickFile(),
                     suffixIcon: chooseFilePrefix()),
                 smallSizedBox,
 
-                StudentAppWidgets.titleTextMarked(text: 'Answer:'),
+                StudentAppWidgets.titleTextMarked(text:Strings.answer),
                 CustomDropDown(
-                  hintText: "Select Answer",
+                  hintText: Strings.selectAnswer,
                   items: answer,
                   selectedValue: selectedValue2,
                   onChanged: (value) {
@@ -277,13 +277,13 @@ class _AddTestState extends State<AddTest> {
                   },
                 ),
                 smallSizedBox,
-                StudentAppWidgets.titleTextMarked(text: 'Descriptions:'),
-               StudentAppWidgets.textFormFieldWidget(hintText: 'Description', textEditingController: _questionController,validator: FormValidator.emptyFieldValidation(value: _questionController.text)),
+                StudentAppWidgets.titleTextMarked(text:'${Strings.description}:'),
+               StudentAppWidgets.textFormFieldWidget(hintText: Strings.description, textEditingController: _questionController,validator: FormValidator.emptyFieldValidation(value: _questionController.text)),
 
                 smallSizedBox,
-                StudentAppWidgets.titleText(text: 'Upload File:'),
+                StudentAppWidgets.titleText(text: Strings.uploadFile),
                 StudentAppWidgets.textFormFieldWidget(
-                    hintText: " No File Chosen",
+                    hintText: Strings.noFileChosen,
                     textEditingController: _file5Controller,
                     readOnly: true,
                     onTap: () => PickFile(),
@@ -293,10 +293,10 @@ class _AddTestState extends State<AddTest> {
             )),
         Step(
             isActive: currentStep >= 2,
-            title: const Text("Assign Students",
+            title: const Text(Strings.assignStudents,
                 style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
             content: Center(
-              child: Text("Assign Students"),
+              child: Text(Strings.assignStudents),
             ))
       ];
   @override
@@ -350,7 +350,7 @@ class _AddTestState extends State<AddTest> {
             // mainAxisAlignment: MainAxisAlignment.start,
             //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             StudentAppWidgets.titleTextHeading(title: 'Create Test'),
+             StudentAppWidgets.titleTextHeading(title: Strings.createTest),
               Expanded(
                 child: Theme(
                   data: Theme.of(context).copyWith(

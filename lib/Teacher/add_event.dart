@@ -95,27 +95,27 @@ class _AddEventState extends State<AddEvent> {
               key: _formKey,
               child: ListView(
                 children: [
-                  StudentAppWidgets.titleTextHeading(title: 'Create Event'),
+                  StudentAppWidgets.titleTextHeading(title: Strings.createEvent),
                   divider,
                   smallSizedBox,
-                  StudentAppWidgets.titleTextMarked(text: 'Event Title'),
+                  StudentAppWidgets.titleTextMarked(text: Strings.eventTitle),
                   StudentAppWidgets.textFormFieldWidget(
-                      hintText: 'Event Title',
+                      hintText: Strings.eventTitle,
                       textEditingController: _titleController,
 
                       validator: FormValidator.emptyFieldValidation(
                           value: _titleController.text)),
                   smallSizedBox,
-                  StudentAppWidgets.titleTextMarked(text: 'Event Description'),
+                  StudentAppWidgets.titleTextMarked(text: Strings.eventDescription),
                   StudentAppWidgets.textFormFieldWidget(
-                      hintText: 'Event Description',
+                      hintText: Strings.eventDescription,
                       textEditingController: _descriptionController,
 
                       validator: FormValidator.emptyFieldValidation(
                           value: _descriptionController.text)),
                   smallSizedBox,
-                  StudentAppWidgets.titleText(text: 'Schedule Date'),
-                  StudentAppWidgets.textFormFieldWidget(hintText:'Schedule Date' , textEditingController: _dateController,readOnly: true,validator: FormValidator.emptyFieldValidation(value: _dateController.text),onTap:() =>
+                  StudentAppWidgets.titleText(text: Strings.scheduleDate),
+                  StudentAppWidgets.textFormFieldWidget(hintText:Strings.scheduleDate , textEditingController: _dateController,readOnly: true,validator: FormValidator.emptyFieldValidation(value: _dateController.text),onTap:() =>
                       StudentAppWidgets.calenderView(context: context,dateTime: todayDate,dateController: _dateController)
                   ),
 

@@ -13,6 +13,7 @@ import 'package:school_app/Teacher/create_assignment.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -46,35 +47,7 @@ class _TeacherAssignmentsState extends State<TeacherAssignments> {
     if (isConnected) {
       assignmentController.getTeacherAssignment();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+      StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -124,20 +97,13 @@ class _TeacherAssignmentsState extends State<TeacherAssignments> {
               padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
               child: Obx(
                 () => assignmentController.isLoading == true
-                    ? Center(
-                        child: Image.asset(
-                          "assets/loading.gif",
-                          height: 425.0,
-                          width: 425.0,
-                          fit: BoxFit.fitHeight,
-                        ),
-                      )
+                    ? StudentAppWidgets.loadingWidget()
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Center(
                             child: Text(
-                              "Assignments".toUpperCase(),
+                    Strings.assignment.toUpperCase(),
                               style: titleTextStyle,
                             ),
                           ),
@@ -170,7 +136,7 @@ class _TeacherAssignmentsState extends State<TeacherAssignments> {
                                       size: 18.0,
                                     ),
                                     Text(
-                                      "Add Assignment",
+                                      Strings.addAssignment,
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontFamily: 'Roboto'),
@@ -187,18 +153,18 @@ class _TeacherAssignmentsState extends State<TeacherAssignments> {
                             padding: EdgeInsets.zero,
                             indicatorSize: TabBarIndicatorSize.tab,
 
-                            tabs: const [
+                            tabs:  [
                               Tab(
-                                child: Text('Checked \n Assignments',
+                                child: Text(Strings.checkedAssignments,
                                     textAlign: TextAlign.center),
                                 // text: "Checked \n Assignments",
                               ),
                               Tab(
-                                child: Text('Unchecked \n Assignments',
+                                child: Text(Strings.uncheckedAssignments,
                                     textAlign: TextAlign.center),
                               ),
                               Tab(
-                                child: Text('All Uploaded \n Assignments',
+                                child: Text(Strings.allUploadedAssignments,
                                     textAlign: TextAlign.center),
                               ),
                             ],
@@ -231,13 +197,13 @@ buildTabBarView(context) {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           assignmentController.checked_assignments.length == 0
-              ? noDataFoundWidget()
+              ? StudentAppWidgets.noDataFound(text: Strings.thereAreNoPendingAssignments)
               : cardWidget(list: assignmentController.checked_assignments),
           assignmentController.unchecked_assignments.length == 0
-              ? noDataFoundWidget()
+              ?  StudentAppWidgets.noDataFound(text: Strings.thereAreNoPendingAssignments)
               : cardWidget(list: assignmentController.unchecked_assignments),
           assignmentController.all_assignments.length == 0
-              ? noDataFoundWidget()
+              ? StudentAppWidgets.noDataFound(text: Strings.thereAreNoPendingAssignments)
               : cardWidget(list: assignmentController.all_assignments)
         ],
       ),
@@ -296,7 +262,7 @@ cardWidget({required RxList list}) {
                           width: 5,
                         ),
                         Text(
-                          "Class: ${list[index].className}",
+                          "${Strings.classStrings} ${list[index].className}",
                           style: const TextStyle(
                               fontFamily: 'Roboto',
                               color: Colors.black,
@@ -312,7 +278,7 @@ cardWidget({required RxList list}) {
                           width: 5,
                         ),
                         Text(
-                          "Section: ${list[index].sectionName}",
+                          "${Strings.section} ${list[index].sectionName}",
                           style: const TextStyle(
                               fontFamily: 'Roboto',
                               color: Colors.black,
@@ -333,7 +299,7 @@ cardWidget({required RxList list}) {
                           width: 5,
                         ),
                         Text(
-                          "Subject: ${list[index].subjectName}",
+                          "${Strings.subject} ${list[index].subjectName}",
                           style: const TextStyle(
                               fontFamily: 'Roboto',
                               color: Colors.black,
@@ -343,7 +309,7 @@ cardWidget({required RxList list}) {
                     ),
                     smallSizedBox,
                     Text(
-                      "Assignment Doc Link",
+                      Strings.assignmentDocLink,
                       style: TextStyle(
                           fontFamily: 'Roboto',
                           color: Colors.blue,
@@ -368,7 +334,7 @@ noDataFoundWidget() {
       Image.asset("assets/no-data.gif"),
       smallSizedBox,
       Text(
-        "There are no pending assignments",
+        "",
         style: TextStyle(
           color: Colors.purple[800],
           fontFamily: 'Roboto',

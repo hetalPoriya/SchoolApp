@@ -72,14 +72,14 @@ class _ActionAssignmentState extends State<ActionAssignment> {
             children: [
              Center(
                child: Text(
-                  "View Submission Details",
+                  Strings.viewSubmissionDetails,
                   style: deepPurpleStyle
                 ),
              ),
               const Divider(color: Colors.grey),
               smallSizedBox,
                Text(
-                "Uplaoded Documents",
+                Strings.uploadedDocuments,
                 style: mediumStyle
               ),
               largeSizedBox,
@@ -99,7 +99,7 @@ class _ActionAssignmentState extends State<ActionAssignment> {
                 child: Row(
                   children: [
                      Text(
-                      "Marks",
+                      Strings.marks,
                       style: mediumStyle,
                     ),
                     const Icon(
@@ -133,7 +133,7 @@ class _ActionAssignmentState extends State<ActionAssignment> {
                 child: Row(
                   children: [
                      Text(
-                      "Select Status",
+                      Strings.selectStatus,
                       style: mediumStyle
                     ),
                     const Icon(
@@ -152,7 +152,7 @@ class _ActionAssignmentState extends State<ActionAssignment> {
                     fillColor: Colors.white,
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                    hintText: ("Accept"),
+                    hintText: Strings.accept,
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey, width: 1.0),
                     ),
@@ -165,7 +165,7 @@ class _ActionAssignmentState extends State<ActionAssignment> {
               Row(
                 children: [
                    Text(
-                    "Remarks",
+                    Strings.remarks,
                     style: mediumStyle,
                   ),
                   const Icon(
@@ -212,7 +212,7 @@ class _ActionAssignmentState extends State<ActionAssignment> {
                 child: Row(
                   children: [
                      Text(
-                      "Descriptions:",
+                      "${Strings.description}:",
                       style:mediumStyle
                     ),
                     const Icon(
@@ -231,7 +231,7 @@ class _ActionAssignmentState extends State<ActionAssignment> {
                   cursorWidth: 2.0,
                   // textAlign: TextAlign.left,
                   decoration: const InputDecoration(
-                    hintText: "Test",
+                    hintText: Strings.test,
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey, width: 1.0),
                     ),
