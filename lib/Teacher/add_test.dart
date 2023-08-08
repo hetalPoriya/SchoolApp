@@ -7,19 +7,24 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:school_app/Controller/teacherMarkAttendanceController.dart';
 import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/Teacher/Tests.dart';
 import 'package:school_app/Teacher/upload_video.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
+import 'package:school_app/utils/student/dropdown_widget.dart';
 import 'package:school_app/utils/widgets/custom_app_bar.dart';
 import 'package:school_app/utils/widgets/custom_drop_down.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
 import 'package:school_app/utils/utility.dart';
+import 'package:school_app/utils/widgets/form_validator.dart';
 import 'package:school_app/utils/widgets/video_player.dart';
 
 class AddTest extends StatefulWidget {
@@ -38,6 +43,12 @@ class _AddTestState extends State<AddTest> {
   bool isLoading = false;
   File? fileToDisplay;
 
+  @override
+  void initState() {
+    teacherMarkAttendanceController.getClassesSections();
+    super.initState();
+  }
+
   void PickFile() async {
     try {
       setState(() {
@@ -51,7 +62,6 @@ class _AddTestState extends State<AddTest> {
         _fileName = result?.files.first.name;
         Pickedfile = result!.files.first;
         fileToDisplay = File(Pickedfile!.path.toString());
-
       }
       setState(() {
         isLoading = false;
@@ -73,44 +83,14 @@ class _AddTestState extends State<AddTest> {
   TextEditingController _option4Controller = TextEditingController();
   TextEditingController _file4Controller = TextEditingController();
 
+  TextEditingController _testNameController = TextEditingController();
   TextEditingController _file5Controller = TextEditingController();
   TextEditingController _validtillController = TextEditingController();
-  String? selectedValue;
-  List<DropdownMenuItem<String>> items = [
+  static var teacherMarkAttendanceController =
+      Get.put(TeacherMarkAttendanceController());
 
-    DropdownMenuItem(
-      value: 'I',
-      child: Text('I'),
-    ),
-    DropdownMenuItem(
-      value: 'II',
-      child: Text('II'),
-    ),
-    DropdownMenuItem(
-      value: 'III',
-      child: Text('III'),
-    ),
-
-  ];
-  String? selectedValue1;
-  List<DropdownMenuItem<String>>  subjects = [
-
-    DropdownMenuItem(
-      value: 'PHP',
-      child: Text('PHP'),
-    ),
-    DropdownMenuItem(
-      value: 'Python',
-      child: Text('Python'),
-    ),
-    DropdownMenuItem(
-      value: 'DAA',
-      child: Text('DAA'),
-    ),
-
-  ];
   String? selectedValue2;
-  List<DropdownMenuItem<String>>  answer = [
+  List<DropdownMenuItem<String>> answer = [
     DropdownMenuItem(
       value: 'Option 1',
       child: Text('Option 1'),
@@ -127,7 +107,6 @@ class _AddTestState extends State<AddTest> {
       value: 'Option 4',
       child: Text('Option 4'),
     ),
-
   ];
   DateTime todayDate = DateTime.now();
   int currentStep = 0;
@@ -140,139 +119,32 @@ class _AddTestState extends State<AddTest> {
               "Create Test",
               style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
             ),
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
+            content: ListView(
+              shrinkWrap: true,
+              physics: AlwaysScrollableScrollPhysics(),
               children: [
-                const Text(
-                  "Class:",
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                ),
-                SizedBox(
-                  height: 42,
-                  child: CustomDropDown(
-                    hintText: "Select Class",
-                    items: items,
-                    selectedValue: selectedValue,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedValue = value!;
-                      });
-                    },
-                  ),
-                ),
+
+                StudentAppWidgets.titleTextMarked(text: 'Test Name:'),
+                StudentAppWidgets.textFormFieldWidget(
+                    hintText: 'Input Test Name',
+                    textEditingController: _testNameController),
                 smallSizedBox,
-                const Text(
-                  "Subject:",
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                ),
-                SizedBox(
-                  height: 42,
-                  child: CustomDropDown(
-                    hintText: "Select Subject",
-                    items: subjects,
-                    selectedValue: selectedValue1,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedValue1 = value!;
-                      });
-                    },
-                  ),
-                ),
+                StudentAppWidgets.titleTextMarked(text: 'Class:'),
+                DropDownWidget.classesDropDown(),
                 smallSizedBox,
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: const Text(
-                    "Test Name:",
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 3),
-                ),
-                TextField(
-                    //controller: _titleController,
-                    decoration: const InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                  hintText: ("Input Test Name"),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                  ),
-                  isDense: true,
-                )),
+                StudentAppWidgets.titleTextMarked(text: 'Subject:'),
+                DropDownWidget.subjectDropDown(),
+
                 smallSizedBox,
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: const Text(
-                    "Valid till",
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 3),
-                ),
-                SizedBox(
-                  height: 42,
-                  child: TextField(
-                      onTap: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1999),
-                          lastDate: DateTime(2040),
-                        ).then((date) {
-                          setState(() {
-                            _dateTime = date!;
-                            _validtillController.text =
-                                DateFormat('dd-MM-yyyy').format(date);
-                          });
-                        });
-                      },
-                      controller: _validtillController,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                        hintText: ("dd-mm-yyyy"),
-                        suffixIcon: IconButton(
-                            onPressed: () {
-                              showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1999),
-                                lastDate: DateTime(2040),
-                              ).then((date) {
-                                setState(() {
-                                  _dateTime = date!;
-                                  _validtillController.text =
-                                      DateFormat('dd-MM-yyyy').format(date);
-                                });
-                              });
-                            },
-                            icon: Icon(Icons.calendar_month)),
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                        ),
-                        isDense: true,
-                      )),
-                ),
+                StudentAppWidgets.titleTextMarked(text: 'Valid till'),
+                StudentAppWidgets.textFormFieldWidget(
+                    hintText: "dd-mm-yyyy",
+                    textEditingController: _validtillController,
+                    readOnly: true,
+                    onTap: () => StudentAppWidgets.calenderView(
+                        context: context,
+                        dateTime: todayDate,
+                        dateController: _validtillController)),
               ],
             )),
         Step(
@@ -280,7 +152,9 @@ class _AddTestState extends State<AddTest> {
             isActive: currentStep >= 1,
             title: const Text("Add QnA",
                 style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
-            content: Column(
+            content: ListView(
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
               children: [
                 Row(
                   children: [
@@ -289,7 +163,7 @@ class _AddTestState extends State<AddTest> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "Test 1",
+                      _testNameController.text,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -302,7 +176,7 @@ class _AddTestState extends State<AddTest> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "I",
+                      teacherMarkAttendanceController.className.value ?? '',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -315,7 +189,7 @@ class _AddTestState extends State<AddTest> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "Python",
+                      teacherMarkAttendanceController.subjectName.value ?? '',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -328,390 +202,93 @@ class _AddTestState extends State<AddTest> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      DateFormat('dd-MM-yyyy').format(DateTime.now()),
+                      _validtillController.text,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
                 largeSizedBox,
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: const Text(
-                    "Option 1",
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 3),
-                ),
-                TextField(
-                    controller: _option1Controller,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                      hintText: ("Option 1"),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      ),
-                      isDense: true,
-                    )),
+                StudentAppWidgets.titleTextMarked(text: 'Option 1'),
+                StudentAppWidgets.textFormFieldWidget(
+                    hintText: 'Option 1',
+                    textEditingController: _option1Controller,
+                    validator: FormValidator.emptyFieldValidation(
+                        value: _option1Controller.text)),
+                smallerSizedBox,
+                StudentAppWidgets.textFormFieldWidget(
+                    hintText: " No File Chosen",
+                    textEditingController: _file1Controller,
+                    readOnly: true,
+                    onTap: () => PickFile(),
+                    suffixIcon: chooseFilePrefix()),
                 smallSizedBox,
-                SizedBox(
-                  height: 35,
-                  child: TextField(
-                      onTap: () {
-                        PickFile();
-                      },
-                      controller: _file1Controller,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 5),
-                        hintText: ("       No File Chosen"),
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(5.0),
-                                  bottomRight: Radius.circular(5)),
-                            ),
-                            child: const Center(
-                              child: Text('Choose file'),
-                            ),
-                          ),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                        ),
-                        isDense: true,
-                      )),
-                ),
+                StudentAppWidgets.titleTextMarked(text: 'Option 2'),
+                StudentAppWidgets.textFormFieldWidget(
+                    hintText: 'Option 2',
+                    textEditingController: _option2Controller,
+                    validator: FormValidator.emptyFieldValidation(
+                        value: _option2Controller.text)),
+                smallerSizedBox,
+                StudentAppWidgets.textFormFieldWidget(
+                    hintText: " No File Chosen",
+                    textEditingController: _file2Controller,
+                    readOnly: true,
+                    onTap: () => PickFile(),
+                    suffixIcon: chooseFilePrefix()),
                 smallSizedBox,
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: const Text(
-                    "Option 2",
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 3),
-                ),
-                TextField(
-                    controller: _option2Controller,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                      hintText: ("Option 2"),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      ),
-                      isDense: true,
-                    )),
+                StudentAppWidgets.titleTextMarked(text: 'Option 3'),
+                StudentAppWidgets.textFormFieldWidget(
+                    hintText: 'Option 3',
+                    textEditingController: _option3Controller,
+                    validator: FormValidator.emptyFieldValidation(
+                        value: _option3Controller.text)),
+                smallerSizedBox,
+                StudentAppWidgets.textFormFieldWidget(
+                    hintText: " No File Chosen",
+                    textEditingController: _file3Controller,
+                    readOnly: true,
+                    onTap: () => PickFile(),
+                    suffixIcon: chooseFilePrefix()),
                 smallSizedBox,
-                SizedBox(
-                  height: 35,
-                  child: TextField(
-                      onTap: () {
-                        PickFile();
-                      },
-                      controller: _file2Controller,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 5),
-                        hintText: ("       No File Chosen"),
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(5.0),
-                                  bottomRight: Radius.circular(5)),
-                            ),
-                            child: const Center(
-                              child: Text('Choose file'),
-                            ),
-                          ),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                        ),
-                        isDense: true,
-                      )),
+                StudentAppWidgets.titleTextMarked(text: 'Option 4'),
+                StudentAppWidgets.textFormFieldWidget(
+                    hintText: 'Option 4',
+                    textEditingController: _option4Controller,
+                    validator: FormValidator.emptyFieldValidation(
+                        value: _option4Controller.text)),
+                smallerSizedBox,
+                StudentAppWidgets.textFormFieldWidget(
+                    hintText: " No File Chosen",
+                    textEditingController: _file4Controller,
+                    readOnly: true,
+                    onTap: () => PickFile(),
+                    suffixIcon: chooseFilePrefix()),
+                smallSizedBox,
+
+                StudentAppWidgets.titleTextMarked(text: 'Answer:'),
+                CustomDropDown(
+                  hintText: "Select Answer",
+                  items: answer,
+                  selectedValue: selectedValue2,
+                  onChanged: (value) {
+                    setState(() {
+                      //selectedValue = value!;
+                    });
+                  },
                 ),
                 smallSizedBox,
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: const Text(
-                    "Option 3",
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 3),
-                ),
-                TextField(
-                    controller: _option3Controller,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                      hintText: ("Option 3"),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      ),
-                      isDense: true,
-                    )),
+                StudentAppWidgets.titleTextMarked(text: 'Descriptions:'),
+               StudentAppWidgets.textFormFieldWidget(hintText: 'Description', textEditingController: _questionController,validator: FormValidator.emptyFieldValidation(value: _questionController.text)),
+
                 smallSizedBox,
-                SizedBox(
-                  height: 35,
-                  child: TextField(
-                      onTap: () {
-                        PickFile();
-                      },
-                      controller: _file3Controller,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 5),
-                        hintText: ("       No File Chosen"),
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(5.0),
-                                  bottomRight: Radius.circular(5)),
-                            ),
-                            child: const Center(
-                              child: Text('Choose file'),
-                            ),
-                          ),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                        ),
-                        isDense: true,
-                      )),
-                ),
-                smallSizedBox,
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: const Text(
-                    "Option 4",
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 3),
-                ),
-                TextField(
-                    controller: _option4Controller,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                      hintText: ("Option 4"),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      ),
-                      isDense: true,
-                    )),
-                smallSizedBox,
-                SizedBox(
-                  height: 35,
-                  child: TextField(
-                      onTap: () {
-                        PickFile();
-                      },
-                      controller: _file4Controller,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 5),
-                        hintText: ("       No File Chosen"),
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(5.0),
-                                  bottomRight: Radius.circular(5)),
-                            ),
-                            child: const Center(
-                              child: Text('Choose file'),
-                            ),
-                          ),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                        ),
-                        isDense: true,
-                      )),
-                ),
-                smallSizedBox,
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: const Text(
-                    "Answer:",
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 3),
-                ),
-                SizedBox(
-                  height: 40,
-                  child: CustomDropDown(
-                    hintText: "Select Answer",
-                    items: answer,
-                    selectedValue: selectedValue2,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedValue = value!;
-                      });
-                    },
-                  ),
-                ),
-                smallSizedBox,
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: const Text(
-                    "Descriptions:",
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 3),
-                ),
-                TextField(
-                    controller: _questionController,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: 2,
-                    cursorWidth: 2.0,
-                    // textAlign: TextAlign.left,
-                    decoration: const InputDecoration(
-                      hintText: "Description",
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      ),
-                      //isDense: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      ),
-                    )),
-                smallSizedBox,
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: const Text(
-                    "Upload File:",
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 3),
-                ),
-                SizedBox(
-                  height: 35,
-                  child: TextField(
-                      onTap: () {
-                        PickFile();
-                      },
-                      controller: _file5Controller,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 5),
-                        hintText: ("       No File Chosen"),
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(5.0),
-                                  bottomRight: Radius.circular(5)),
-                            ),
-                            child: const Center(
-                              child: Text('Choose file'),
-                            ),
-                          ),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                        ),
-                        isDense: true,
-                      )),
-                ),
+                StudentAppWidgets.titleText(text: 'Upload File:'),
+                StudentAppWidgets.textFormFieldWidget(
+                    hintText: " No File Chosen",
+                    textEditingController: _file5Controller,
+                    readOnly: true,
+                    onTap: () => PickFile(),
+                    suffixIcon: chooseFilePrefix()),
+
               ],
             )),
         Step(
@@ -725,25 +302,30 @@ class _AddTestState extends State<AddTest> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      top:true,
+      top: true,
       child: Scaffold(
         backgroundColor: Colors.grey[50],
         appBar: AppBar(
-           leading: IconButton(
-           alignment: Alignment.topLeft,
-            icon: Icon(Icons.arrow_back,
-            size: 35,
-            color: Colors.black,),
-            onPressed: ()=>AnimatedNavigation.pushReplacementAnimatedNavigation(context, TeacherTest()),),
-         
-        // automaticallyImplyLeading: true,
+          leading: IconButton(
+            alignment: Alignment.topLeft,
+            icon: Icon(
+              Icons.arrow_back,
+              size: 35,
+              color: Colors.black,
+            ),
+            onPressed: () =>
+                AnimatedNavigation.pushReplacementAnimatedNavigation(
+                    context, TeacherTest()),
+          ),
+
+          // automaticallyImplyLeading: true,
           toolbarHeight: 180,
           centerTitle: true,
           flexibleSpace: ClipRRect(
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(90),
-               // bottomRight: Radius.circular(20)
-                ),
+              bottomLeft: Radius.circular(90),
+              // bottomRight: Radius.circular(20)
+            ),
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -755,7 +337,7 @@ class _AddTestState extends State<AddTest> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(90),
-             // bottomRight: Radius.circular(20),
+              // bottomRight: Radius.circular(20),
             ),
           ),
         ),
@@ -766,33 +348,13 @@ class _AddTestState extends State<AddTest> {
               const EdgeInsets.only(top: 20, bottom: 10, left: 10, right: 10),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Text(
-                  "Create Test",
-                  style: TextStyle(
-                      color: Colors.deepPurple,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                      decorationThickness: 2.0,
-                      decorationStyle: TextDecorationStyle.solid,
-                      // wordSpacing: 8,
-                      // letterSpacing: 2,
-                      // shadows: [
-                      //   Shadow(
-                      //       color: Colors.black,
-                      //       blurRadius: 2.0,
-                      //       offset: Offset(3, 1))
-                      // ]
-                      ),
-                ),
-              ),
-          
-              Theme(
-                data: Theme.of(context).copyWith(
-                    colorScheme: ColorScheme.light(primary: Colors.deepPurple)),
-                child: Expanded(
+             StudentAppWidgets.titleTextHeading(title: 'Create Test'),
+              Expanded(
+                child: Theme(
+                  data: Theme.of(context).copyWith(
+                      colorScheme: ColorScheme.light(primary: Colors.deepPurple)),
                   child: Stepper(
                     elevation: 0,
                     physics: ScrollPhysics(),
@@ -802,13 +364,11 @@ class _AddTestState extends State<AddTest> {
                     onStepContinue: () {
                       final isLastStep = currentStep == getSteps().length - 1;
                       if (isLastStep) {
-
                       } else {
                         setState(() => currentStep += 1);
                       }
                     },
-                    onStepTapped: (step) =>
-                        setState(() => currentStep = step),
+                    onStepTapped: (step) => setState(() => currentStep = step),
                     onStepCancel: currentStep == 0
                         ? null
                         : () => setState(() => currentStep -= 1),
@@ -831,11 +391,23 @@ class _AddTestState extends State<AddTest> {
                   ),
                 ),
               ),
-             
             ],
           ),
         ),
       ),
     );
   }
+
+  chooseFilePrefix() => Container(
+        width: 90,
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          border: Border.all(color: Colors.grey),
+          borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(5.0), bottomRight: Radius.circular(8)),
+        ),
+        child: const Center(
+          child: Text('Choose file'),
+        ),
+      );
 }

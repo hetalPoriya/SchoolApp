@@ -1,29 +1,25 @@
 import 'package:better_player/better_player.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/gestures.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:school_app/Controller/videoController.dart';
-import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
-import 'package:school_app/utils/constants.dart';
+
 import 'package:school_app/utils/network_handler.dart';
-import 'package:school_app/utils/widgets/custom_page.dart';
-import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
+import 'package:school_app/utils/student/app_widget.dart';
+import 'package:school_app/utils/widgets/custom_page.dart';
+
 import 'package:school_app/utils/utility.dart';
 import 'package:school_app/utils/widgets/show_image.dart';
-import 'package:school_app/utils/widgets/video_player.dart';
-import 'package:school_app/utils/widgets/youtube_video_player.dart';
 
 import '../Controller/assesmentCertController.dart';
 import '../utils/widgets/shimmerWidget.dart';
 
 class AssesmentCertificate extends StatefulWidget {
-
   const AssesmentCertificate({Key? key}) : super(key: key);
 
   @override
@@ -45,8 +41,7 @@ class _AssesmentCertificateState extends State<AssesmentCertificate> {
 
     if (isConnected) {
       assesmentCertController.getStuCertificate();
-    }
-    else{
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: const Duration(days: 1),
         behavior: SnackBarBehavior.floating,
@@ -65,7 +60,7 @@ class _AssesmentCertificateState extends State<AssesmentCertificate> {
                   left: 16.0,
                 ),
                 child: Text(
-                  'No internet available',
+                  Strings.noInternetAvailable,
                   textAlign: TextAlign.start,
                 ),
               ),
@@ -82,77 +77,69 @@ class _AssesmentCertificateState extends State<AssesmentCertificate> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        automaticallyImplyLeading: false,
-        child: Padding(
-            padding: const EdgeInsets.only(top: 60, bottom: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      automaticallyImplyLeading: false,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 60, bottom: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(Strings.assesmentCertificate, style: titleTextStyle),
+            smallSizedBox,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Assesment Certificate", style: titleTextStyle),
-                smallSizedBox,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      DateFormat('dd MMMM yyyy').format(DateTime.now()),
-                      style: textButtonTextStyle,
-                    ),
-                  ],
+                Text(
+                  DateFormat('dd MMMM yyyy').format(DateTime.now()),
+                  style: textButtonTextStyle,
                 ),
-                divider,
-                const SizedBox(height: 10),
-                buildTabBarView(),
               ],
             ),
-          ),
-        );
+            divider,
+            const SizedBox(height: 10),
+            buildTabBarView(),
+          ],
+        ),
+      ),
+    );
     //   ),
     // );
   }
 
   buildTabBarView() {
-    return Obx(() => assesmentCertController.isLoading ==true?
-    Center(
-      child: Image.asset(
-        "assets/loading.gif",
-        height: 425.0,
-        width: 425.0,
-        fit: BoxFit.fitHeight,
-      ),
-    ):Expanded(
-      child: MediaQuery.removePadding(
-        context: context,
-        removeTop: true,
-        child: assesmentCertController.status == "Certificate not found"?Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset("assets/no-data.gif"),
-            smallSizedBox,
-            Text("Certificate not found", style: TextStyle(color: Colors.purple[800]),)
-          ],
-        ):ListView(
-                  //crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 0,
-                              crossAxisSpacing: 15,
-                              //childAspectRatio: 16 / 9,
-                            ),
-                            itemCount: assesmentCertController.certificates.length,
-                            itemBuilder: (context, index) => InkWell(
+    return Obx(() => assesmentCertController.isLoading == true
+        ? StudentAppWidgets.loadingWidget()
+        : Expanded(
+            child: MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              child: assesmentCertController.status == "Certificate not found"
+                  ? StudentAppWidgets.noDataFound(text: Strings.certificateNotFound)
+                  : ListView(
+                      //crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 0,
+                            crossAxisSpacing: 15,
+                            //childAspectRatio: 16 / 9,
+                          ),
+                          itemCount:
+                              assesmentCertController.certificates.length,
+                          itemBuilder: (context, index) => InkWell(
                               onTap: () {
                                 AnimatedNavigation.pushAnimatedNavigation(
                                   context,
                                   ShowImage(
-                                      url: assesmentCertController.certificates[index].certificateFile),
+                                      url: assesmentCertController
+                                          .certificates[index].certificateFile),
                                 );
                               },
                               child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   smallSizedBox,
@@ -160,39 +147,47 @@ class _AssesmentCertificateState extends State<AssesmentCertificate> {
                                     alignment: Alignment.center,
                                     children: [
                                       ClipRRect(
-                                        borderRadius: BorderRadius.circular(20.0),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                         child: CachedNetworkImage(
-                                          imageUrl: assesmentCertController.certificates[index].certificateFile,
+                                          imageUrl: assesmentCertController
+                                              .certificates[index]
+                                              .certificateFile,
                                           fit: BoxFit.cover,
-                                          height: MediaQuery.of(context).size.height/6,
-                                          width: MediaQuery.of(context).size.width,
-                                          placeholder: (context, url) => buildShimmer(),
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              6,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          placeholder: (context, url) =>
+                                              buildShimmer(),
                                         ),
                                       ),
                                     ],
                                   ),
                                 ],
-                              )
-                            ),
-                          ),
-                    smallSizedBox,
-                  ],
-                ),
-      ),
-    ));
+                              )),
+                        ),
+                        smallSizedBox,
+                      ],
+                    ),
+            ),
+          ));
   }
-  Widget buildShimmer(){
+
+  Widget buildShimmer() {
     return Container(
-      height: MediaQuery.of(context).size.height/6,
+      height: MediaQuery.of(context).size.height / 6,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           color: ColorConstants.kWhiteColor,
-          borderRadius: BorderRadius.circular(
-              10.0)),
+          borderRadius: BorderRadius.circular(10.0)),
       child: Center(
-          child: ShimmerWidget.rectangular(height: MediaQuery.of(context).size.height/6,
-            width: MediaQuery.of(context).size.width,)
-      ),
+          child: ShimmerWidget.rectangular(
+        height: MediaQuery.of(context).size.height / 6,
+        width: MediaQuery.of(context).size.width,
+      )),
     );
   }
 }

@@ -40,7 +40,7 @@ class _ActivityState extends State<Activity> {
       automaticallyImplyLeading: false,
       child: ListView(children: [
         const Text(
-          "Activities",
+          Strings.activities,
           style: TextStyle(
               color: Color.fromARGB(255, 145, 92, 236),
               fontWeight: FontWeight.bold,
@@ -55,19 +55,18 @@ class _ActivityState extends State<Activity> {
         const Divider(
           color: Colors.grey,
         ),
-        Obx(() => widget.id == '1'?ListView.builder(
-            shrinkWrap: true,
-            itemCount: dailyActivityController.sport_activities.length,
-            itemBuilder: (context, index) =>
-                GestureDetector(
+        Obx(() => widget.id == '1'
+            ? ListView.builder(
+                shrinkWrap: true,
+                itemCount: dailyActivityController.sport_activities.length,
+                itemBuilder: (context, index) => GestureDetector(
                   onTap: () => AnimatedNavigation.pushAnimatedNavigation(
                       context,
                       ActivityDetails(
                         id: index,
                         from: "sports_activities",
                       )),
-                  child:
-                  Card(
+                  child: Card(
                     color: ColorConstants.kGreyColor100,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -81,140 +80,123 @@ class _ActivityState extends State<Activity> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Container(
-
-                                decoration:
-                                BoxDecoration(color: ColorConstants.kWhiteColor, borderRadius: BorderRadius.circular(10.0)),
-                                child:
-                                Center(
+                                decoration: BoxDecoration(
+                                    color: ColorConstants.kWhiteColor,
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                child: Center(
                                   child: Image.network(
-                                    dailyActivityController.sport_activities[index].activityImage,
+                                    dailyActivityController
+                                        .sport_activities[index].activityImage,
                                     width: 80.0,
                                     height: 80.0,
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 20,),
-                              Expanded(child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    dailyActivityController.sport_activities[index].activityTitle,
-                                    style: TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  smallerSizedBox,
-                                  Text(
-                                    dailyActivityController.sport_activities[index].activitySubject,
-
-                                    maxLines: null,
-
-
-                                  ),
-
-
-                                ],),),
-
-                              Icon(Icons.arrow_forward_ios,color: ColorConstants.kGreyColor),
-
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      dailyActivityController
+                                          .sport_activities[index]
+                                          .activityTitle,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    smallerSizedBox,
+                                    Text(
+                                      dailyActivityController
+                                          .sport_activities[index]
+                                          .activitySubject,
+                                      maxLines: null,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Icon(Icons.arrow_forward_ios,
+                                  color: ColorConstants.kGreyColor),
                             ],
                           ),
-
-
-
                         ],
                       ),
                     ),
                   ),
-
                 ),
-
-              ):
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: dailyActivityController.other_activities.length,
-          itemBuilder: (context, index) =>
-
-              GestureDetector(
-                onTap: () => AnimatedNavigation.pushAnimatedNavigation(
-                    context,
-                    ActivityDetails(
-                      id: index,
-                      from: "other_activities",
-                    )),
-                child: Card(
-                  color: ColorConstants.kGreyColor100,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-
-                              decoration:
-                              BoxDecoration(color: ColorConstants.kWhiteColor, borderRadius: BorderRadius.circular(10.0)),
-                              child:
-                              Center(
-                                child: Image.network(
-                                  dailyActivityController.other_activities[index].activityImage,
-                                  width: 80.0,
-                                  height: 80.0,
+              )
+            : ListView.builder(
+                shrinkWrap: true,
+                itemCount: dailyActivityController.other_activities.length,
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () => AnimatedNavigation.pushAnimatedNavigation(
+                      context,
+                      ActivityDetails(
+                        id: index,
+                        from: "other_activities",
+                      )),
+                  child: Card(
+                    color: ColorConstants.kGreyColor100,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: ColorConstants.kWhiteColor,
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                child: Center(
+                                  child: Image.network(
+                                    dailyActivityController
+                                        .other_activities[index].activityImage,
+                                    width: 80.0,
+                                    height: 80.0,
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(width: 20,),
-                            Expanded(child: Column(
-                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                              Text(
-                                dailyActivityController.other_activities[index].activityTitle,
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                              SizedBox(
+                                width: 20,
                               ),
-                              smallerSizedBox,
-                              Text(
-                                dailyActivityController.other_activities[index].activitySubject,
-
-                                maxLines: null,
-
-
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      dailyActivityController
+                                          .other_activities[index]
+                                          .activityTitle,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    smallerSizedBox,
+                                    Text(
+                                      dailyActivityController
+                                          .other_activities[index]
+                                          .activitySubject,
+                                      maxLines: null,
+                                    ),
+                                  ],
+                                ),
                               ),
-
-
-                            ],),),
-
-                    Icon(Icons.arrow_forward_ios,color: ColorConstants.kGreyColor),
-                           
-                          ],
-                        ),
-
-
-
-                      ],
+                              Icon(Icons.arrow_forward_ios,
+                                  color: ColorConstants.kGreyColor),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            )
-        ),
+              )),
       ]),
     );
   }
 }
-//  return CustomScaffold(
-//       showAppBar: true,
-//       showDrawer: false,
-//       automaticallyImplyLeading: true,
-//       child: SingleChildScrollView(
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//              ],
-//         ),
-//       ),
-//     );
-//   }
-// }

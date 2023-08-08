@@ -33,4 +33,9 @@ class Strings {
   static const todayClasses = "TODAY'S CLASSES";
   static const yourTask = "YOUR TASK";
   static const documents = "Documents";
+static const noInternetAvailable = 'No internet available';
+
+//assement certificate
+static const assesmentCertificate = 'Assesment Certificate';
+static const certificateNotFound = 'Certificate not found';
 }

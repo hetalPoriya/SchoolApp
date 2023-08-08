@@ -451,22 +451,24 @@ class StudentAppWidgets {
       width: 425.0,
       fit: BoxFit.fitHeight,
     ),
+
   );
 
+  static titleTextHeading({required String title}) =>  Text(
+    title,
+    style: const TextStyle(
+      color: Colors.deepPurple,
+      fontSize: 35,
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.bold,
+      decorationThickness: 2.0,
+      decorationStyle: TextDecorationStyle.solid,
+    ),
+  );
   static addButton({required VoidCallback onTap,required String text,required String title}) => Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-       Text(
-        title,
-        style: const TextStyle(
-          color: Colors.deepPurple,
-          fontSize: 35,
-          fontFamily: 'Roboto',
-          fontWeight: FontWeight.bold,
-          decorationThickness: 2.0,
-          decorationStyle: TextDecorationStyle.solid,
-        ),
-      ),
+       titleTextHeading(title: title),
       ElevatedButton(
         onPressed:onTap,
         style: ElevatedButton.styleFrom(

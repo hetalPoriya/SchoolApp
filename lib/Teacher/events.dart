@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:school_app/Controller/teacherEventController.dart';
 import 'package:school_app/Student/event_details.dart';
 import 'package:school_app/Student/profile_page.dart';
+import 'package:school_app/Teacher/add_event.dart';
 import 'package:school_app/Teacher/home.dart';
 import 'package:school_app/Teacher/teacher_particular_event.dart';
 import 'package:school_app/utils/animated_navigation.dart';
@@ -94,7 +95,8 @@ class _TeacherEventsState extends State<TeacherEvents> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             StudentAppWidgets.addButton(onTap: (){}, text: 'Add Event', title: "Event List"),
+             StudentAppWidgets.addButton(onTap:()=>AnimatedNavigation.pushAnimatedNavigation(
+                 context, AddEvent()), text: 'Add Event', title: "Event List"),
               divider,
               Obx(() => teacherEventController.isLoading.value == true
                   ? StudentAppWidgets.loadingWidget()

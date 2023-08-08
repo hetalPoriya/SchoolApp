@@ -32,14 +32,7 @@ class TeacherParticularEvent extends StatefulWidget {
 class _TeacherParticularEventState extends State<TeacherParticularEvent> {
   var teacherEventController = Get.put(TeacherEventController());
   DateTime todayDate = DateTime.now();
-  final DateFormat formatter = DateFormat('EEEE');
-  final DateFormat formatter1 = DateFormat('dMMMM');
 
-  @override
-  void initState() {
-    teacherEventController.teacherViewEvent();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,28 +83,7 @@ class _TeacherParticularEventState extends State<TeacherParticularEvent> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Text(
-                  "Events List",
-                  style: TextStyle(
-                    color: Colors.deepPurple,
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                    decorationThickness: 2.0,
-                    decorationStyle: TextDecorationStyle.solid,
-                    // wordSpacing: 8,
-                    //letterSpacing: 2,
-                    // ignore: prefer_const_literals_to_create_immutables
-                    // shadows: [
-                    //   Shadow(
-                    //       color: Colors.black,
-                    //       blurRadius: 2.0,
-                    //       offset: Offset(3, 1))
-                    // ]
-                  ),
-                ),
-              ),
-
+              StudentAppWidgets.titleTextHeading(title: "Events List"),
               Expanded(
                 child: StudentAppWidgets.eventCardDetails(title: teacherEventController.eventList[widget.id].title,
                     eventDate:

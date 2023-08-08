@@ -127,8 +127,11 @@ class _TeacherTestState extends State<TeacherTest> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () => AnimatedNavigation.pushAnimatedNavigation(
-                        context, AddTest()),
+                    onPressed: () {
+
+                      AnimatedNavigation.pushAnimatedNavigation(
+                          context, AddTest());
+                    },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
@@ -225,10 +228,10 @@ class _TeacherTestState extends State<TeacherTest> {
                                               //fontWeight: FontWeight.bold
                                             ),
                                           ),
-                                         
+
                                         ],
                                       ),
-                                  
+
                                  SizedBox(width:40),
                                   Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
