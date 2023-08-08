@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:school_app/Controller/dailyActivityController.dart';
 import 'package:school_app/utils/colors.dart';
+import 'package:school_app/utils/strings.dart';
 import 'package:school_app/utils/utility.dart';
 import 'package:intl/intl.dart';
 import 'package:school_app/utils/widgets/shimmerWidget.dart';
@@ -493,4 +494,34 @@ class StudentAppWidgets {
       ),
     ],
   );
+
+  static noInternetAvailable({required BuildContext context}) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    duration: const Duration(days: 1),
+    behavior: SnackBarBehavior.floating,
+    content: const Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Icon(
+          Icons.signal_wifi_off,
+          color: Colors.white,
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: 16.0,
+            ),
+            child: Text(
+              Strings.noInternetAvailable,
+              textAlign: TextAlign.start,
+            ),
+          ),
+        ),
+      ],
+    ),
+    action: SnackBarAction(
+        textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
+    backgroundColor: Colors.grey,
+  ));
 }

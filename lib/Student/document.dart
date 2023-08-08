@@ -14,6 +14,7 @@ import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -45,35 +46,7 @@ class _DocumentsState extends State<Documents> {
       });
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+     StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
   @override
@@ -84,17 +57,10 @@ class _DocumentsState extends State<Documents> {
         padding: const EdgeInsets.only(top:60),
         child: Obx(
         () => documentController.isLoading ==true?
-        Center(
-        child: Image.asset(
-        "assets/loading.gif",
-        height: 425.0,
-        width: 425.0,
-        fit: BoxFit.fitHeight,
-        ),
-        ):Column(
+        StudentAppWidgets.loadingWidget():Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Document".toUpperCase(),
+            Text(Strings.document.toUpperCase(),
             style: titleTextStyle,),
            
             Text(

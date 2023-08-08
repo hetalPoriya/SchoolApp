@@ -46,7 +46,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
-                "Change Request",
+                Strings.changeRequest,
                 style: titleTextStyle,
               ),
               Text(
@@ -59,7 +59,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                 alignment: Alignment.topLeft,
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: const Text(
-                  "Request ID",
+                  Strings.requestID,
                   //textAlign: TextAlign.end,
                   style: TextStyle(
                     fontSize: 13,
@@ -72,7 +72,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                     hintText: ("Student Name"),
+                     hintText: (Strings.studentName),
                       border: OutlineInputBorder(),
                       isDense: true,
                     )),
@@ -82,7 +82,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                 alignment: Alignment.topLeft,
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: const Text(
-                  "Title",
+                  Strings.title,
                   style: TextStyle(
                     fontSize: 13,
                   ),
@@ -94,7 +94,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                      hintText: ("Detail change request"),
+                      hintText: (Strings.detailChangeRequest),
                       border: OutlineInputBorder(),
                       isDense: true,
                     )),
@@ -104,7 +104,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                 alignment: Alignment.topLeft,
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: const Text(
-                  "Relation Type",
+                  Strings.relationType,
                   style: TextStyle(
                     fontSize: 13,
                   ),
@@ -116,7 +116,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                    hintText: (" Enter Relation Type"),
+                    hintText: (Strings.enterRelationType),
                       border: OutlineInputBorder(),
                       isDense: true,
                     )),
@@ -125,7 +125,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                 alignment: Alignment.topLeft,
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: const Text(
-                  "Relative Name",
+                  Strings.relativeName,
                   style: TextStyle(
                     fontSize: 13,
                   ),
@@ -137,7 +137,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                     hintText: ("Enter Relative Name"),
+                     hintText: (Strings.enterRelativeName),
                       border: OutlineInputBorder(),
                       isDense: true,
                     )),
@@ -147,7 +147,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                 alignment: Alignment.topLeft,
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: const Text(
-                  "Change Description",
+                  Strings.changeDescription,
                   style: TextStyle(
                     fontSize: 13,
                   ),
@@ -160,7 +160,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                   cursorWidth: 2.0,
                   textAlign: TextAlign.left,
                   decoration: const InputDecoration(
-                    hintText: "Description",
+                    hintText: Strings.description,
                     border: OutlineInputBorder(),
                     //isDense: true,
                   )),
@@ -168,7 +168,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                 alignment: Alignment.topLeft,
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: const Text(
-                  "E-mail Address",
+                  Strings.emailAddress,
                   style: TextStyle(
                     fontSize: 13,
                   ),
@@ -180,7 +180,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                      hintText: ("Email"),
+                      hintText: (Strings.email),
                       border: OutlineInputBorder(),
                       isDense: true,
                     )),
@@ -191,7 +191,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                 alignment: Alignment.topLeft,
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: const Text(
-                  "Father Contact No.",
+                  Strings.fatherContactNo,
                   style: TextStyle(
                     fontSize: 13,
                   ),
@@ -202,7 +202,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                    hintText: ("Mobile No."),
+                    hintText: (Strings.mobileNo),
                     border: OutlineInputBorder(),
                     isDense: true,
                   )),
@@ -228,7 +228,7 @@ class _ChangeRequestState extends State< ChangeRequest> {
                       primary: const Color.fromRGBO(105, 80, 255, 1.0),
                     ),
                     child: const Text(
-                      "Submit Request",
+                      Strings.submitRequest,
                       style: TextStyle(fontSize: 15),
                     ),
                   ),

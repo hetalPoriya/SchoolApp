@@ -7,6 +7,7 @@ import 'package:school_app/Controller/attendanceController.dart';
 import 'package:school_app/Student/subjects.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -44,39 +45,11 @@ class _AttendanceState extends State<Attendance> {
       attendanceController.getAttendance();
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+      StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
-  nameText() => Text("Attendance".toUpperCase(), style: titleTextStyle);
+  nameText() => Text(Strings.attendance.toUpperCase(), style: titleTextStyle);
 
   dateText() => Text(
         DateFormat('dd MMMM yyyy').format(DateTime.now()),
@@ -97,14 +70,7 @@ class _AttendanceState extends State<Attendance> {
         padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 10.0),
         child: Obx(
           ()=>attendanceController.isLoading ==true?
-          Center(
-              child: Image.asset(
-                "assets/loading.gif",
-                height: 425.0,
-                width: 425.0,
-                fit: BoxFit.fitHeight,
-              )
-          ):TableCalendar(
+          StudentAppWidgets.loadingWidget():TableCalendar(
           rowHeight: 25.0,
           headerVisible: true,
           daysOfWeekHeight: 30.0,
@@ -145,7 +111,7 @@ class _AttendanceState extends State<Attendance> {
                 if(day.day == attend.attendanceDate.day &&
                     day.month == attend.attendanceDate.month &&
                     day.year == attend.attendanceDate.year &&
-                attend.status == "Present"){
+                attend.status == Strings.present){
                   return Container(
                     padding:
                     const EdgeInsets.only(left: 7, right: 7, top: 4, bottom: 4),
@@ -162,7 +128,7 @@ class _AttendanceState extends State<Attendance> {
                 else if(day.day == attend.attendanceDate.day &&
                     day.month == attend.attendanceDate.month &&
                     day.year == attend.attendanceDate.year &&
-                    attend.status == "Absent"){
+                    attend.status == Strings.absent){
                   return Container(
                     padding:
                     const EdgeInsets.only(left: 7, right: 7, top: 4, bottom: 4),
@@ -179,7 +145,7 @@ class _AttendanceState extends State<Attendance> {
                 else if(day.day == attend.attendanceDate.day &&
                     day.month == attend.attendanceDate.month &&
                     day.year == attend.attendanceDate.year &&
-                    attend.status == "Leave"){
+                    attend.status == Strings.leave){
                   return Container(
                     padding:
                     const EdgeInsets.only(left: 7, right: 7, top: 4, bottom: 4),
@@ -196,7 +162,7 @@ class _AttendanceState extends State<Attendance> {
                 else if(day.day == attend.attendanceDate.day &&
                     day.month == attend.attendanceDate.month &&
                     day.year == attend.attendanceDate.year &&
-                    attend.status == "Holiday"){
+                    attend.status == Strings.holiday){
                   return Container(
                     padding:
                     const EdgeInsets.only(left: 7, right: 7, top: 4, bottom: 4),
@@ -271,7 +237,7 @@ class _AttendanceState extends State<Attendance> {
               child: const Padding(
                 padding: EdgeInsets.only(top: 5, left: 6),
                 child: Text(
-                  "Legend",
+                  Strings.legend,
                   style: TextStyle(color: Colors.white),
                   textAlign: TextAlign.left,
                 ),
@@ -290,7 +256,7 @@ class _AttendanceState extends State<Attendance> {
                       borderRadius: BorderRadius.circular(50.0)),
                 ),
                 const SizedBox(width: 3),
-                const Text("Present"),
+                const Text(Strings.present),
                 const SizedBox(width: 50),
                 Container(
                   padding: const EdgeInsets.all(7.0),
@@ -299,7 +265,7 @@ class _AttendanceState extends State<Attendance> {
                       borderRadius: BorderRadius.circular(50.0)),
                 ),
                 const SizedBox(width: 3),
-                const Text("Absent"),
+                const Text(Strings.absent),
                 const SizedBox(width: 50),
                 Container(
                   padding: const EdgeInsets.all(7.0),
@@ -308,7 +274,7 @@ class _AttendanceState extends State<Attendance> {
                       borderRadius: BorderRadius.circular(50.0)),
                 ),
                 const SizedBox(width: 3),
-                const Text("Leave"),
+                const Text(Strings.leave),
               ],
             ),
             largeSizedBox,
@@ -321,7 +287,7 @@ class _AttendanceState extends State<Attendance> {
                       borderRadius: BorderRadius.circular(50.0)),
                 ),
                 const SizedBox(width: 3),
-                const Text("Holiday"),
+                const Text(Strings.holiday),
               ],
             ),
           ],

@@ -11,6 +11,7 @@ import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -49,7 +50,7 @@ class _Document1State extends State<Document1> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Document".toUpperCase(),
+              Strings.document.toUpperCase(),
               style: titleTextStyle,
             ),
             Text(
@@ -64,14 +65,7 @@ class _Document1State extends State<Document1> {
                 removeTop: true,
                 child: Obx(
                   ()=> documentController.isLoading ==true?
-                  Center(
-                    child: Image.asset(
-                      "assets/loading.gif",
-                      height: 425.0,
-                      width: 425.0,
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ):ListView.builder(
+                  StudentAppWidgets.loadingWidget():ListView.builder(
                   shrinkWrap: true,
                   itemCount: widget.monthLength,
                   itemBuilder: (context, index) {

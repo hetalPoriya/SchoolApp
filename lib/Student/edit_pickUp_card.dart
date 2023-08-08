@@ -14,6 +14,7 @@ import 'package:school_app/Student/home_page.dart';
 import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_app_bar.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
@@ -187,14 +188,7 @@ class _EditPickUpCardState extends State<EditPickUpCard> {
           padding:
               const EdgeInsets.only(top: 18, bottom: 40, left: 15, right: 15),
           child: Obx(() => pickupCardController.isLoading == true
-                  ? Center(
-                      child: Image.asset(
-                        "assets/loading.gif",
-                        height: 425.0,
-                        width: 425.0,
-                        fit: BoxFit.fitHeight,
-                      ),
-                    )
+                  ? StudentAppWidgets.loadingWidget()
                   : Container()
               // : Column(
               //     crossAxisAlignment: CrossAxisAlignment.start,

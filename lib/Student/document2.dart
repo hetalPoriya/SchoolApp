@@ -44,7 +44,7 @@ class _Document2State extends State<Document2> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Document".toUpperCase(),
+              Strings.document.toUpperCase(),
               style: titleTextStyle,
             ),
             Text(

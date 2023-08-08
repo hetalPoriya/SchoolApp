@@ -36,7 +36,7 @@ class _InboxState extends State<AssignmentInbox> {
   Widget build(BuildContext context) {
     return CustomScaffold(
         titleWidget: const Text(
-          "Assignment",
+          Strings.assignment,
           style: TextStyle(
               color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 25),
         ),
@@ -56,7 +56,7 @@ class _InboxState extends State<AssignmentInbox> {
             ),
             smallerSizedBox,
             Text(
-                "Subject: "+assignmentController.pending_assignments[widget.id!].subjectName,
+                Strings.subject + assignmentController.pending_assignments[widget.id!].subjectName,
               style: TextStyle(fontSize: 15),
             ),
             smallerSizedBox,
@@ -65,7 +65,7 @@ class _InboxState extends State<AssignmentInbox> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Class: "+assignmentController.pending_assignments[widget.id!].className,
+                  Strings.classStrings +assignmentController.pending_assignments[widget.id!].className,
                   style: TextStyle(fontSize: 15),
                 ),
                 SizedBox(width: 5,),
@@ -77,7 +77,7 @@ class _InboxState extends State<AssignmentInbox> {
             ),
             smallerSizedBox,
             Text(
-              "Last Day To Submit: "+
+              Strings.lastDayToSubmit +
                   DateFormat('dd/MM/yyyy')
                       .format(assignmentController.pending_assignments[widget.id!].expireAt),
               style: TextStyle(fontSize: 15),
@@ -97,7 +97,7 @@ class _InboxState extends State<AssignmentInbox> {
                 )
                 :Wrap(),
             largeSizedBox,
-            const Text("Attachment"),
+            const Text(Strings.attachment),
             largeSizedBox,
             GridView.count(
               padding: EdgeInsets.zero,
@@ -169,7 +169,7 @@ class _InboxState extends State<AssignmentInbox> {
                     );
                   },
                   child: const Text(
-                    "Submit Assignment",
+                    Strings.submitAssignment,
                     style: TextStyle(fontSize: 12),
                   ),
                   style: ElevatedButton.styleFrom(
@@ -199,7 +199,7 @@ class _InboxState extends State<AssignmentInbox> {
             ),
             smallerSizedBox,
             Text(
-              "Subject: "+assignmentController.submitted_assignments[widget.id!].subjectName,
+              Strings.subject +assignmentController.submitted_assignments[widget.id!].subjectName,
               style: TextStyle(fontSize: 15),
             ),
             smallerSizedBox,
@@ -208,7 +208,7 @@ class _InboxState extends State<AssignmentInbox> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Class: "+assignmentController.submitted_assignments[widget.id!].className,
+                 Strings.classStrings +assignmentController.submitted_assignments[widget.id!].className,
                   style: TextStyle(fontSize: 15),
                 ),
                 SizedBox(width: 5,),
@@ -233,7 +233,7 @@ class _InboxState extends State<AssignmentInbox> {
             )
                 :Wrap(),
             largeSizedBox,
-            const Text("Attachment"),
+            const Text(Strings.attachment),
             largeSizedBox,
             GridView.count(
               padding: EdgeInsets.zero,
@@ -298,7 +298,7 @@ class _InboxState extends State<AssignmentInbox> {
             const Divider(color: Colors.grey),
             smallerSizedBox,
             Text(
-              "Assignment Submitted",
+              Strings.assignmentSubmitted,
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -306,23 +306,23 @@ class _InboxState extends State<AssignmentInbox> {
             ),
             smallerSizedBox,
             Text(
-              "Date Submited: "+DateFormat('dd/MM/yyyy')
+              Strings.dateSubmitted +DateFormat('dd/MM/yyyy')
                   .format(assignmentController.submitted_assignments[widget.id!].submitDateTime),
             ),
             smallerSizedBox,
             assignmentController.submitted_assignments[widget.id!].rejectStatus == 1?
-                Text("Assignment rejected"):
+                Text(Strings.assignmentRejected):
             assignmentController.submitted_assignments[widget.id!].teacherCheckStatus == 1?
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Marks: ${assignmentController.submitted_assignments[widget.id!].assignmentMark}"),
+                    Text("${Strings.marks}: ${assignmentController.submitted_assignments[widget.id!].assignmentMark}"),
                     smallerSizedBox,
-                    Text("Feedback: ${assignmentController.submitted_assignments[widget.id!].feedback}"),
+                    Text("${Strings.feedback}: ${assignmentController.submitted_assignments[widget.id!].feedback}"),
                   ],
                 ):
-                Text("Evalution in progress"),
+                Text(Strings.evaluationInProgress),
             mediumSizedBox,
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -333,12 +333,12 @@ class _InboxState extends State<AssignmentInbox> {
                     AnimatedNavigation.pushAnimatedNavigation(
                       context,
                       PhotoGrid(
-                          id:"View Submisssion",
+                          id:Strings.viewSubmission,
                           url: assignmentController.submitted_assignments[widget.id!].assignmentDocs),
                     );
                   },
                   child: Text(
-                    "View Submission",
+                    Strings.viewSubmission,
                     style: TextStyle(fontSize: 12),
                   ),
                   style: ElevatedButton.styleFrom(
@@ -367,7 +367,7 @@ class _InboxState extends State<AssignmentInbox> {
             ),
             smallerSizedBox,
             Text(
-              "Subject: "+assignmentController.past_assignments[widget.id!].subjectName,
+               Strings.subject +assignmentController.past_assignments[widget.id!].subjectName,
               style: TextStyle(fontSize: 15),
             ),
             smallerSizedBox,
@@ -376,7 +376,7 @@ class _InboxState extends State<AssignmentInbox> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Class: "+assignmentController.past_assignments[widget.id!].className,
+                  Strings.classStrings+assignmentController.past_assignments[widget.id!].className,
                   style: TextStyle(fontSize: 15),
                 ),
                 SizedBox(width: 5,),
@@ -401,7 +401,7 @@ class _InboxState extends State<AssignmentInbox> {
             )
                 :Wrap(),
             largeSizedBox,
-            const Text("Attachment"),
+            const Text(Strings.attachment),
             largeSizedBox,
             GridView.count(
               padding: EdgeInsets.zero,
@@ -470,7 +470,7 @@ class _InboxState extends State<AssignmentInbox> {
                 ElevatedButton(
                   onPressed: () {},
                   child: const Text(
-                    "Submit Assignment",
+                    Strings.submitAssignment,
                     style: TextStyle(fontSize: 12),
                   ),
                   style: ElevatedButton.styleFrom(

@@ -10,6 +10,7 @@ import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -42,7 +43,7 @@ class _DocumentListState extends State< DocumentList > {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Document List".toUpperCase(),
+              Strings.documentList.toUpperCase(),
               style: titleTextStyle,
             ),
             Text(
@@ -57,14 +58,8 @@ class _DocumentListState extends State< DocumentList > {
                 removeTop: true,
                 child:  Obx(
                       ()=> documentController.isLoading ==true?
-                  Center(
-                    child: Image.asset(
-                      "assets/loading.gif",
-                      height: 425.0,
-                      width: 425.0,
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ): ListView.builder(
+                  StudentAppWidgets.loadingWidget()
+                          : ListView.builder(
                     itemCount: widget.docLength,
                     itemBuilder: (context, index) {
                       var entry = documentController.docdata.entries.elementAt(widget.yearIndex);
@@ -81,7 +76,7 @@ class _DocumentListState extends State< DocumentList > {
                             ),
                             child: ListTile(
                               onTap: () {},
-                              title: const Text('Document',style: TextStyle(fontSize: 12),),
+                              title: const Text(Strings.document,style: TextStyle(fontSize: 12),),
                               leading: SizedBox(
                                 width: 25,
                                 child: Center(
@@ -100,7 +95,7 @@ class _DocumentListState extends State< DocumentList > {
                                     AppWidget.launchUrlWidget(entry.value["month_folder"][widget.monthIndex]["documents"][index]["document"]),
                                   );
                                 },
-                                 child: const Text("View Details",style: TextStyle(fontSize: 12),),
+                                 child: const Text(Strings.viewDetails,style: TextStyle(fontSize: 12),),
                                style: ElevatedButton.styleFrom(
                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0),
                                   ),

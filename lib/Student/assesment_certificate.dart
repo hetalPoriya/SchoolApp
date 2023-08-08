@@ -42,35 +42,7 @@ class _AssesmentCertificateState extends State<AssesmentCertificate> {
     if (isConnected) {
       assesmentCertController.getStuCertificate();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: const Padding(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  Strings.noInternetAvailable,
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+      StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -112,7 +84,7 @@ class _AssesmentCertificateState extends State<AssesmentCertificate> {
             child: MediaQuery.removePadding(
               context: context,
               removeTop: true,
-              child: assesmentCertController.status == "Certificate not found"
+              child: assesmentCertController.certificates.length == 0
                   ? StudentAppWidgets.noDataFound(text: Strings.certificateNotFound)
                   : ListView(
                       //crossAxisAlignment: CrossAxisAlignment.start,

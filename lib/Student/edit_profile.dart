@@ -90,7 +90,7 @@ class _EditProfileState extends State<EditProfile> {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
-                "Edit Profile",
+                Strings.editProfile,
                 style: titleTextStyle,
               ),
 
@@ -149,7 +149,7 @@ class _EditProfileState extends State<EditProfile> {
                                             MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
                                           const Text(
-                                            "Choose Profile photo",
+                                            Strings.chooseProfilePhoto,
                                             style: TextStyle(
                                               fontSize: 20.0,
                                             ),
@@ -173,7 +173,7 @@ class _EditProfileState extends State<EditProfile> {
                                                     color: Colors.black,
                                                   ),
                                                   label: const Text(
-                                                    "Camera",
+                                                    Strings.camera,
                                                     style: TextStyle(
                                                         color: Colors.black),
                                                   ),
@@ -190,7 +190,7 @@ class _EditProfileState extends State<EditProfile> {
                                                     color: Colors.black,
                                                   ),
                                                   label: const Text(
-                                                    "Gallery",
+                                                    Strings.gallery,
                                                     style: TextStyle(
                                                         color: Colors.black),
                                                   ),
@@ -215,7 +215,7 @@ class _EditProfileState extends State<EditProfile> {
               Container(
                 alignment: Alignment.topLeft,
                 child: const Text(
-                  "Name",
+                  Strings.name,
                   //textAlign: TextAlign.end,
                   style: TextStyle(
                     fontSize: 13,
@@ -229,7 +229,7 @@ class _EditProfileState extends State<EditProfile> {
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                      hintText: ("Student Name"),
+                      hintText: (Strings.studentName),
                       border: OutlineInputBorder(),
                       isDense: true,
                     )),
@@ -238,7 +238,7 @@ class _EditProfileState extends State<EditProfile> {
               Container(
                 alignment: Alignment.topLeft,
                 child: const Text(
-                  "Class",
+                  Strings.classStrings,
                   style: TextStyle(
                     fontSize: 13,
                   ),
@@ -251,7 +251,7 @@ class _EditProfileState extends State<EditProfile> {
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                      hintText: ("Enter class"),
+                      hintText: (Strings.enterClass),
                       border: OutlineInputBorder(),
                       isDense: true,
                     )),
@@ -260,7 +260,7 @@ class _EditProfileState extends State<EditProfile> {
               Container(
                 alignment: Alignment.topLeft,
                 child: const Text(
-                  "Gender",
+                  Strings.gender,
                   style: TextStyle(
                     fontSize: 13,
                   ),
@@ -281,7 +281,7 @@ class _EditProfileState extends State<EditProfile> {
                     isExpanded: true,
                     isDense: true,
                     hint: Text(
-                      'Select Gender',
+                      Strings.selectGender,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 13,

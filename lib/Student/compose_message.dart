@@ -12,6 +12,7 @@ import 'package:school_app/Controller/stuCompMsgController.dart';
 import 'package:school_app/Model/getTeacherModel.dart';
 import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/animated_navigation.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -57,56 +58,21 @@ class _ComposeMessageState extends State<ComposeMessage> {
       });
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+     StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
         titleWidget: const Text(
-          "Compose New Message",
+          Strings.composeNewMessage,
           style: TextStyle(
               color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 20),
         ),
         automaticallyImplyLeading: false,
         child: Obx(
         ()=> getTeacherController.isLoading ==true?
-        Center(
-          child: Image.asset(
-            "assets/loading.gif",
-            height: 425.0,
-            width: 425.0,
-            fit: BoxFit.fitHeight,
-          ),
-        ):ListView(
+        StudentAppWidgets.loadingWidget():ListView(
           padding: const EdgeInsets.only(bottom: 10, top: 50),
           children: [
             ListTile(
@@ -119,7 +85,7 @@ class _ComposeMessageState extends State<ComposeMessage> {
                 height: 30,
               ),
               title: Text(
-                "To: ${stuCompMsgController.teacherController.text}",
+                "${Strings.to} ${stuCompMsgController.teacherController.text}",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -133,7 +99,7 @@ class _ComposeMessageState extends State<ComposeMessage> {
             const Divider(color: Colors.grey),
             smallSizedBox,
             const Text(
-              "Compose New Message",
+              Strings.composeNewMessage,
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -141,7 +107,7 @@ class _ComposeMessageState extends State<ComposeMessage> {
             ),
             largeSizedBox,
             const Text(
-              "To Teacher",
+              Strings.toTeacher,
               style: TextStyle(fontSize: 15),
             ),
             largeSizedBox,
@@ -151,7 +117,7 @@ class _ComposeMessageState extends State<ComposeMessage> {
                 decoration: const InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                  hintText: ("Select Teacher"),
+                  hintText: (Strings.selectTeacher),
                   border: OutlineInputBorder(),
                   isDense: true,
                 )),
@@ -223,7 +189,7 @@ class _ComposeMessageState extends State<ComposeMessage> {
                 decoration: const InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                  hintText: ("Subject"),
+                  hintText: (Strings.subjects),
                   border: OutlineInputBorder(),
                   isDense: true,
                 )),
@@ -235,7 +201,7 @@ class _ComposeMessageState extends State<ComposeMessage> {
                 cursorWidth: 2.0,
                // textAlign: TextAlign.left,
                 decoration: const InputDecoration(
-                  hintText: "Message",
+                  hintText: Strings.messages,
                   border: OutlineInputBorder(),
                   //isDense: true,
                 )),
@@ -250,16 +216,16 @@ class _ComposeMessageState extends State<ComposeMessage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: ElevatedButton(
-                        child: const Text(
-                          "Discard",
-                          style: TextStyle(fontSize: 12),
-                        ),
                         onPressed: () => Navigator.of(context).pop(),
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           primary: const Color.fromRGBO(105, 80, 255, 1.0),
+                        ),
+                        child: const Text(
+                          Strings.discard,
+                          style: TextStyle(fontSize: 12),
                         ),
                       ),
                     ),
@@ -275,50 +241,28 @@ class _ComposeMessageState extends State<ComposeMessage> {
                             );
                             Get.off(
                                 const Message(
-                                  name: "Message",
+                                  name: Strings.message,
                                 )
                             );
                           });
                         }
                         else{
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            duration: Duration(days: 1),
-                            behavior: SnackBarBehavior.floating,
-                            content: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  Icons.signal_wifi_off,
-                                  color: Colors.white,
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 16.0,
-                                    ),
-                                    child: Text(
-                                      'No internet available',
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            action: SnackBarAction(
-                                textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-                            backgroundColor: Colors.grey,
-                          ));
+                         StudentAppWidgets.noInternetAvailable(context: context);
                         }
                         //await messageController.getStuMessages();
                       },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        primary: const Color.fromRGBO(105, 80, 255, 1.0),
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Text(
-                            "Send Message",
+                            Strings.sendMessage,
                             style: TextStyle(fontSize: 12),
                           ),
                           SizedBox(width: 5,),
@@ -332,12 +276,6 @@ class _ComposeMessageState extends State<ComposeMessage> {
                                   ))),
                           SizedBox(width: 5,),
                         ],
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        primary: const Color.fromRGBO(105, 80, 255, 1.0),
                       ),
                     ),
                     //SizedBox(height: 10),

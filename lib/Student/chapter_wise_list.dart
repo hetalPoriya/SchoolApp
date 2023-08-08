@@ -32,7 +32,7 @@ class _ChapterWiseListState extends State<ChapterWiseList>
 
   nameText() => Row(
         children: [
-          Text("Maths",
+          Text(Strings.maths,
               style: titleTextStyle.copyWith(color: const Color(0xFF536DFE))),
           Text(
             ' (Chapter 1)',
@@ -105,7 +105,7 @@ class _ChapterWiseListState extends State<ChapterWiseList>
                       child: Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Rational number',
+                            Strings.rationalNumber,
                             style:
                                 textButtonTextStyle.copyWith(fontSize: 12.0),
                           )),
@@ -147,13 +147,13 @@ class _ChapterWiseListState extends State<ChapterWiseList>
                               children: [
                                 smallerSizedBox,
                                 const Flexible(
-                                  child: Text('Equations',
+                                  child: Text(Strings.equations,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(fontSize: 18.0)),
                                 ),
                                 const Flexible(
                                   child: Text(
-                                    'Equations and geometrical calculations',
+                                    Strings.equationsAndGeometricalCal,
                                     style: TextStyle(
                                         fontSize: 9.0, color: Colors.grey),
                                     overflow: TextOverflow.ellipsis,
@@ -183,7 +183,7 @@ class _ChapterWiseListState extends State<ChapterWiseList>
                                               .kPurpleCardLightColor,
                                         ),
                                         const Text(
-                                          'Download pdf',
+                                          Strings.downloadPdf,
                                           style: TextStyle(
                                             fontSize: 8.0,
                                             color: ColorConstants

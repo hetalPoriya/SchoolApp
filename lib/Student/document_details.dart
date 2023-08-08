@@ -24,7 +24,7 @@ class _DocumentDetailState extends State<DocumentDetail> {
   Widget build(BuildContext context) {
     return CustomScaffold(
         titleWidget: const Text(
-          "Document detail",
+          Strings.documentDetail,
           style: TextStyle(
               color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 20),
         ),
@@ -65,7 +65,7 @@ class _DocumentDetailState extends State<DocumentDetail> {
             largeSizedBox,
             const Divider(color: Colors.grey),
             const Text(
-              "Good Luck!",
+              Strings.goodLuck,
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -73,23 +73,23 @@ class _DocumentDetailState extends State<DocumentDetail> {
             ),
             largeSizedBox,
             const Text(
-              "Dear Parents,",
+              Strings.dearParents,
               style: TextStyle(fontSize: 15),
             ),
             largeSizedBox,
             const Text(
-              "Greetings!",
+              Strings.greeting,
               style: TextStyle(fontSize: 15),
             ),
             largeSizedBox,
             largeSizedBox,
             const Text(
-                "It was wonderfull to have Adein in class.I wish him all the best for as bright future."),
+                Strings.greetingText),
             largeSizedBox,
             largeSizedBox,
-            const Text("Regards"),
+            const Text(Strings.regards),
             smallSizedBox,
-            const Text("Attachment"),
+            const Text(Strings.attachment),
            const SizedBox(height:60 ),
             Center(
               child: Padding(
@@ -101,7 +101,7 @@ class _DocumentDetailState extends State<DocumentDetail> {
                     ElevatedButton(
                       onPressed: (){},
                       child: const Text(
-                        "View Details",
+                        Strings.viewDetails,
                         style: TextStyle(fontSize: 12),
                       ),
                       style: ElevatedButton.styleFrom(
@@ -114,7 +114,7 @@ class _DocumentDetailState extends State<DocumentDetail> {
                      ElevatedButton(
                       onPressed: () {},
                       child: const Text(
-                        "Download",
+                        Strings.download,
                         style: TextStyle(fontSize: 12),
                       ),
                       style: ElevatedButton.styleFrom(
