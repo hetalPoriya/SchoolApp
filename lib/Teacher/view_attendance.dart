@@ -16,6 +16,7 @@ import 'package:school_app/Teacher/home.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_drop_down.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
@@ -78,35 +79,7 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
       teacherMarkAttendanceController.getClassesSections();
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+    StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -165,7 +138,7 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                 children: [
                   Center(
                     child: Text(
-                      "View Attendance",
+                      Strings.viewAttendance,
                       style: titleTextStyle,
                     ),
                   ),
@@ -173,10 +146,10 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                   const TabBar(
                     tabs: [
                       Tab(
-                        text: "Student Wise",
+                        text: Strings.studentWise,
                       ),
                       Tab(
-                        text: "Day Wise",
+                        text: Strings.dayWise,
                       ),
                     ],
                     isScrollable: true,
@@ -197,14 +170,7 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
   buildTabBarView(context) {
     return Obx(
             () => teacherMarkAttendanceController.isLoading ==true?
-        Center(
-            child: Image.asset(
-              "assets/loading.gif",
-              height: 425.0,
-              width: 425.0,
-              fit: BoxFit.fitHeight,
-            )
-        ):Expanded(
+        StudentAppWidgets.loadingWidget():Expanded(
           child: MediaQuery.removePadding(
             context: context,
             removeTop: true,
@@ -219,12 +185,12 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                          Text(
-                          "Class:",
+                          Strings.classStrings,
                           style: mediumStyle
                         ),
                         smallSizedBox,
                         CustomDropDown(
-                          hintText: "Select Class",
+                          hintText: Strings.selectClass,
                           items: [
                             for(var i in teacherMarkAttendanceController.classesSections)
                               DropdownMenuItem<String>(
@@ -251,12 +217,12 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                         ),
                         smallSizedBox,
                          Text(
-                          "Section:",
+                          Strings.section,
                           style: mediumStyle
                         ),
                         smallSizedBox,
                         CustomDropDown(
-                          hintText: "Select Section",
+                          hintText: Strings.selectSection,
                           items: [
                             for(var i in teacherMarkAttendanceController.classesSections)
                               DropdownMenuItem<String>(
@@ -290,12 +256,12 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                  Text(
-                                  "Student:",
+                              Strings.student,
                                   style: mediumStyle
                                 ),
                                 smallSizedBox,
                                 CustomDropDown(
-                                  hintText: "Select Student",
+                                  hintText: Strings.selectStudent,
                                   items: [
                                     for(var i in teacherMarkAttendanceController.students)
                                       DropdownMenuItem<String>(
@@ -322,7 +288,7 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                         Container(
                           alignment: Alignment.topLeft,
                           child: const Text(
-                            "Date of Attendance",
+                          Strings.dateOfAttendance,
                             style: TextStyle(
                               fontSize: 15,
                             ),
@@ -345,7 +311,7 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                                   ),
                                 ),
                             ],
-                          hint: Text("Select Month"),
+                          hint: Text(Strings.selectMonth),
                           icon: const Icon(
                             Icons.keyboard_arrow_down,
                             color: ColorConstants.kBlackColor,
@@ -384,7 +350,7 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                               teacherMarkAttendanceController.teacherViewAttendance();
                             },
                             child: const Text(
-                              "View",
+                              Strings.view,
                               style: TextStyle(fontSize: 12),
                             ),
                             style: ElevatedButton.styleFrom(
@@ -405,16 +371,16 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                                   //horizontalMargin: 20,
                                   columns: [
                                     DataColumn(
-                                      label: Text('Sno.'),
+                                      label: Text(Strings.sNo),
                                     ),
                                     DataColumn(
-                                      label: Text('ID'),
+                                      label: Text(Strings.id),
                                     ),
                                     DataColumn(
-                                      label: Text('Name'),
+                                      label: Text(Strings.name),
                                     ),
                                     DataColumn(
-                                      label: Text('Action'),
+                                      label: Text(Strings.action),
                                     ),
                                   ], rows: [
                                     for(var i = 0; i<teacherMarkAttendanceController.attendance.length;i++)
@@ -439,14 +405,14 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                       children: [
                         smallSizedBox,
                         const Text(
-                          "Class:",
+                          Strings.classStrings,
                           style: TextStyle(
                             fontSize: 15,
                           ),
                         ),
                         smallSizedBox,
                         CustomDropDown(
-                          hintText: "Select Class",
+                          hintText: Strings.selectClass,
                           items: [
                             for(var i in teacherMarkAttendanceController.classesSections)
                               DropdownMenuItem<String>(
@@ -470,14 +436,14 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                         ),
                         smallSizedBox,
                         const Text(
-                          "Section:",
+                          Strings.section,
                           style: TextStyle(
                             fontSize: 15,
                           ),
                         ),
                         smallSizedBox,
                         CustomDropDown(
-                          hintText: "Select Section",
+                          hintText: Strings.selectSection,
                           items: [
                             for(var i in teacherMarkAttendanceController.classesSections)
                               DropdownMenuItem<String>(
@@ -505,7 +471,7 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                         Container(
                           alignment: Alignment.topLeft,
                           child: const Text(
-                            "Date of Attendance",
+                            Strings.dateOfAttendance,
                             style: TextStyle(
                               fontSize: 15,
                             ),
@@ -562,7 +528,7 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                               teacherMarkAttendanceController.teacherViewAttendance();
                             },
                             child: const Text(
-                              "View",
+                              Strings.view,
                               style: TextStyle(fontSize: 12),
                             ),
                             style: ElevatedButton.styleFrom(
@@ -585,16 +551,16 @@ class _TeacherViewAttendanceState extends State<TeacherViewAttendance> {
                                   //horizontalMargin: 20,
                                   columns: [
                                     DataColumn(
-                                      label: Text('Sno.'),
+                                      label: Text(Strings.sNo),
                                     ),
                                     DataColumn(
-                                      label: Text('ID'),
+                                      label: Text(Strings.id),
                                     ),
                                     DataColumn(
-                                      label: Text('Name'),
+                                      label: Text(Strings.name),
                                     ),
                                     DataColumn(
-                                      label: Text('Action'),
+                                      label: Text(Strings.action),
                                     ),
                                   ], rows: [
                                     for(var i = 0; i<teacherMarkAttendanceController.attendance.length;i++)

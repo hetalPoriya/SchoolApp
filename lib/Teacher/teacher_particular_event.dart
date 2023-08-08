@@ -83,7 +83,7 @@ class _TeacherParticularEventState extends State<TeacherParticularEvent> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              StudentAppWidgets.titleTextHeading(title: "Events List"),
+              StudentAppWidgets.titleTextHeading(title: Strings.eventList),
               Expanded(
                 child: StudentAppWidgets.eventCardDetails(title: teacherEventController.eventList[widget.id].title,
                     eventDate:

@@ -578,6 +578,7 @@ import 'package:school_app/Teacher/new_message.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_checkbox.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
@@ -624,35 +625,7 @@ class _TeacherMessageState extends State<TeacherMessage> {
       });
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+     StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -709,19 +682,12 @@ class _TeacherMessageState extends State<TeacherMessage> {
             padding: const EdgeInsets.only(top: 12, left: 10, right: 10),
             child: Obx(
                   () => messageController.msgIsLoading ==true?
-              Center(
-                child: Image.asset(
-                  "assets/loading.gif",
-                  height: 425.0,
-                  width: 425.0,
-                  fit: BoxFit.fitHeight,
-                ),
-              ):Column(
+              StudentAppWidgets.loadingWidget():Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
                     child:  Text(
-                      "MESSAGES",
+                      Strings.message.toUpperCase(),
                       style: deepPurpleStyle,
                     ),
                   ),
@@ -736,10 +702,10 @@ class _TeacherMessageState extends State<TeacherMessage> {
                           // padding: const  EdgeInsets.only(right:60),
                           tabs: [
                             const Tab(
-                              text: "INBOX",
+                              text: Strings.inbox,
                             ),
                             const Tab(
-                              text: "OUTBOX",
+                              text: Strings.outbox,
                             ),
                           ],
                           indicator: BoxDecoration(
@@ -761,7 +727,7 @@ class _TeacherMessageState extends State<TeacherMessage> {
                             Icon(Icons.add_circle_outlined,
                                 color: ColorConstants.kHeadingTextColor),
                             SizedBox(width: 5),
-                            Text("NEW MESSAGE")
+                            Text(Strings.newMessage)
                           ],
                         ),
                       ),
@@ -796,14 +762,7 @@ buildTabBarView(context, events) {
 
 
 listView({ required RxList list,required bool isInbox}) => list.length==0?
-Column(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children: [
-    Image.asset("assets/no-message.gif"),
-    smallSizedBox,
-    Text("There are no chats in your inbox", style: TextStyle(color: Colors.blueGrey[100],fontFamily: 'Roboto'),)
-  ],
-) : ListView.builder(
+StudentAppWidgets.noDataFound(text: Strings.thereAreNoChatsInYourInbox) : ListView.builder(
     itemCount: list.length,
     itemBuilder: (context, index) => Padding(
       padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),

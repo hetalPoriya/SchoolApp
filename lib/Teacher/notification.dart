@@ -69,7 +69,7 @@ class _TeacherNotificationState extends State<TeacherNotification> {
             children: [
                Center(
                 child: Text(
-                  "Notifications",
+                  Strings.notification,
                   style: deepPurpleStyle,
                 ),
               ),

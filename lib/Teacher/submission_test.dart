@@ -79,7 +79,7 @@ class _SubmissionTestState extends State<SubmissionTest> {
               // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(child: Text("View Test Submissions", style: titleTextStyle)),
+                Center(child: Text(Strings.viewTestSubmissions, style: titleTextStyle)),
                 smallSizedBox,
                 // Text(
                 //   DateFormat('dd MMMM yyyy').format(DateTime.now()),
@@ -90,7 +90,7 @@ class _SubmissionTestState extends State<SubmissionTest> {
                 Row(
                   children: [
                     Text(
-                      "Test Name:",
+                      Strings.testName,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
@@ -128,7 +128,7 @@ class _SubmissionTestState extends State<SubmissionTest> {
                                     Row(
                                       children: [
                                         const Text(
-                                          "S no.:",
+                                         Strings.sNo,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 12),
@@ -140,7 +140,7 @@ class _SubmissionTestState extends State<SubmissionTest> {
                                     Row(
                                       children: [
                                         const Text(
-                                          "Student Name:",
+                                          Strings.studentName,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 12),
@@ -151,7 +151,7 @@ class _SubmissionTestState extends State<SubmissionTest> {
                                     Row(
                                       children: [
                                         const Text(
-                                          "Class:",
+                                          Strings.classStrings,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 12),
@@ -162,7 +162,7 @@ class _SubmissionTestState extends State<SubmissionTest> {
                                     Row(
                                       children: [
                                         const Text(
-                                          "Section:",
+                                          Strings.section,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 12),
@@ -179,7 +179,7 @@ class _SubmissionTestState extends State<SubmissionTest> {
                                   // ignore: prefer_const_literals_to_create_immutables
                                   children: [
                                     const Text(
-                                      "Action",
+                                  Strings.action,
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),

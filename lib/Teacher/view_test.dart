@@ -79,7 +79,7 @@ class _ViewTestState extends State<ViewTest> {
                 // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(child: Text("View Test", style: titleTextStyle)),
+                  Center(child: Text(Strings.viewTest, style: titleTextStyle)),
                   smallSizedBox,
                   // Text(
                   //   DateFormat('dd MMMM yyyy').format(DateTime.now()),
@@ -90,7 +90,7 @@ class _ViewTestState extends State<ViewTest> {
                   Row(
                     children: [
                       Text(
-                        "Test Name:",
+                        Strings.testName,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -102,7 +102,7 @@ class _ViewTestState extends State<ViewTest> {
                   Row(
                     children: [
                       Text(
-                        "Class:",
+                        Strings.classStrings,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -114,7 +114,7 @@ class _ViewTestState extends State<ViewTest> {
                   Row(
                     children: [
                       Text(
-                        "Subject:",
+                        Strings.subject,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -126,7 +126,7 @@ class _ViewTestState extends State<ViewTest> {
                   Row(
                     children: [
                       Text(
-                        "Valid till:",
+                        Strings.validTill,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -160,7 +160,7 @@ class _ViewTestState extends State<ViewTest> {
                                  Row(
                                    children: [
                                      const Text(
-                                       "S no.:",
+                                       Strings.sNo,
                                        style: TextStyle(
                                            fontWeight: FontWeight.bold,
                                            fontSize: 12),
@@ -171,7 +171,7 @@ class _ViewTestState extends State<ViewTest> {
                                  Row(
                                    children: [
                                      const Text(
-                                       "Question:",
+                                      Strings.question,
                                        style: TextStyle(
                                            fontWeight: FontWeight.bold,
                                            fontSize: 12),
@@ -191,7 +191,7 @@ class _ViewTestState extends State<ViewTest> {
                                  Row(
                                    children: [
                                      const Text(
-                                       "Option:",
+                                       Strings.option,
                                        style: TextStyle(
                                            fontWeight: FontWeight.bold,
                                            fontSize: 12),
@@ -202,7 +202,7 @@ class _ViewTestState extends State<ViewTest> {
                                  Row(
                                    children: [
                                      const Text(
-                                       "Option:",
+                                       Strings.option,
                                        style: TextStyle(
                                            fontWeight: FontWeight.bold,
                                            fontSize: 12),
@@ -213,7 +213,7 @@ class _ViewTestState extends State<ViewTest> {
                                  Row(
                                    children: [
                                      const Text(
-                                       "Option:",
+                                       Strings.option,
                                        style: TextStyle(
                                            fontWeight: FontWeight.bold,
                                            fontSize: 12),
@@ -227,7 +227,7 @@ class _ViewTestState extends State<ViewTest> {
                                  Row(
                                    children: [
                                      const Text(
-                                       "Option:",
+                                       Strings.option,
                                        style: TextStyle(
                                            fontWeight: FontWeight.bold,
                                            fontSize: 12),
@@ -242,7 +242,7 @@ class _ViewTestState extends State<ViewTest> {
                                // ignore: prefer_const_literals_to_create_immutables
                                children: [
                                  const Text(
-                                   "Answer:",
+                                   Strings.answer,
                                    style: TextStyle(
                                        color: Colors.black,
                                        fontWeight: FontWeight.bold),
@@ -251,7 +251,7 @@ class _ViewTestState extends State<ViewTest> {
                                    crossAxisAlignment: CrossAxisAlignment.center,
                                    children: [
                                      const Text(
-                                       "Option:",
+                                       Strings.option,
                                        style: TextStyle(
                                            fontWeight: FontWeight.bold,
                                            fontSize: 12),

@@ -105,7 +105,7 @@ class _TimeTableState extends State<TimeTable> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                 const  Text("Class Time Table",
+                 const  Text(Strings.classTimeTable,
                     style: TextStyle(
                         color: Colors.deepPurple,
                         fontSize: 30,

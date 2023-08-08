@@ -13,6 +13,7 @@ import 'package:school_app/Student/subjects.dart';
 import 'package:school_app/Teacher/home.dart';
 import 'package:school_app/Teacher/message.dart';
 import 'package:school_app/utils/animated_navigation.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -67,35 +68,7 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
       newMsgController.studentVisible(false);
       newMsgController.getClassesSections();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+      StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -142,20 +115,13 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
             ),
           ),
           body: Obx(() => newMsgController.isLoading == true
-              ? Center(
-                  child: Image.asset(
-                    "assets/loading.gif",
-                    height: 425.0,
-                    width: 425.0,
-                    fit: BoxFit.fitHeight,
-                  ),
-                )
+              ? StudentAppWidgets.loadingWidget()
               : ListView(
                   padding: const EdgeInsets.only(
                       bottom: 10, top: 20, left: 15, right: 15),
                   children: [
                     const Text(
-                      "Compose New\n Message",
+                      Strings.composeNewMessage,
                       style: TextStyle(
                         color: Colors.deepPurple,
                         fontSize: 30,
@@ -191,7 +157,7 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                           hint: Padding(
                             padding: const EdgeInsets.only(left: 15),
                             child: Text(
-                              'Select Class',
+                              Strings.selectClass,
                               style: TextStyle(
                                 //fontWeight: FontWeight.bold,
                                 fontSize: 15,
@@ -231,7 +197,7 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                       padding:
                           const EdgeInsets.only(left: 15, bottom: 5, top: 6),
                       child:  Text(
-                        "Section:",
+                        Strings.section,
                         style:mediumStyle
                       ),
                     ),
@@ -253,7 +219,7 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                           hint: Padding(
                             padding: const EdgeInsets.only(left: 15),
                             child: Text(
-                              'Select Section',
+                              Strings.selectSection,
                               style: TextStyle(
                                 fontFamily: 'Roboto',
                                 //fontWeight: FontWeight.bold,
@@ -300,7 +266,7 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                               padding: const EdgeInsets.only(
                                   left: 15, top: 6, bottom: 5),
                               child: const Text(
-                                "Student:",
+                                Strings.student,
                                 style: TextStyle(
                                   fontSize: 15,
                                 ),
@@ -325,7 +291,7 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                                   hint: Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(
-                                      'Select Student',
+                                      Strings.selectStudent,
                                       style: TextStyle(
                                         //fontWeight: FontWeight.bold,
                                         fontSize: 15,
@@ -367,7 +333,7 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                       padding:
                           const EdgeInsets.only(left: 15, top: 6, bottom: 5),
                       child: const Text(
-                        "Title:",
+                        "${Strings.title}:",
                         //textAlign: TextAlign.end,
                         style: TextStyle(
                           fontSize: 15,
@@ -384,7 +350,7 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                       child: TextFormField(
                         controller: newMsgController.title,
                         decoration: const InputDecoration(
-                          hintText: "Title",
+                          hintText: Strings.title,
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(15.0),
                         ),
@@ -395,7 +361,7 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                       padding: const EdgeInsets.only(
                           left: 15, top: 6, right: 5, bottom: 5),
                       child: const Text(
-                        "Message:",
+                        "${Strings.message}:",
                         style: TextStyle(
                           fontSize: 15,
                         ),
@@ -409,7 +375,7 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                           maxLines: 5,
                           cursorWidth: 2.0,
                           decoration: const InputDecoration(
-                            hintText: "Message",
+                            hintText: Strings.message,
                             focusedBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -431,6 +397,14 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                             Padding(
                               padding: const EdgeInsets.only(left: 10),
                               child: ElevatedButton(
+                                onPressed: () => Navigator.of(context).pop(),
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  primary:
+                                      const Color.fromRGBO(105, 80, 255, 1.0),
+                                ),
                                 child: Row(
                                   children: [
                                     const Icon(
@@ -439,18 +413,10 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                                       size: 18.0,
                                     ),
                                     const Text(
-                                      "Discard",
+                                      Strings.discard,
                                       style: TextStyle(fontSize: 12),
                                     ),
                                   ],
-                                ),
-                                onPressed: () => Navigator.of(context).pop(),
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  primary:
-                                      const Color.fromRGBO(105, 80, 255, 1.0),
                                 ),
                               ),
                             ),
@@ -468,42 +434,16 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                                     Get.off(TeacherMessage());
                                   });
                                 } else {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    duration: Duration(days: 1),
-                                    behavior: SnackBarBehavior.floating,
-                                    content: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.signal_wifi_off,
-                                          color: Colors.white,
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                              left: 16.0,
-                                            ),
-                                            child: Text(
-                                              'No internet available',
-                                              textAlign: TextAlign.start,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    action: SnackBarAction(
-                                        textColor: Colors.white,
-                                        label: 'RETRY',
-                                        onPressed: () async {}),
-                                    backgroundColor: Colors.grey,
-                                  ));
+                                 StudentAppWidgets.noInternetAvailable(context: context);
                                 }
                               },
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                primary:
+                                    const Color.fromRGBO(105, 80, 255, 1.0),
+                              ),
                               child: Row(
                                 children: [
                                   const Icon(
@@ -512,7 +452,7 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                                     size: 18.0,
                                   ),
                                   const Text(
-                                    "Send Message",
+                                    Strings.sendMessage,
                                     style: TextStyle(fontSize: 12),
                                   ),
                                   SizedBox(
@@ -530,13 +470,6 @@ class _TeacherNewMessageState extends State<TeacherNewMessage> {
                                     width: 5,
                                   ),
                                 ],
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                primary:
-                                    const Color.fromRGBO(105, 80, 255, 1.0),
                               ),
                             ),
                             //SizedBox(height: 10),

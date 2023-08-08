@@ -59,7 +59,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
         backgroundColor: Colors.deepPurple,
         centerTitle: true,
         title: const Text(
-          "Profile",
+          Strings.profile,
           style: TextStyle(
               fontSize: 30,
               fontFamily: 'Roboto',
@@ -154,7 +154,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           const Text(
-                            "Contact:",
+                            Strings.contact,
                             style: TextStyle(
                               fontSize: 15,
                               fontFamily: 'Roboto',
@@ -175,7 +175,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           const Text(
-                            "Email:",
+                            Strings.email,
                             style: TextStyle(
                               fontSize: 15,
                               fontFamily: 'Roboto',
@@ -197,7 +197,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: const Text(
-                          "Name:",
+                          Strings.name,
                           style: TextStyle(
                             fontSize: 15,
                           ),
@@ -215,7 +215,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       child: TextFormField(
                         controller: _nameController,
                         decoration: const InputDecoration(
-                          hintText: "Enter Name",
+                          hintText: Strings.enterName,
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(15.0),
                         ),
@@ -248,7 +248,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: const Text(
-                          "Branch Name:",
+                          Strings.branchName,
                           style: TextStyle(
                             fontSize: 15,
                           ),
@@ -266,7 +266,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       child: TextFormField(
                         controller: _branchnameController,
                         decoration: const InputDecoration(
-                          hintText: "City Name",
+                          hintText: Strings.cityName,
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(15.0),
                         ),
@@ -279,7 +279,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: const Text(
-                          "Class:",
+                          Strings.classStrings,
                           style: TextStyle(
                             fontSize: 15,
                           ),
@@ -297,7 +297,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       child: TextFormField(
                         controller: _classController,
                         decoration: const InputDecoration(
-                          hintText: "I",
+                          hintText: Strings.selectClass,
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(15.0),
                         ),
@@ -309,7 +309,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: const Text(
-                          "Section:",
+    Strings.section,
                           style: TextStyle(
                             fontSize: 15,
                           ),
@@ -327,7 +327,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       child: TextFormField(
                         controller: _sectionController,
                         decoration: const InputDecoration(
-                          hintText: "A",
+                          hintText: Strings.selectSection,
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(15.0),
                         ),
@@ -339,7 +339,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: const Text(
-                          "Gender:",
+                          Strings.gender,
                           style: TextStyle(
                             fontSize: 15,
                           ),
@@ -365,7 +365,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                           hint: Padding(
                             padding: const EdgeInsets.only(left: 15),
                             child: Text(
-                              'Select Gender',
+                              Strings.selectGender,
                               style: TextStyle(
                                 //fontWeight: FontWeight.bold,
                                 fontSize: 15,
@@ -403,7 +403,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: const Text(
-                          "Contact:",
+                          Strings.contact,
                           style: TextStyle(
                             fontSize: 15,
                           ),
@@ -421,7 +421,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       child: TextFormField(
                         controller: _contactController,
                         decoration: const InputDecoration(
-                          hintText: "1234567890",
+                          hintText: Strings.mobileNo,
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(15.0),
                         ),
@@ -434,7 +434,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: const Text(
-                          "Teacher Type:",
+                          Strings.teacherType,
                           style: TextStyle(
                             fontSize: 15,
                           ),
@@ -452,7 +452,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       child: TextFormField(
                         controller: _teachertypeController,
                         decoration: const InputDecoration(
-                          hintText: "Activity type",
+                          hintText: Strings.activityType,
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(15.0),
                         ),
@@ -468,7 +468,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                           padding: const EdgeInsets.only(left: 10),
                           child: ElevatedButton(
                             child: const Text(
-                              "Save",
+                              Strings.save,
                               style: TextStyle(fontSize: 12),
                             ),
                             onPressed: () {

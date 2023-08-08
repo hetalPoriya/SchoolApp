@@ -9,6 +9,7 @@ import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/Teacher/home.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -28,33 +29,7 @@ class TeacherSingleFeed extends StatefulWidget {
 }
 
 class _TeacherSingleFeedState extends State<TeacherSingleFeed> {
-  final List<Map<String, dynamic>> _events = [
-    {
-      'title': 'Sakshi Sharma Class Teacher',
-      'color': const LinearGradient(
-          colors: [Colors.grey, Color.fromARGB(255, 211, 205, 205)]),
-      'Description':
-      'Dear Parents,\n\nGreetings of the day! \n Kindly find the attached holiday assignment.\n Thank You'
-    },
-    {
-      'title': 'Sakshi Sharma Class Teacher',
-      'color': const LinearGradient(colors: [Colors.blue, Color(0xFF90CAF9)]),
-      'Description':
-      'Dear Parents,\n\nGreetings of the day! \n Kindly find the attached holiday assignment.\n Thank You'
-    },
-    {
-      'title': 'Sakshi Sharma Class Teacher',
-      'color': const LinearGradient(colors: [Colors.blue, Color(0xFF90CAF9)]),
-      'Description':
-      'Dear Parents,\n\nGreetings of the day! \n Kindly find the attached holiday assignment.\n Thank You'
-    },
-    {
-      'title': 'Sakshi Sharma Class Teacher',
-      'color': const LinearGradient(colors: [Colors.blue, Color(0xFF90CAF9)]),
-      'Description':
-      'Dear Parents,\n\nGreetings of the day! \n Kindly find the attached holiday assignment.\n Thank You'
-    },
-  ];
+
   DateTime todayDate = DateTime.now();
   final DateFormat formatter = DateFormat('EEEE');
   final DateFormat formatter1 = DateFormat('dMMMM');
@@ -77,35 +52,7 @@ class _TeacherSingleFeedState extends State<TeacherSingleFeed> {
       });
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+    StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -160,7 +107,7 @@ class _TeacherSingleFeedState extends State<TeacherSingleFeed> {
             //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Feeds Notification",
+                Strings.feedsNotification,
                 style: TextStyle(
                   color: Colors.deepPurple,
                   fontSize: 30,
@@ -172,14 +119,7 @@ class _TeacherSingleFeedState extends State<TeacherSingleFeed> {
               divider,
               Obx(
                     () => teacherFeed.isLoading ==true?
-                Center(
-                    child: Image.asset(
-                      "assets/loading.gif",
-                      height: 425.0,
-                      width: 425.0,
-                      fit: BoxFit.fitHeight,
-                    )
-                ):
+               StudentAppWidgets.loadingWidget():
                     Card(
                       color: Colors.grey[200],
                       shape: RoundedRectangleBorder(

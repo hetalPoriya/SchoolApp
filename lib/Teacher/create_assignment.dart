@@ -157,45 +157,45 @@ class _CreateAssignmentState extends State<CreateAssignment> {
               padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
               children: [
                 Center(
-                  child: Text("Create Assignment", style: deepPurpleStyle),
+                  child: Text(Strings.createAssignment, style: deepPurpleStyle),
                 ),
                 smallSizedBox,
-                StudentAppWidgets.titleTextMarked(text: 'Title:'),
+                StudentAppWidgets.titleTextMarked(text: '${Strings.title}:'),
                 StudentAppWidgets.textFormFieldWidget(
-                    hintText: "Assignment Title",
+                    hintText: Strings.assignmentTitle,
                     validator: FormValidator.emptyFieldValidation(value: _titleController.text),
                     textEditingController: _titleController),
                 smallSizedBox,
-                StudentAppWidgets.titleTextMarked(text: 'Class:'),
+                StudentAppWidgets.titleTextMarked(text: Strings.classStrings),
                 DropDownWidget.classesDropDown(),
                 smallSizedBox,
-                StudentAppWidgets.titleTextMarked(text: 'Section:'),
+                StudentAppWidgets.titleTextMarked(text: Strings.section),
                 DropDownWidget.sectionDropDown(),
                 smallSizedBox,
-                StudentAppWidgets.titleTextMarked(text: 'Subject:'),
+                StudentAppWidgets.titleTextMarked(text: Strings.subject),
                 DropDownWidget.subjectDropDown(),
                 smallSizedBox,
 
-                StudentAppWidgets.titleText(text:   "Link:",),
-                StudentAppWidgets.textFormFieldWidget(hintText: "Link", textEditingController: _urlController),
+                StudentAppWidgets.titleText(text: '${Strings.link}:',),
+                StudentAppWidgets.textFormFieldWidget(hintText: Strings.link, textEditingController: _urlController),
 
                 smallSizedBox,
-                StudentAppWidgets.titleTextMarked(text: "Descriptions:"),
-                StudentAppWidgets.textFormFieldWidget(hintText: "Description", textEditingController: _descriptionController,validator: FormValidator.emptyFieldValidation(value: _descriptionController.text),),
+                StudentAppWidgets.titleTextMarked(text: "${Strings.description}:"),
+                StudentAppWidgets.textFormFieldWidget(hintText: Strings.description, textEditingController: _descriptionController,validator: FormValidator.emptyFieldValidation(value: _descriptionController.text),),
 
                 smallSizedBox,
-                StudentAppWidgets.titleText(text: 'Schedule Date'),
-                StudentAppWidgets.textFormFieldWidget(hintText:'Schedule Date' , textEditingController: _dateController,readOnly: true,onTap:() =>
+                StudentAppWidgets.titleText(text: Strings.scheduleDate),
+                StudentAppWidgets.textFormFieldWidget(hintText:Strings.scheduleDate, textEditingController: _dateController,readOnly: true,onTap:() =>
                  StudentAppWidgets.calenderView(context: context,dateTime: todayDate,dateController: _dateController)
                  ),
 
                 smallSizedBox,
-                StudentAppWidgets.titleText(text:  "Expire Date",),
-                StudentAppWidgets.textFormFieldWidget(hintText:'Expire Date' , textEditingController: _expiredateController,readOnly: true,onTap:() =>  StudentAppWidgets.calenderView(context: context,dateTime: todayDate,dateController: _expiredateController)
+                StudentAppWidgets.titleText(text:  Strings.expireDate,),
+                StudentAppWidgets.textFormFieldWidget(hintText:Strings.expireDate , textEditingController: _expiredateController,readOnly: true,onTap:() =>  StudentAppWidgets.calenderView(context: context,dateTime: todayDate,dateController: _expiredateController)
                  ),
 
                 smallSizedBox,
-                StudentAppWidgets.titleText(text:  "Status:"),
+                StudentAppWidgets.titleText(text:Strings.status),
               CustomDropDown(    items: status
                   .map((status) => DropdownMenuItem<String>(
                 value: status,
@@ -207,16 +207,16 @@ class _CreateAssignmentState extends State<CreateAssignment> {
                 ),
               ))
                   .toList(),
-                hintText: 'Select Status',
+                hintText: Strings.selectStatus,
                 onChanged: ( value) {
                setState(() {
                  statusValue = value!;
                });
                 },),
                 smallSizedBox,
-                StudentAppWidgets.titleText(text: 'Upload Image:'),
+                StudentAppWidgets.titleText(text: Strings.uploadImage),
 
-                StudentAppWidgets.textFormFieldWidget(hintText: "No File Chosen", textEditingController: _fileController,suffixIcon: GestureDetector(
+                StudentAppWidgets.textFormFieldWidget(hintText: Strings.noFileChosen, textEditingController: _fileController,suffixIcon: GestureDetector(
                   onTap: (){
                     PickFile();
                   },
@@ -232,7 +232,7 @@ class _CreateAssignmentState extends State<CreateAssignment> {
                             bottomRight: Radius.circular(5)),
                       ),
                       child: const Center(
-                        child: Text('Choose file'),
+                        child: Text(Strings.chooseFile),
                       ),
                     ),
                   ),

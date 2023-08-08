@@ -78,7 +78,7 @@ class _ViewSubmittedTestState extends State< ViewSubmittedTest > {
               // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(child: Text("View Submitted Test", style: titleTextStyle)),
+                Center(child: Text(Strings.viewSubmittedTest, style: titleTextStyle)),
                 smallSizedBox,
                
                 divider,
@@ -90,7 +90,7 @@ class _ViewSubmittedTestState extends State< ViewSubmittedTest > {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Test Name:",
+                            Strings.testName,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
@@ -103,7 +103,7 @@ class _ViewSubmittedTestState extends State< ViewSubmittedTest > {
                   Row(
                     children: [
                       Text(
-                        "Class:",
+                        Strings.classStrings,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -115,7 +115,7 @@ class _ViewSubmittedTestState extends State< ViewSubmittedTest > {
                   Row(
                     children: [
                       Text(
-                        "Subject:",
+                       Strings.subject,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -127,7 +127,7 @@ class _ViewSubmittedTestState extends State< ViewSubmittedTest > {
                   Row(
                     children: [
                       Text(
-                        "Valid till:",
+                        Strings.validTill,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -156,7 +156,7 @@ class _ViewSubmittedTestState extends State< ViewSubmittedTest > {
                       Icon(Icons.check,
                       size: 20,
                       color: Colors.green,),
-                      const Text("Correct answer:",
+                      const Text(Strings.correctAnswer,
                       style: TextStyle(color: Colors.green)),
                       const Text(" Option 3"),
                       const SizedBox(width: 5,),
@@ -178,7 +178,7 @@ class _ViewSubmittedTestState extends State< ViewSubmittedTest > {
                         size: 20,
                         color: Colors.red,
                       ),
-                      const Text("Submitted answer:",
+                      const Text(Strings.submittedAnswer,
                           style: TextStyle(color: Colors.red)),
                       const Text(" Option 4"),
                       const SizedBox(
@@ -198,7 +198,7 @@ class _ViewSubmittedTestState extends State< ViewSubmittedTest > {
                       child:Column(
                         children: [
                           const Text(
-                            "Test Feedback:",
+                            Strings.testFeedback,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Colors.white,

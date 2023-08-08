@@ -143,6 +143,7 @@ class Strings {
   static const dailyFeed = 'Daily feed';
   static const others = 'Others';
   static const thereAreNoEventFeeds = 'There are no event feeds';
+  static const thereAreNoOtherFeeds = 'There are no other feeds';
 
 //homepage
   static const video = 'Video';
@@ -232,12 +233,91 @@ static const uploadFile = 'Upload File:';
 static const assignStudents = 'Assign Students';
 
 //assignment
-static String addAssignment = 'Add Assignment';
-static String checkedAssignments = 'Checked \n Assignments';
-static String uncheckedAssignments = 'Unchecked \n Assignments';
-static String allUploadedAssignments = 'All Uploaded \n Assignments';
-static String thereAreNoPendingAssignments = 'There are no pending assignments';
+static const addAssignment = 'Add Assignment';
+static const checkedAssignments = 'Checked \n Assignments';
+static const uncheckedAssignments = 'Unchecked \n Assignments';
+static const allUploadedAssignments = 'All Uploaded \n Assignments';
+static const thereAreNoPendingAssignments = 'There are no pending assignments';
 
 //attendance
+static const markAttendance = "Mark Attendance";
+static const viewAttendance = "View Attendance";
+static const selectClass = "Select Class";
+static const selectSection = "Select Section";
+static const selectSubject = "Select Subject";
+static const dateOfAttendance = "Date of Attendance";
+static const pleaseChooseOneOrMore = "Please choose one or more";
 
+//create assignment
+static const createAssignment = 'Create Assignment';
+static const link = 'Link';
+static const status = 'Status:';
+
+//event
+static const addEvent = 'Add Event';
+static const thereAreNoEvents  = 'There are no events ';
+
+//feed
+static const feedsNotification = 'Feeds Notification';
+
+//home
+static const viewFeeds = 'View Feeds';
+static const addFeeds = 'Add Feeds';
+static const addCheckTest = 'Add & Check Test';
+static const addAttendance = 'Add Attendance';
+static const timeTable = 'Time Table';
+static const teacherDashboard = 'TEACHER DASHBOARD';
+static const thereAreNoChatsInYourInbox = 'There are no chats in your inbox';
+
+//new message
+static const student= 'Student:';
+static const selectStudent= 'Select Student';
+
+//profile
+
+static const enterName = 'Enter Name';
+static const branchName = 'Branch Name:';
+static const cityName = 'City Name';
+static const teacherType = 'Teacher Type:';
+static const activityType = 'Activity type';
+static const save = 'Save';
+
+//submission test
+static const viewTestSubmissions = 'View Test Submissions';
+static const sNo = 'S no.:';
+static const action = 'Action';
+
+//test
+static const addTest = 'Add Test';
+static const expireAt = 'Expire at';
+static const viewQuestions = 'View Questions';
+static const viewSubmissions = 'View Submissions';
+
+//time table
+static const classTimeTable = 'Class Time Table';
+
+//upload video
+static const uploadVideo = 'Upload Video';
+static const videoUrl = 'Video URL:';
+static const students = 'Students';
+static const close = 'Close';
+static const addNewVideo = 'Add new video';
+
+//view attendance
+static const studentWise= 'Student Wise';
+static const dayWise= 'Day Wise';
+static const selectMonth= 'Select Month';
+static const view= 'View';
+static const id= 'ID';
+
+//view test
+static const viewTest = 'View Test';
+static const question = 'Question:';
+static const option = 'Option:';
+
+//view submitted test
+static const viewSubmittedTest = 'View Submitted Test';
+static const correctAnswer = 'Correct answer:';
+static const submittedAnswer = 'Submitted answer:';
+static const testFeedback = 'Test Feedback:"';
 }

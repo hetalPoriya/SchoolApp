@@ -128,7 +128,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                 children: [
                   Center(
                     child: Text(
-                      "Mark Attendance",
+                      Strings.markAttendance,
                       style: titleTextStyle,
                     ),
                   ),
@@ -139,7 +139,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                       const TabBar(
                         tabs: [
                           Tab(
-                            text: "Mark Attendance",
+                            text: Strings.markAttendance,
                           ),
                         ],
                         isScrollable: true,
@@ -156,7 +156,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                             Icon(Icons.remove_red_eye,
                                 color: ColorConstants.kHeadingTextColor),
                             SizedBox(width: 5),
-                            Text("View Attendance")
+                            Text(Strings.viewAttendance)
                           ],
                         ),
                       ),
@@ -176,13 +176,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
 
   buildTabBarView(context) {
     return Obx(() => teacherMarkAttendanceController.isLoading == true
-        ? Center(
-            child: Image.asset(
-            "assets/loading.gif",
-            height: 425.0,
-            width: 425.0,
-            fit: BoxFit.fitHeight,
-          ))
+        ? StudentAppWidgets.loadingWidget()
         : Expanded(
             child: MediaQuery.removePadding(
               context: context,
@@ -198,7 +192,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                            Text(
-                            "Class:",
+                            Strings.classStrings,
                             style: mediumStyle
                           ),
                           smallSizedBox,
@@ -220,7 +214,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                                   ),
                                 ),
                             ],
-                            hint: Text("Select Class"),
+                            hint: Text(Strings.selectClass),
                             icon: const Icon(
                               Icons.keyboard_arrow_down,
                               color: ColorConstants.kBlackColor,
@@ -258,12 +252,12 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                           ),
                           smallSizedBox,
                            Text(
-                            "Section:",
+                            Strings.section,
                             style: mediumStyle
                           ),
                           smallSizedBox,
                           CustomDropDown(
-                            hintText: "Select Section",
+                            hintText: Strings.selectSection,
                             items: [
                               for (var i in teacherMarkAttendanceController
                                   .classesSections)
@@ -343,7 +337,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                                       okButtonLabel: 'OK',
                                       cancelButtonLabel: 'CANCEL',
                                       hintWidget:
-                                          Text('Please choose one or more'),
+                                          Text(Strings.pleaseChooseOneOrMore),
                                       initialValue: _myStudents,
                                       onSaved: (value) {
 
@@ -362,7 +356,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                           Container(
                             alignment: Alignment.topLeft,
                             child:  Text(
-                              "Date of Attendance",
+                              Strings.dateOfAttendance,
                               style: mediumStyle
                             ),
                             padding: const EdgeInsets.symmetric(vertical: 3),
@@ -467,7 +461,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                                     .teacherMarkAttendance();
                               },
                               child: const Text(
-                                "Submit",
+                                Strings.submit,
                                 style: TextStyle(fontSize: 12),
                               ),
                               style: ElevatedButton.styleFrom(

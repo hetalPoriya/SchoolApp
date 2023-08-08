@@ -96,7 +96,7 @@ class _TeacherEventsState extends State<TeacherEvents> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
              StudentAppWidgets.addButton(onTap:()=>AnimatedNavigation.pushAnimatedNavigation(
-                 context, AddEvent()), text: 'Add Event', title: "Event List"),
+                 context, AddEvent()), text: Strings.addEvent, title: Strings.eventList),
               divider,
               Obx(() => teacherEventController.isLoading.value == true
                   ? StudentAppWidgets.loadingWidget()
@@ -104,7 +104,7 @@ class _TeacherEventsState extends State<TeacherEvents> {
                 child: MediaQuery.removePadding(
                   context: context,
                   removeTop: true,
-                  child:teacherEventController.eventList.length == 0 ? StudentAppWidgets.noDataFound(text: 'There are no events ') : ListView.builder(
+                  child:teacherEventController.eventList.length == 0 ? StudentAppWidgets.noDataFound(text: Strings.thereAreNoEvents) : ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemCount: teacherEventController.eventList.length,

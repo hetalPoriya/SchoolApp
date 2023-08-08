@@ -116,7 +116,7 @@ class _TeacherTestState extends State<TeacherTest> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Tests",
+                    Strings.test,
                     style: TextStyle(
                       color: Colors.deepPurple,
                       fontSize: 35,
@@ -146,7 +146,7 @@ class _TeacherTestState extends State<TeacherTest> {
                           size: 18.0,
                         ),
                         Text(
-                          "Add Test",
+                          Strings.addTest,
                           style: const TextStyle(fontWeight: FontWeight.bold,fontFamily: "Roboto"),
                         ),
                       ],
@@ -189,7 +189,7 @@ class _TeacherTestState extends State<TeacherTest> {
                                   Row(
                                     children: [
                                       Text(
-                                        "Test Name:  ",
+                                        Strings.testName,
                                         style: const TextStyle(
                                             color: Colors.black,
                                             fontSize: 15,
@@ -214,7 +214,7 @@ class _TeacherTestState extends State<TeacherTest> {
                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Subject",
+                                            Strings.subject,
                                             style: TextStyle(
                                                 color: Colors.grey, fontSize: 13,fontFamily: 'Roboto',),
                                           ),
@@ -237,7 +237,7 @@ class _TeacherTestState extends State<TeacherTest> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                            "Expire at",
+                                            Strings.expireAt,
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontFamily: 'Roboto',
@@ -267,7 +267,7 @@ class _TeacherTestState extends State<TeacherTest> {
                                               primary: Colors.deepPurple,
                                               padding: EdgeInsets.only(
                                                   left: 3, right: 3)),
-                                          child: Text("View Questions",
+                                          child: Text(Strings.viewQuestions,
                                               style: TextStyle(fontSize: 10,fontFamily: 'Roboto',))),
                                       const SizedBox(width: 5),
                                       ElevatedButton(
@@ -278,7 +278,7 @@ class _TeacherTestState extends State<TeacherTest> {
                                               primary: Colors.blue,
                                               padding: EdgeInsets.only(
                                                   left: 3, right: 3)),
-                                          child: Text("View Submissions",
+                                          child: Text(Strings.viewSubmissions,
                                               style: TextStyle(fontSize: 10,fontFamily: 'Roboto',))),
                                     ],
                                   ),

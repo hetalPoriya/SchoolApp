@@ -13,6 +13,7 @@ import 'package:school_app/Teacher/upload_video.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -35,16 +36,7 @@ class TeacherVideo extends StatefulWidget {
 
 class _TeacherVideoState extends State<TeacherVideo> {
   DateTime todayDate = DateTime.now();
-  final List<Map<String, dynamic>> _data = [
-    {
-      'image': AssetImages.php,
-      'icon': AssetImages.videoIcon,
-    },
-    {
-      'image': AssetImages.php,
-      'icon': AssetImages.videoIcon,
-    },
-  ];
+
 
   var videoController = Get.put(VideoController());
   NetworkHandler nr = NetworkHandler();
@@ -60,35 +52,7 @@ class _TeacherVideoState extends State<TeacherVideo> {
     if (isConnected) {
       videoController.getTeacherVideos();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+     StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -134,13 +98,7 @@ class _TeacherVideoState extends State<TeacherVideo> {
           ),
         ),
         body: Obx(() => videoController.isLoading == true
-            ? Center(
-                child: Image.asset(
-                "assets/loading.gif",
-                height: 425.0,
-                width: 425.0,
-                fit: BoxFit.fitHeight,
-              ))
+            ? StudentAppWidgets.loadingWidget()
             : DefaultTabController(
                 length: videoController.videos.length,
                 child: Padding(
@@ -153,7 +111,7 @@ class _TeacherVideoState extends State<TeacherVideo> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("VIDEOS", style: titleTextStyle),
+                          Text(Strings.videos.toUpperCase(), style: titleTextStyle),
                           // SvgPicture.asset(AssetImages.search, height: 25),
                           ElevatedButton(
                             onPressed: () =>
@@ -175,7 +133,7 @@ class _TeacherVideoState extends State<TeacherVideo> {
                                   size: 18.0,
                                 ),
                                 Text(
-                                  "Add new video",
+                                  Strings.addNewVideo,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Roboto',
@@ -190,8 +148,8 @@ class _TeacherVideoState extends State<TeacherVideo> {
                       smallSizedBox,
                       Padding(
                         padding: const EdgeInsets.only(right: 5),
-                        child: videoController.status == "Videos not found"
-                            ? noVideoFound()
+                        child: videoController.status == Strings.videosNotFound
+                            ? StudentAppWidgets.noDataFound(text: Strings.videosNotFound)
                             : TabBar(
                                 // ignore: prefer_const_literals_to_create_immutables
                                 tabs: [
@@ -230,13 +188,7 @@ class _TeacherVideoState extends State<TeacherVideo> {
     for (var entry in videoController.videos.entries)
       log('entry ${entry.value}');
     return Obx(() => videoController.isLoading == true
-        ? Center(
-            child: Image.asset(
-            "assets/loading.gif",
-            height: 425.0,
-            width: 425.0,
-            fit: BoxFit.fitHeight,
-          ))
+        ? StudentAppWidgets.loadingWidget()
         : Expanded(
             child: TabBarView(
               key: ValueKey(DateTime.now().toString()),
@@ -244,7 +196,8 @@ class _TeacherVideoState extends State<TeacherVideo> {
               children: [
                 for (var entry in videoController.videos.entries)
                   entry.value.length == 0
-                      ? noVideoFound()
+                      ? StudentAppWidgets.noDataFound(text: Strings.videosNotFound)
+
                       : GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 12,crossAxisSpacing: 12),
                     shrinkWrap: true,
@@ -308,19 +261,5 @@ class _TeacherVideoState extends State<TeacherVideo> {
   }
 
 
-  noVideoFound() {
-    return Column(
-      children: [
-        Image.asset("assets/no-data.gif"),
-        smallSizedBox,
-        Text(
-          "No Videos Found",
-          style: TextStyle(
-            color: Colors.purple[800],
-            fontFamily: 'Roboto',
-          ),
-        )
-      ],
-    );
-  }
+
 }

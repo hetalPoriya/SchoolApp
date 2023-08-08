@@ -10,6 +10,7 @@ import 'package:school_app/Teacher/home.dart';
 import 'package:school_app/Teacher/single_feed.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -29,33 +30,7 @@ class TeacherFeeds extends StatefulWidget {
 }
 
 class _TeacherFeedsState extends State<TeacherFeeds> {
-  final List<Map<String, dynamic>> _events = [
-    {
-      'title': 'Sakshi Sharma Class Teacher',
-      'color': const LinearGradient(
-          colors: [Colors.grey, Color.fromARGB(255, 211, 205, 205)]),
-      'Description':
-          'Dear Parents,\n\nGreetings of the day! \n Kindly find the attached holiday assignment.\n Thank You'
-    },
-    {
-      'title': 'Sakshi Sharma Class Teacher',
-      'color': const LinearGradient(colors: [Colors.blue, Color(0xFF90CAF9)]),
-      'Description':
-          'Dear Parents,\n\nGreetings of the day! \n Kindly find the attached holiday assignment.\n Thank You'
-    },
-    {
-      'title': 'Sakshi Sharma Class Teacher',
-      'color': const LinearGradient(colors: [Colors.blue, Color(0xFF90CAF9)]),
-      'Description':
-          'Dear Parents,\n\nGreetings of the day! \n Kindly find the attached holiday assignment.\n Thank You'
-    },
-    {
-      'title': 'Sakshi Sharma Class Teacher',
-      'color': const LinearGradient(colors: [Colors.blue, Color(0xFF90CAF9)]),
-      'Description':
-          'Dear Parents,\n\nGreetings of the day! \n Kindly find the attached holiday assignment.\n Thank You'
-    },
-  ];
+
   DateTime todayDate = DateTime.now();
   final DateFormat formatter = DateFormat('EEEE');
   final DateFormat formatter1 = DateFormat('dMMMM');
@@ -78,35 +53,7 @@ class _TeacherFeedsState extends State<TeacherFeeds> {
       });
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+      StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -162,21 +109,14 @@ class _TeacherFeedsState extends State<TeacherFeeds> {
             //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Feeds Notification",
+                Strings.feedsNotification,
                 style: deepPurpleStyle
               ),
               smallSizedBox,
               divider,
           Obx(
                 () => teacherFeed.isLoading ==true?
-            Center(
-                child: Image.asset(
-                  "assets/loading.gif",
-                  height: 425.0,
-                  width: 425.0,
-                  fit: BoxFit.fitHeight,
-                )
-            ):
+            StudentAppWidgets.loadingWidget():
                 DefaultTabController(
                   length: 2,
                   child: Padding(
@@ -188,8 +128,8 @@ class _TeacherFeedsState extends State<TeacherFeeds> {
                           TabBar(
                             // ignore: prefer_const_literals_to_create_immutables
                             tabs: [
-                              Tab(text: "Daily feed",),
-                              Tab(text: "Others",)
+                              Tab(text: Strings.dailyFeed,),
+                              Tab(text: Strings.others,)
                             ],
                             isScrollable: true,
                             indicator: BoxDecoration(
@@ -210,14 +150,7 @@ class _TeacherFeedsState extends State<TeacherFeeds> {
                                 removeTop: true,
                                 child: TabBarView(
                                   children: [
-                                    teacherFeed.events.length == 0?Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset("assets/no-data.gif"),
-                                        smallSizedBox,
-                                        Text("There are no event feeds", style: TextStyle(color: Colors.purple[800],fontFamily: 'Roboto',),)
-                                      ],
-                                    ):
+                                    teacherFeed.events.length == 0?StudentAppWidgets.noDataFound(text: Strings.thereAreNoEventFeeds):
                                     ListView.builder(
                                       scrollDirection: Axis.vertical,
                                       shrinkWrap: true,
@@ -289,14 +222,7 @@ class _TeacherFeedsState extends State<TeacherFeeds> {
                                       },
                                     ),
                                     teacherFeed.others.length == 0?
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset("assets/no-data.gif"),
-                                        smallSizedBox,
-                                        Text("There are no other feeds", style: TextStyle(color: Colors.purple[800],fontFamily: 'Roboto',),)
-                                      ],
-                                    ):ListView.builder(
+                                   StudentAppWidgets.noDataFound(text: Strings.thereAreNoOtherFeeds):ListView.builder(
                                       scrollDirection: Axis.vertical,
                                       shrinkWrap: true,
                                       itemCount: teacherFeed.others.length,

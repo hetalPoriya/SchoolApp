@@ -72,7 +72,7 @@ class _TeacherHomeState extends State<TeacherHome> {
                 AnimatedNavigation.pushAnimatedNavigation(
                     context, TeacherProfile());
               },
-              title: const Text("My Profile"),
+              title: const Text(Strings.myProfile),
               leading: SvgPicture.asset(
                 AssetImages.drawerMyProfile,
                 color: Colors.black,
@@ -85,7 +85,7 @@ class _TeacherHomeState extends State<TeacherHome> {
                 NetworkHandler.removeToken();
                 Get.offAll(LoginPage());
                 },
-            title: const Text("Logout"),
+            title: const Text(Strings.logout),
               leading:
                 SvgPicture.asset(AssetImages.drawerLogout, color: Colors.black),
           ),
@@ -112,84 +112,84 @@ class _TeacherHomeState extends State<TeacherHome> {
 
   final List<Map<String, dynamic>> _data = [
     {
-      'title': "View Feeds",
+      'title': Strings.viewFeeds,
       'count': "0",
       'icon': AssetImages.drawerAssignment,
       'color': const LinearGradient(colors: [Colors.pink, Color(0xFFF48FB1)]),
       'page': const TeacherFeeds(
         id: '1',
-        name: "Add Feeds",
+        name: Strings.addFeeds,
       )
     },
     {
-      'title': "Videos",
+      'title': Strings.videos,
       'icon': AssetImages.video,
       'count': "1",
       'color': const LinearGradient(colors: [Colors.green, Color(0xFFA5D6A7)]),
       'page': const TeacherVideo(
         id: '2',
-        name: "Video",
+        name: Strings.video,
       )
     },
     {
-      'title': "Messages",
+      'title':Strings.messages,
       'icon': AssetImages.messages,
       'count': "2",
       'color': const LinearGradient(colors: [Colors.red, Color(0xFFEF9A9A)]),
       'page': const TeacherMessage(
         id: '3',
-        name: "Message",
+        name: Strings.message,
       )
     },
     {
-      'title': " Add Assignments",
+      'title': Strings.addAssignment,
       'icon': AssetImages.messageAssignment,
       'count': "3",
       'color': const LinearGradient(colors: [Colors.blue, Color(0xFF90CAF9)]),
       'page': const TeacherAssignments(
         id: '4',
-        name: "Assignments",
+        name: Strings.assignment,
       )
     },
     {
-      'title': "Add & Check Test",
+      'title': Strings.addCheckTest,
       'icon': AssetImages.todaysWork,
       'count': "4",
       'color': const LinearGradient(colors: [Colors.orange, Color(0xFFFFCC80)]),
       'page': const TeacherTest(
         id: '5',
-        name: "Test",
+        name: Strings.test,
       )
     },
     {
-      'title': "Add Attendance",
+      'title': Strings.addAttendance,
       'icon': AssetImages.drawerAttendence,
       'count': "6",
       'color':
           const LinearGradient(colors: [Colors.deepPurple, Color(0xFFB39DDB)]),
       'page': const TeacherAttendance(
         id: '6',
-        name: "Attendance",
+        name: Strings.attendance,
       )
     },
     {
-      'title': "Add Events",
+      'title': Strings.addEvent,
       'icon': AssetImages.assessmentCert,
       'count': "6",
       'color': const LinearGradient(colors: [Colors.green, Color(0xFFA5D6A7)]),
       'page': const TeacherEvents(
         id: '7',
-        name: "Add Events",
+        name: Strings.addEvent,
       )
     },
     {
-      'title': "Time Table",
+      'title': Strings.timeTable,
       'icon': AssetImages.assessmentCert,
       'count': "7",
       'color': const LinearGradient(colors: [Colors.pink, Color(0xFFF48FB1)]),
       'page': const TimeTable(
         id: '8',
-        name: "View Events",
+        name: Strings.viewEvents,
       )
     },
   ];
@@ -304,7 +304,7 @@ class _TeacherHomeState extends State<TeacherHome> {
         );
 
     welcomeText() => const Text(
-          "TEACHER DASHBOARD",
+          Strings.teacherDashboard,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.deepPurple,

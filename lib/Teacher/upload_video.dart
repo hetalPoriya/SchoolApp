@@ -75,35 +75,7 @@ class _UploadVideoState extends State<UploadVideo> {
       uploadVideoController.isSubjectVisible(false);
       uploadVideoController.getClass();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+     StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -148,14 +120,7 @@ class _UploadVideoState extends State<UploadVideo> {
             ),
           ),
           body: Obx(() => uploadVideoController.isLoading == true
-              ? Center(
-                  child: Image.asset(
-                    "assets/loading.gif",
-                    height: 425.0,
-                    width: 425.0,
-                    fit: BoxFit.fitHeight,
-                  ),
-                )
+              ? StudentAppWidgets.loadingWidget()
               : Form(
             key: _formKey,
                   child: ListView(
@@ -164,13 +129,13 @@ class _UploadVideoState extends State<UploadVideo> {
                     children: [
                       Center(
                         child: Text(
-                          "Upload Video",
+                          Strings.uploadVideo,
                           style: deepPurpleStyle,
                         ),
                       ),
                       const Divider(color: Colors.grey),
                       smallSizedBox,
-                      StudentAppWidgets.titleTextMarked(text: 'Class:'),
+                      StudentAppWidgets.titleTextMarked(text: Strings.classStrings),
                       DropDownWidget.teacherClassesDropDown(),
                       Visibility(
                         visible: uploadVideoController.isSubjectVisible.value,
@@ -179,13 +144,13 @@ class _UploadVideoState extends State<UploadVideo> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             smallSizedBox,
-                            StudentAppWidgets.titleText(text: "Subjects:"),
+                            StudentAppWidgets.titleText(text: Strings.subject),
                             DropDownWidget.getSubjectFromClassesDropDown(),
                           ],
                         ),
                       ),
                       smallSizedBox,
-                      StudentAppWidgets.titleText(text: "Video URL:"),
+                      StudentAppWidgets.titleText(text: Strings.videoUrl),
                       StudentAppWidgets.textFormFieldWidget(
                           hintText: 'Enter URL',
                           textEditingController:
@@ -219,7 +184,7 @@ class _UploadVideoState extends State<UploadVideo> {
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(12.0))),
                                 title: Text(
-                                  "Students",
+                                  Strings.students,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontFamily: 'Roboto',
@@ -242,7 +207,7 @@ class _UploadVideoState extends State<UploadVideo> {
                                 valueField: 'value',
                                 okButtonLabel: 'OK',
                                 cancelButtonLabel: 'CANCEL',
-                                hintWidget: Text('Please choose one or more'),
+                                hintWidget: Text(Strings.pleaseChooseOneOrMore),
                                 initialValue: _myStudents,
                                 onSaved: (value) {
                                   if (value == null) return;
@@ -255,9 +220,9 @@ class _UploadVideoState extends State<UploadVideo> {
                             ],
                           )),
                       smallSizedBox,
-                      StudentAppWidgets.titleText(text: "Descriptions:"),
+                      StudentAppWidgets.titleText(text: "${Strings.description}:"),
                       StudentAppWidgets.textFormFieldWidget(
-                        hintText: "Description",
+                        hintText: Strings.description,
                         textEditingController:
                             uploadVideoController.videoDescController,
                         validator: FormValidator.emptyFieldValidation(value: uploadVideoController.videoDescController.text)
@@ -275,7 +240,7 @@ class _UploadVideoState extends State<UploadVideo> {
                               context: context,
                               isVisible:
                                   uploadVideoController.isUploadLoading.value,
-                              text: "Submit",
+                              text: Strings.submit,
                               onPressed: () async {
                                 bool isConnected = await nr.checkConnectivity();
                                 if (isConnected) {
@@ -289,45 +254,12 @@ class _UploadVideoState extends State<UploadVideo> {
                                             content: Text(uploadVideoController
                                                 .status.value)));
                                     Get.off(const TeacherVideo(
-                                      name: "Video",
+                                      name: Strings.video,
                                     ));
                                   });
                                 }
                                 } else {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    duration: Duration(days: 1),
-                                    behavior: SnackBarBehavior.floating,
-                                    content: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.signal_wifi_off,
-                                          color: Colors.white,
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                              left: 16.0,
-                                            ),
-                                            child: Text(
-                                              'No internet available',
-                                              textAlign: TextAlign.start,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    action: SnackBarAction(
-                                        textColor: Colors.white,
-                                        label: 'RETRY',
-                                        onPressed: () async {}),
-                                    backgroundColor: Colors.grey,
-                                  ));
+                                 StudentAppWidgets.noInternetAvailable(context: context);
                                 }
                               },
                             )),
@@ -335,7 +267,7 @@ class _UploadVideoState extends State<UploadVideo> {
                             Expanded(
                               child: StudentAppWidgets.elevatedButton(
                                   context: context,
-                                  text: "Close",
+                                  text: Strings.close,
                                   onPressed: () => Navigator.of(context).pop()),
                             ),
             SizedBox(width: 20,),
