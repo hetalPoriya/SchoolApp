@@ -11,6 +11,7 @@ import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_checkbox.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
@@ -54,35 +55,7 @@ class _MessageState extends State<Message> {
       });
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+      StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -102,18 +75,10 @@ class _MessageState extends State<Message> {
           padding: const EdgeInsets.only(top: 60, bottom: 10),
           child: Obx(
             () => messageController.msgIsLoading ==true?
-              Center(
-                child: Image.asset(
-                  "assets/loading.gif",
-                  height: 425.0,
-                  width: 425.0,
-                  fit: BoxFit.fitHeight,
-              ),
-          ):Column(
+              StudentAppWidgets.loadingWidget():Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Messages".toUpperCase(),
+              Text(Strings.messages.toUpperCase(),
                 style: titleTextStyle,
               ),
               divider,
@@ -125,10 +90,10 @@ class _MessageState extends State<Message> {
                       // padding: const  EdgeInsets.only(right:60),
                       tabs: const [
                         Tab(
-                          text: "INBOX",
+                          text: Strings.inbox,
                         ),
                         Tab(
-                          text: "OUTBOX",
+                          text: Strings.outbox,
                         ),
                       ],
                       indicator: BoxDecoration(
@@ -150,7 +115,7 @@ class _MessageState extends State<Message> {
                         Icon(Icons.add_circle_outlined,
                             color: ColorConstants.kHeadingTextColor),
                         SizedBox(width: 5),
-                        Text("NEW MESSAGE")
+                        Text(Strings.newMessage)
                       ],
                     ),
                   ),
@@ -185,13 +150,13 @@ inboxtoptabs(context) {
               tabs: [
                 Tab(
                   child: Text(
-                    'Unselect All',
+                    Strings.unselectAll,
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
                 Tab(
                   child: Text(
-                    'Select All',
+                    Strings.selectAll,
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
@@ -220,14 +185,7 @@ buildInboxTabBarView(context) {
             physics: const NeverScrollableScrollPhysics(),
             children: [
               messageController.inbox_message.length==0?
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset("assets/no-message.gif"),
-                  smallSizedBox,
-                  Text("There are no chats in your inbox", style: TextStyle(color: Colors.blueGrey[100]),)
-                ],
-              ):ListView.builder(
+              StudentAppWidgets.noDataFound(text: 'There are no chats in your inbox'):ListView.builder(
                   itemCount: messageController.inbox_message.length,
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
@@ -273,14 +231,7 @@ buildInboxTabBarView(context) {
                     ),
                   )),
               messageController.inbox_message.length==0?
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset("assets/no-message.gif"),
-                  smallSizedBox,
-                  Text("There are no chats in your inbox", style: TextStyle(color: Colors.blueGrey[100]),)
-                ],
-              ):ListView.builder(
+              StudentAppWidgets.noDataFound(text: 'There are no chats in your inbox'):ListView.builder(
                 itemCount: messageController.inbox_message.length,
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
@@ -352,13 +303,13 @@ outboxtoptabs(context) {
               tabs: [
                 Tab(
                   child: Text(
-                    'Unselect All',
+                    Strings.unselectAll,
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
                 Tab(
                   child: Text(
-                    'Select All',
+                    Strings.selectAll,
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
@@ -387,14 +338,7 @@ buildOutboxTabBarView(context) {
             physics: const NeverScrollableScrollPhysics(),
             children: [
               messageController.outbox_message.length==0?
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset("assets/no-message.gif"),
-                  smallSizedBox,
-                  Text("There are no chats in your outbox", style: TextStyle(color: Colors.blueGrey[100]),)
-                ],
-              ):ListView.builder(
+             StudentAppWidgets.noDataFound(text: 'There are no chats in your outbox'):ListView.builder(
                   itemCount: messageController.outbox_message.length,
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
@@ -440,14 +384,7 @@ buildOutboxTabBarView(context) {
                     ),
                   )),
               messageController.outbox_message.length==0?
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset("assets/no-message.gif"),
-                  smallSizedBox,
-                  Text("There are no chats in your outbox", style: TextStyle(color: Colors.blueGrey[100]),)
-                ],
-              ):ListView.builder(
+              StudentAppWidgets.noDataFound(text: 'There are no chats in your outbox'):ListView.builder(
                 itemCount: messageController.outbox_message.length,
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),

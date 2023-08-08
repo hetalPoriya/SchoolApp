@@ -11,6 +11,7 @@ import 'package:school_app/Student/edit_profile.dart';
 import 'package:school_app/Student/home_page.dart';
 import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/animated_navigation.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_app_bar.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
@@ -81,35 +82,7 @@ class _MyProfileState extends State<MyProfile> {
       await studentProfileController.getStuProfile();
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+      StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -126,19 +99,13 @@ class _MyProfileState extends State<MyProfile> {
             child:
               Obx(
               () => studentProfileController.isLoading ==true?
-                Center(
-                  child: Image.asset(
-                  "assets/loading.gif",
-                  height: 425.0,
-                  width: 425.0,
-                  fit: BoxFit.fitHeight,
-                ),
-              ):Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                StudentAppWidgets.loadingWidget()
+                  :Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "My Profile",
+                    Strings.myProfile,
                     style: titleTextStyle,
                   ),
                   const Spacer(),
@@ -178,7 +145,7 @@ class _MyProfileState extends State<MyProfile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Name",
+                    Strings.name,
                     style: TextStyle(
                       color: Colors.grey[500],
                       fontSize: 18,
@@ -199,7 +166,7 @@ class _MyProfileState extends State<MyProfile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Class",
+                    Strings.classStrings,
                     style: TextStyle(
                       color: Colors.grey[500],
                       fontSize: 18,
@@ -220,7 +187,7 @@ class _MyProfileState extends State<MyProfile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Gender",
+                    Strings.gender,
                     style: TextStyle(
                       color: Colors.grey[500],
                       fontSize: 18,
@@ -241,7 +208,7 @@ class _MyProfileState extends State<MyProfile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Parents Name",
+                Strings.parentsName,
                     style: TextStyle(
                       color: Colors.grey[500],
                       fontSize: 18,
@@ -262,7 +229,7 @@ class _MyProfileState extends State<MyProfile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "E-mail Address",
+                    Strings.emailAddress,
                     style: TextStyle(
                       color: Colors.grey[500],
                       fontSize: 18,
@@ -283,7 +250,7 @@ class _MyProfileState extends State<MyProfile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Section",
+                    Strings.section,
                     style: TextStyle(
                       color: Colors.grey[500],
                       fontSize: 18,
@@ -304,7 +271,7 @@ class _MyProfileState extends State<MyProfile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "DOB",
+                    Strings.dateOfBirth,
                     style: TextStyle(
                       color: Colors.grey[500],
                       fontSize: 18,
@@ -325,7 +292,7 @@ class _MyProfileState extends State<MyProfile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Father Contact No.",
+                    Strings.fatherContactNo,
                     style: TextStyle(
                       color: Colors.grey[500],
                       fontSize: 18,
@@ -363,7 +330,7 @@ class _MyProfileState extends State<MyProfile> {
                   fit: BoxFit.fitHeight,
                 ),
                 largerSizedBox,
-                Text("Switching Account..")
+                Text(Strings.switchingAccount)
               ],
             )
           ):Column(
@@ -442,35 +409,7 @@ class _MyProfileState extends State<MyProfile> {
                         }
                         else{
                           Navigator.pop(context);
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            duration: Duration(days: 1),
-                            behavior: SnackBarBehavior.floating,
-                            content: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  Icons.signal_wifi_off,
-                                  color: Colors.white,
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 16.0,
-                                    ),
-                                    child: Text(
-                                      'No internet available',
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            action: SnackBarAction(
-                                textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-                            backgroundColor: Colors.grey,
-                          ));
+                          StudentAppWidgets.noInternetAvailable(context: context);
                         }
                       },
                     ),

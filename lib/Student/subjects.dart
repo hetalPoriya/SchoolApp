@@ -346,7 +346,7 @@ class _SubjectsState extends State<Subjects>
     tabController = TabController(length: tabs.length, vsync: this);
   }
 
-  nameText() => Text("Subjects",
+  nameText() => Text(Strings.subjects,
       style: titleTextStyle.copyWith(color: const Color(0xFF536DFE)));
 
   //
@@ -636,7 +636,7 @@ class _SubjectsState extends State<Subjects>
                   context,
                   MaterialPageRoute(
                       builder: ((context) => SubjectsWiseList(
-                            subjectName: 'Maths',
+                            subjectName: Strings.maths,
                             date: _selectedDay,
                           )))),
               child: Column(

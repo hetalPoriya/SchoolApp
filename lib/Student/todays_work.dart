@@ -928,6 +928,7 @@ import 'package:school_app/Controller/todaysWorkController.dart';
 import 'package:school_app/Student/todays_word_dateWise_data.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/network_handler.dart';
+import 'package:school_app/utils/strings.dart';
 import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
@@ -965,40 +966,12 @@ class _TodaysWorkState extends State<TodaysWork> {
     if (isConnected) {
       todaysWorkController.getStuTodaysWork();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+      StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
   //nameText() => Text(widget.name.toString(), style: titleTextStyle);
-  nameText() => Text("Today's Work", style: titleTextStyle);
+  nameText() => Text(Strings.todayWork, style: titleTextStyle);
 
   dateText() => Text(
     DateFormat('dd MMMM yyyy').format(DateTime.now()),
@@ -1172,7 +1145,7 @@ class _TodaysWorkState extends State<TodaysWork> {
       const Expanded(
         flex: 4,
         child: Text(
-          "Regular School Timings for New Students",
+          Strings.regularSchoolTimings,
           style: TextStyle(color: Colors.grey),
         ),
       )
@@ -1229,13 +1202,7 @@ class _TodaysWorkState extends State<TodaysWork> {
 
     return CustomScaffold(
       child: Obx(() => todaysWorkController.isLoading.value == true
-          ? Center(
-          child: Image.asset(
-            "assets/loading.gif",
-            height: 425.0,
-            width: 425.0,
-            fit: BoxFit.fitHeight,
-          ))
+          ? StudentAppWidgets.loadingWidget()
           : SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

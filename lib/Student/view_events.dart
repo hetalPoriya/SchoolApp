@@ -42,35 +42,7 @@ class _ViewEventsState extends State<ViewEvents> {
         calEventController.getStuEvent();
       });
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+     StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -86,19 +58,12 @@ class _ViewEventsState extends State<ViewEvents> {
           top: 60,
         ),
         child: Obx(() => calEventController.isLoading == true
-            ? Center(
-                child: Image.asset(
-                  "assets/loading.gif",
-                  height: 425.0,
-                  width: 425.0,
-                  fit: BoxFit.fitHeight,
-                ),
-              )
+            ? StudentAppWidgets.loadingWidget()
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Events list".toUpperCase(),
+                    Strings.eventList.toUpperCase(),
                     style: titleTextStyle,
                     // textAlign: TextAlign.start,
                   ),
@@ -110,8 +75,8 @@ class _ViewEventsState extends State<ViewEvents> {
                       // removeBottom: true,
                       // removeBottom: true,
                       child: (calEventController.calender_events.length == 0 || calEventController.status ==
-                          "Calender events not found")
-                          ? StudentAppWidgets.noDataFound(text: 'There are no events')
+                          Strings.calenderEventsNotFound)
+                          ? StudentAppWidgets.noDataFound(text: Strings.calenderEventsNotFound)
                           : ListView.builder(
                                   scrollDirection: Axis.vertical,
                                   shrinkWrap: true,

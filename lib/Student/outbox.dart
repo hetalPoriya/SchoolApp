@@ -32,7 +32,7 @@ class _OutboxState extends State<Outbox> {
   Widget build(BuildContext context) {
     return CustomScaffold(
         titleWidget: const Text(
-          "Inbox",
+          Strings.inbox,
           style: TextStyle(
               color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 20),
         ),

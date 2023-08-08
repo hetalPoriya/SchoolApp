@@ -312,7 +312,7 @@ class _EditProfileState extends State<EditProfile> {
               Container(
                 alignment: Alignment.topLeft,
                 child: const Text(
-                  "Parents Name",
+                  Strings.parentsName,
                   style: TextStyle(
                     fontSize: 13,
                   ),
@@ -325,7 +325,7 @@ class _EditProfileState extends State<EditProfile> {
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                      hintText: ("Parents"),
+                      hintText: (Strings.parents),
                       border: OutlineInputBorder(),
                       isDense: true,
                     )),
@@ -333,7 +333,7 @@ class _EditProfileState extends State<EditProfile> {
               Container(
                 alignment: Alignment.topLeft,
                 child: const Text(
-                  "E-mail Address",
+                  Strings.emailAddress,
                   style: TextStyle(
                     fontSize: 13,
                   ),
@@ -346,7 +346,7 @@ class _EditProfileState extends State<EditProfile> {
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                      hintText: ("Email"),
+                      hintText: (Strings.email),
                       border: OutlineInputBorder(),
                       isDense: true,
                     )),
@@ -355,7 +355,7 @@ class _EditProfileState extends State<EditProfile> {
               Container(
                 alignment: Alignment.topLeft,
                 child: const Text(
-                  "Section",
+                  Strings.section,
                   style: TextStyle(
                     fontSize: 13,
                   ),
@@ -367,14 +367,14 @@ class _EditProfileState extends State<EditProfile> {
                   decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                    hintText: ("Section"),
+                    hintText: (Strings.section),
                     border: OutlineInputBorder(),
                     isDense: true,
                   )),
               Container(
                 alignment: Alignment.topLeft,
                 child: const Text(
-                  "Date Of Birth",
+                  Strings.dateOfBirth,
                   style: TextStyle(
                     fontSize: 13,
                   ),
@@ -387,7 +387,7 @@ class _EditProfileState extends State<EditProfile> {
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                      hintText: ("DOB"),
+                      hintText: (Strings.dateOfBirth),
                       border: OutlineInputBorder(),
                       isDense: true,
                     )),
@@ -395,7 +395,7 @@ class _EditProfileState extends State<EditProfile> {
               Container(
                 alignment: Alignment.topLeft,
                 child: const Text(
-                  "Father Contact No.",
+                  Strings.fatherContactNo,
                   style: TextStyle(
                     fontSize: 13,
                   ),
@@ -408,7 +408,7 @@ class _EditProfileState extends State<EditProfile> {
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                      hintText: ("Mobile No."),
+                      hintText: (Strings.mobileNo),
                       border: OutlineInputBorder(),
                       isDense: true,
                     )),
@@ -425,7 +425,7 @@ class _EditProfileState extends State<EditProfile> {
                         padding: const EdgeInsets.only(left: 10),
                         child: ElevatedButton(
                           child: const Text(
-                            "Update",
+                            Strings.update,
                             style: TextStyle(fontSize: 12),
                           ),
                           onPressed: () {
@@ -446,7 +446,7 @@ class _EditProfileState extends State<EditProfile> {
                         
                       
                         child: const Text(
-                          "Cancel",
+                          Strings.cancel,
                           style: TextStyle(fontSize: 12),
                         ),
                         style: ElevatedButton.styleFrom(
@@ -478,7 +478,7 @@ Widget bottomSheet() {
     child: Column(
       children: <Widget>[
         const Text(
-          "Choose Profile photo",
+          Strings.chooseProfilePhoto,
           style: TextStyle(
             fontSize: 20.0,
           ),
@@ -490,12 +490,12 @@ Widget bottomSheet() {
           ElevatedButton.icon(
             onPressed: () {},
             icon: const Icon(Icons.camera),
-            label: const Text("Camera"),
+            label: const Text(Strings.camera),
           ),
           ElevatedButton.icon(
             onPressed: () {},
             icon: const Icon(Icons.image),
-            label: const Text("Gallery"),
+            label: const Text(Strings.gallery),
           ),
         ])
       ],

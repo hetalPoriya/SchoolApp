@@ -29,7 +29,7 @@ class _EventDetailsState extends State<EventDetails> {
   Widget build(BuildContext context) {
     return CustomScaffold(
         titleWidget: const Text(
-          "Events",
+          Strings.events,
           style: TextStyle(
               color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 25),
         ),

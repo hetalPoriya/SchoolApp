@@ -11,6 +11,7 @@ import 'package:school_app/Controller/studentFeedController.dart';
 import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -46,48 +47,10 @@ class _SingleFeedState extends State<SingleFeed> {
       });
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+     StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
-  final List<Map<String, dynamic>> _events = [
-    {'title': 'Sakshi Sharma Class Teacher', 'Description': 'Dear Parents,\n\nGreetings of the day! \n Kindly find the attached holiday assignment.\n Thank You'
 
-    },
-    {'title': 'Sakshi Sharma Class Teacher', 'Description':  'Dear Parents,\n\nGreetings of the day! \n Kindly find the attached holiday assignment.\n Thank You'
-    },
-    {'title': 'Sakshi Sharma Class Teacher', 'Description':  'Dear Parents,\n\nGreetings of the day! \n Kindly find the attached holiday assignment.\n Thank You'
-    },
-    {'title': 'Sakshi Sharma Class Teacher', 'Description':  'Dear Parents,\n\nGreetings of the day! \n Kindly find the attached holiday assignment.\n Thank You'
-    },
-  ];
   DateTime todayDate = DateTime.now();
   final DateFormat formatter = DateFormat('EEEE');
   final DateFormat formatter1 = DateFormat('dMMMM');
@@ -101,28 +64,14 @@ class _SingleFeedState extends State<SingleFeed> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Feeds".toUpperCase(),
+              Strings.feeds.toUpperCase(),
               style: titleTextStyle,
               // textAlign: TextAlign.start,
             ),
             divider,
             Obx(
                     () => studentFeed.isLoading ==true?
-                Center(
-                    child: Image.asset(
-                      "assets/loading.gif",
-                      height: 425.0,
-                      width: 425.0,
-                      fit: BoxFit.fitHeight,
-                    )
-                ):studentFeed.events.length == 0?Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/no-data.gif"),
-                        smallSizedBox,
-                        Text("There are no event feeds", style: TextStyle(color: Colors.purple[800]),)
-                      ],
-                    ):
+               StudentAppWidgets.loadingWidget():studentFeed.events.length == 0?StudentAppWidgets.noDataFound(text: Strings.thereAreNoEventFeeds):
                     Card(
                       color: ColorConstants.kGreyColor100,
                       shape: RoundedRectangleBorder(
@@ -142,7 +91,7 @@ class _SingleFeedState extends State<SingleFeed> {
                                                  color: Colors.black, fontWeight: FontWeight.bold),
                                            ),*/
                                 Text(
-                                  "Daily feed",
+                                  Strings.dailyFeed,
                                   style: TextStyle(
                                       color: Colors.black, fontWeight: FontWeight.bold),
                                 ),

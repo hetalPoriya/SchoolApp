@@ -11,6 +11,7 @@ import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
 import 'package:school_app/utils/network_handler.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -47,35 +48,7 @@ class _VideoState extends State<Video> {
       videoController.getStuVideos();
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+      StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
   List<Tab> tabMaker(){  //return type is specified
@@ -94,21 +67,14 @@ class _VideoState extends State<Video> {
         automaticallyImplyLeading: false,
         child: Obx(
             () => videoController.isLoading ==true?
-        Center(
-            child: Image.asset(
-              "assets/loading.gif",
-              height: 425.0,
-              width: 425.0,
-              fit: BoxFit.fitHeight,
-            )
-        ): DefaultTabController(
+       StudentAppWidgets.loadingWidget(): DefaultTabController(
         length: videoController.videos.length,
         child: Padding(
             padding: const EdgeInsets.only(top: 60, bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("VIDEO", style: titleTextStyle),
+                Text(Strings.video.toUpperCase(), style: titleTextStyle),
                 smallSizedBox,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -149,7 +115,7 @@ class _VideoState extends State<Video> {
                       decoration: InputDecoration(
                         contentPadding:
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                        hintText: ("Search"),
+                        hintText: Strings.search,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(50.0),
                         ),
@@ -158,15 +124,8 @@ class _VideoState extends State<Video> {
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.only(right: 5),
-                  child: videoController.status == "Videos not found"?
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset("assets/no-data.gif"),
-                      smallSizedBox,
-                      Text("No Videos Found", style: TextStyle(color: Colors.purple[800]),)
-                    ],
-                  )
+                  child: videoController.status == Strings.videosNotFound?
+                 StudentAppWidgets.noDataFound(text: Strings.videosNotFound)
                       : TabBar(
                     // ignore: prefer_const_literals_to_create_immutables
                     tabs: [
@@ -188,7 +147,7 @@ class _VideoState extends State<Video> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                videoController.status == "Videos not found"? const SizedBox(): buildTabBarView(),
+                videoController.status == Strings.videosNotFound? const SizedBox(): buildTabBarView(),
               ],
             ),
           ),

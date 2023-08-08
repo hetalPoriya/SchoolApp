@@ -339,7 +339,7 @@ class _SubjectsWiseListState extends State<SubjectsWiseList>
                                 smallSizedBox,
                                 Flexible(
                                   child: Text(
-                                    'Equations and geometrical calculations',
+                                    Strings.equationsAndGeometricalCal,
                                     style: TextStyle(
                                         fontSize: 10.0, color: Colors.grey),
                                     overflow: TextOverflow.ellipsis,

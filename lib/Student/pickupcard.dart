@@ -15,6 +15,7 @@ import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -53,52 +54,11 @@ class _PickupcardState extends State<Pickupcard> {
     if (isConnected) {
       await pickupCardController.getPickupCard();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: const Padding(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+     StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
-  final List<Map<String, dynamic>> _details = [
-    {
-      'Name': 'Guardian1',
-      'Contact': '9999999999',
-      'Relation': 'Father',
-      'Aadhar No.': '123456789012',
-    },
-    {
-      'Name': 'Guardian2',
-      'Contact': '8888888888',
-      'Relation': 'Mother',
-      'Aadhar No.': '123456789013'
-    },
-  ];
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -110,7 +70,7 @@ class _PickupcardState extends State<Pickupcard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Pickup Card", style: titleTextStyle),
+                Text(Strings.pickupCard, style: titleTextStyle),
                 Padding(
                   padding: const EdgeInsets.only(right: 15),
                   child: GestureDetector(
@@ -154,26 +114,9 @@ class _PickupcardState extends State<Pickupcard> {
 
   buildPickupCard() {
     return Obx(() => pickupCardController.isLoading == true
-        ? Center(
-            child: Image.asset(
-              "assets/loading.gif",
-              height: 425.0,
-              width: 425.0,
-              fit: BoxFit.fitHeight,
-            ),
-          )
-        : pickupCardController.status == "Pickup card not found"
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset("assets/no-data.gif"),
-                  smallSizedBox,
-                  Text(
-                    "Pickup card not found",
-                    style: TextStyle(color: Colors.purple[800]),
-                  )
-                ],
-              )
+        ?StudentAppWidgets.loadingWidget()
+        : pickupCardController.status == Strings.pickupCardNotFound
+            ? StudentAppWidgets.noDataFound(text: Strings.pickupCardNotFound)
             : RepaintBoundary(
                 key: genKey,
                 child: Card(
@@ -210,7 +153,7 @@ class _PickupcardState extends State<Pickupcard> {
                                 Row(
                                   children: [
                                     const Text(
-                                      "Name:",
+                                      Strings.name,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 13,
@@ -227,7 +170,7 @@ class _PickupcardState extends State<Pickupcard> {
                                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      "Class:",
+                                      Strings.classStrings,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 13,
@@ -249,7 +192,7 @@ class _PickupcardState extends State<Pickupcard> {
                                 Row(
                                   children: [
                                     const Text(
-                                      "Section:",
+                                     Strings.section,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 13,
@@ -271,7 +214,7 @@ class _PickupcardState extends State<Pickupcard> {
                                 Row(
                                   children: [
                                     const Text(
-                                      "Gender:",
+                                      Strings.gender,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 13,
@@ -291,7 +234,7 @@ class _PickupcardState extends State<Pickupcard> {
                                 Row(
                                   children: [
                                     const Text(
-                                      "DOB:",
+                                     Strings.dateOfBirth,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 13,
@@ -316,35 +259,35 @@ class _PickupcardState extends State<Pickupcard> {
                         ),
                         smallSizedBox,
                         const Text(
-                          "Guardian's Details:",
+                          Strings.guardiansDetails,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.black),
                         ),
                         smallSizedBox,
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              "Name:",
+                            Text(
+                              Strings.name,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
-                            const Text(
-                              "Contact:",
+                            Text(
+                              Strings.contact,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
                             // const SizedBox(width:1),
-                            const Text(
-                              "Relation:",
+                            Text(
+                              Strings.relation,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
-                            const Text(
-                              "Aadhar No.:",
+                            Text(
+                              Strings.aadharNo,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),

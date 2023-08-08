@@ -86,7 +86,7 @@ class _TodaysWorkDateWiseDataState extends State<TodaysWorkDateWiseData> {
 
   //nameText() => Text(widget.name.toString(), style: titleTextStyle);
   nameText() => Container(
-        child: Text("Today's Work", style: titleTextStyle),
+        child: Text(Strings.todayWork, style: titleTextStyle),
         width: double.infinity,
         alignment: Alignment.center,
       );
@@ -122,7 +122,7 @@ class _TodaysWorkDateWiseDataState extends State<TodaysWorkDateWiseData> {
           const Expanded(
             flex: 4,
             child: Text(
-              "Regular School Timings for New Students",
+              Strings.regularSchoolTimings,
               style: TextStyle(color: Colors.grey),
             ),
           )
@@ -178,13 +178,7 @@ class _TodaysWorkDateWiseDataState extends State<TodaysWorkDateWiseData> {
 
     return CustomScaffold(
       child: Obx(() => todaysWorkController.isLoading == true
-          ? Center(
-              child: Image.asset(
-              "assets/loading.gif",
-              height: 425.0,
-              width: 425.0,
-              fit: BoxFit.fitHeight,
-            ))
+          ? StudentAppWidgets.loadingWidget()
           : SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

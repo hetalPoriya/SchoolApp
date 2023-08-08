@@ -13,6 +13,7 @@ import 'package:school_app/Model/assignmentModel.dart';
 import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/network_handler.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -55,18 +56,18 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
   void initState() {
     // TODO: implement initState
     log(assignmentController.pending_assignments[widget.id!].id);
-    _titleController = new TextEditingController(
+    _titleController = TextEditingController(
         text: '${assignmentController.pending_assignments[widget.id!].title}');
-    _classController = new TextEditingController(
+    _classController = TextEditingController(
         text:
             '${assignmentController.pending_assignments[widget.id!].className}');
-    _subjectController = new TextEditingController(
+    _subjectController = TextEditingController(
         text:
             '${assignmentController.pending_assignments[widget.id!].subjectName}');
-    _sectionController = new TextEditingController(
+    _sectionController = TextEditingController(
         text:
             '${assignmentController.pending_assignments[widget.id!].sectionName}');
-    _expiredateController = new TextEditingController(
+    _expiredateController = TextEditingController(
         text: DateFormat('dd-MM-yyyy').format(
             assignmentController.pending_assignments[widget.id!].expireAt));
     super.initState();
@@ -111,7 +112,7 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
   Widget build(BuildContext context) {
     return CustomScaffold(
         titleWidget: const Text(
-          "Submit Assignment",
+          Strings.submitAssignment,
           style: TextStyle(
               color: Colors.deepPurple,
               fontWeight: FontWeight.bold,
@@ -125,17 +126,17 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
             smallSizedBox,
             Container(
               alignment: Alignment.topLeft,
+              padding: const EdgeInsets.symmetric(vertical: 3),
               child: Row(
                 children: [
                   const Text(
-                    "Title:",
+                    "${Strings.title}:",
                     style: TextStyle(
                       fontSize: 15,
                     ),
                   ),
                 ],
               ),
-              padding: const EdgeInsets.symmetric(vertical: 3),
             ),
             TextField(
                 //enabled: false,
@@ -147,7 +148,7 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
                   fillColor: Colors.white,
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                  hintText: ("Assignment Title"),
+                  hintText: (Strings.assignmentTitle),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 1.0),
                   ),
@@ -159,17 +160,17 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
             smallSizedBox,
             Container(
               alignment: Alignment.topLeft,
+              padding: const EdgeInsets.symmetric(vertical: 5),
               child: Row(
                 children: [
                   const Text(
-                    "Subject:",
+                    "${Strings.subjects}:",
                     style: TextStyle(
                       fontSize: 15,
                     ),
                   ),
                 ],
               ),
-              padding: const EdgeInsets.symmetric(vertical: 5),
             ),
             TextField(
                 //enabled: false,
@@ -180,7 +181,7 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
                   fillColor: Colors.white,
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                  hintText: ("Subject"),
+                  hintText: (Strings.subject),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 1.0),
                   ),
@@ -192,17 +193,17 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
             smallSizedBox,
             Container(
               alignment: Alignment.topLeft,
+              padding: const EdgeInsets.symmetric(vertical: 5),
               child: Row(
                 children: [
                   const Text(
-                    "Class:",
+                    Strings.classStrings,
                     style: TextStyle(
                       fontSize: 15,
                     ),
                   ),
                 ],
               ),
-              padding: const EdgeInsets.symmetric(vertical: 5),
             ),
             TextField(
                 //enabled: false,
@@ -213,7 +214,7 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
                   fillColor: Colors.white,
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                  hintText: ("Class"),
+                  hintText: Strings.classStrings,
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 1.0),
                   ),
@@ -225,17 +226,17 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
             smallSizedBox,
             Container(
               alignment: Alignment.topLeft,
+              padding: const EdgeInsets.symmetric(vertical: 5),
               child: Row(
                 children: [
                   const Text(
-                    "Section:",
+                    Strings.section,
                     style: TextStyle(
                       fontSize: 15,
                     ),
                   ),
                 ],
               ),
-              padding: const EdgeInsets.symmetric(vertical: 5),
             ),
             TextField(
                 readOnly: true,
@@ -245,7 +246,7 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
                   fillColor: Colors.white,
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                  hintText: ("Section"),
+                  hintText: Strings.section,
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 1.0),
                   ),
@@ -257,13 +258,13 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
             smallSizedBox,
             Container(
               alignment: Alignment.topLeft,
+              padding: const EdgeInsets.symmetric(vertical: 3),
               child: const Text(
-                "Upload Image:",
+                Strings.uploadImage,
                 style: TextStyle(
                   fontSize: 15,
                 ),
               ),
-              padding: const EdgeInsets.symmetric(vertical: 3),
             ),
             SizedBox(
               height: 35,
@@ -290,7 +291,7 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
                               bottomRight: Radius.circular(5)),
                         ),
                         child: const Center(
-                          child: Text('Choose file'),
+                          child: Text(Strings.chooseFile),
                         ),
                       ),
                     ),
@@ -306,10 +307,11 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
             smallSizedBox,
             Container(
               alignment: Alignment.topLeft,
+              padding: const EdgeInsets.symmetric(vertical: 3),
               child: Row(
                 children: [
                   const Text(
-                    "Descriptions:",
+                    "${Strings.description}:",
                     style: TextStyle(
                       fontSize: 15,
                     ),
@@ -321,7 +323,6 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
                   )
                 ],
               ),
-              padding: const EdgeInsets.symmetric(vertical: 3),
             ),
             TextField(
                 controller: submitAssignmentController.decriptionController,
@@ -330,7 +331,7 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
                 cursorWidth: 2.0,
                 // textAlign: TextAlign.left,
                 decoration: const InputDecoration(
-                  hintText: "Description",
+                  hintText: Strings.description,
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 1.0),
                   ),
@@ -342,13 +343,13 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
             smallSizedBox,
             Container(
               alignment: Alignment.topLeft,
+              padding: const EdgeInsets.symmetric(vertical: 3),
               child: const Text(
-                "Expire Date",
+                Strings.expireDate,
                 style: TextStyle(
                   fontSize: 15,
                 ),
               ),
-              padding: const EdgeInsets.symmetric(vertical: 3),
             ),
             TextField(
                 controller: _expiredateController,
@@ -390,45 +391,21 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
                         ));
                       });
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        duration: const Duration(days: 1),
-                        behavior: SnackBarBehavior.floating,
-                        content: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            const Icon(
-                              Icons.signal_wifi_off,
-                              color: Colors.white,
-                            ),
-                            Expanded(
-                              child: const Padding(
-                                padding: EdgeInsets.only(
-                                  left: 16.0,
-                                ),
-                                child: const Text(
-                                  'No internet available',
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        action: SnackBarAction(
-                            textColor: Colors.white,
-                            label: 'RETRY',
-                            onPressed: () async {}),
-                        backgroundColor: Colors.grey,
-                      ));
+                     StudentAppWidgets.noInternetAvailable(context: context);
                     }
                   },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    primary: const Color.fromRGBO(105, 80, 255, 1.0),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text(
-                        "Submit",
+                        Strings.submit,
                         style: TextStyle(fontSize: 12),
                       ),
                       const SizedBox(
@@ -448,12 +425,6 @@ class _SubmitAssignmentState extends State<SubmitAssignment> {
                         width: 5,
                       ),
                     ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    primary: const Color.fromRGBO(105, 80, 255, 1.0),
                   ),
                 ),
               ),

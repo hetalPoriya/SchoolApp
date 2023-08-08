@@ -19,27 +19,27 @@ class StudentProfile extends StatefulWidget {
 class _StudentProfileState extends State<StudentProfile> {
   final List<Map<String, dynamic>> _data = [
     {
-      'title': "My Assignment",
+      'title': Strings.myAssignment,
       'icon': AssetImages.myAssignment,
     },
     {
-      'title': "My Attendance",
+      'title':Strings.myAttendance,
       'icon': AssetImages.myAttendance,
     },
     {
-      'title': "My Report Card",
+      'title':Strings.myReportCard,
       'icon': AssetImages.myReportCard,
     },
     {
-      'title': "Notice Board",
+      'title': Strings.noticeBoard,
       'icon': AssetImages.noticeBoard,
     },
     {
-      'title': "Pick Up Card",
+      'title': Strings.pickupCard,
       'icon': AssetImages.pickupCard,
     },
     {
-      'title': "Logout",
+      'title': Strings.logout,
       'icon': AssetImages.logout,
     },
   ];

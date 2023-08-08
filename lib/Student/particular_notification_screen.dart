@@ -11,6 +11,7 @@ import 'package:school_app/Student/edit_profile.dart';
 import 'package:school_app/Student/profile_page.dart';
 import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/network_handler.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -46,36 +47,7 @@ class _ParticularNotificationsState extends State<ParticularNotifications> {
       notificationController.getStuNotification();
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            duration: Duration(days: 1),
-            behavior: SnackBarBehavior.floating,
-            content: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Icon(
-                  Icons.signal_wifi_off,
-                  color: Colors.white,
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16.0,
-                    ),
-                    child: Text(
-                      'No internet available',
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            action: SnackBarAction(
-                textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-            backgroundColor: Colors.grey,
-          ));
+      StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -88,18 +60,11 @@ class _ParticularNotificationsState extends State<ParticularNotifications> {
             child:
             Obx(
                     () => notificationController.isLoading ==true?
-                Center(
-                  child: Image.asset(
-                    "assets/loading.gif",
-                    height: 425.0,
-                    width: 425.0,
-                    fit: BoxFit.fitHeight,
-                  ),
-                ):Column(
+                StudentAppWidgets.loadingWidget():Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(
-                    "NOTIFICATIONS",
+                    Strings.notification,
                     style: titleTextStyle,
                   ),
                   divider,
@@ -108,23 +73,8 @@ class _ParticularNotificationsState extends State<ParticularNotifications> {
                     removeTop: true,
                     // removeBottom: true,
                     // removeBottom: true,
-                    child: notificationController.notifications.length==0?
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/no-data.gif"),
-                        smallSizedBox,
-                        Text("Notifications not found", style: TextStyle(color: Colors.purple[800]),)
-                      ],
-                    ): notificationController.status == "Notifications not found"?
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/no-data.gif"),
-                        smallSizedBox,
-                        Text("Notifications not found", style: TextStyle(color: Colors.purple[800]),)
-                      ],
-                    ):Card(
+                    child: (notificationController.notifications.length==0 || notificationController.status == Strings.notificationsNotFound)?
+                    StudentAppWidgets.noDataFound(text: Strings.notificationsNotFound):Card(
                       color: ColorConstants.kGreyColor100,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),

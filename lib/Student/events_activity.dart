@@ -27,7 +27,7 @@ class _EventsActivityState extends State<EventsActivity> {
   final DateFormat formatter = DateFormat('EEEE');
   final DateFormat formatter1 = DateFormat('dMMMM');
 
-  nameText() => Text("Events & Activities".toUpperCase(), style: titleTextStyle);
+  nameText() => Text(Strings.eventsAndActivities.toUpperCase(), style: titleTextStyle);
 
   dateText() => Text(
         DateFormat('dd-MM-yyyy').format(DateTime.now()),
@@ -154,19 +154,19 @@ class _EventsActivityState extends State<EventsActivity> {
           ),
           const SizedBox(width: 5),
           const Expanded(
-              flex: 4, child: Text("Regular School Timings for New Students"))
+              flex: 4, child: Text(Strings.regularSchoolTimings))
         ],
       );
 
   textwidget() => Row(
         // ignore: prefer_const_literals_to_create_immutables
         children: [
-          const Expanded(child: Text("All day")),
+          const Expanded(child: Text(Strings.allDay)),
           Container(height: 30.0, width: 3.0, color: Colors.blue),
           const SizedBox(
             width: 5,
           ),
-          const Expanded(flex: 4, child: Text("Health day celebration"))
+          const Expanded(flex: 4, child: Text(Strings.healthDayCelebration))
         ],
       );
   @override

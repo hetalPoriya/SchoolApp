@@ -11,6 +11,7 @@ import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
 import 'package:school_app/utils/network_handler.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -90,7 +91,7 @@ class _SwitchProfileState extends State<SwitchProfile> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Switch Profile", style: titleTextStyle),
+                Text(Strings.switchProfile, style: titleTextStyle),
                 smallSizedBox,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -129,7 +130,7 @@ class _SwitchProfileState extends State<SwitchProfile> {
               fit: BoxFit.fitHeight,
             ),
             largerSizedBox,
-            Text("Switching Account..")
+            Text(Strings.switchingAccount)
           ],
         )
     )):Expanded(
@@ -172,9 +173,9 @@ class _SwitchProfileState extends State<SwitchProfile> {
                               mediumSizedBox,
                               Text("${loginController.studentName.value}", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),),
                               smallerSizedBox,
-                              Text("DOB: ${DateFormat('dd MMMM yyyy').format(loginController.dob.value)}", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: Colors.grey),),
+                              Text("${Strings.dateOfBirth}: ${DateFormat('dd MMMM yyyy').format(loginController.dob.value)}", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: Colors.grey),),
                               smallerSizedBox,
-                              Text("Class: ${loginController.className} ${loginController.sectionName}", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: Colors.grey),),
+                              Text("${Strings.classStrings} ${loginController.className} ${loginController.sectionName}", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: Colors.grey),),
                             ],
                           ),
                         ),
@@ -195,35 +196,7 @@ class _SwitchProfileState extends State<SwitchProfile> {
                                 }
                                 else{
                                   Navigator.pop(context);
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                    duration: Duration(days: 1),
-                                    behavior: SnackBarBehavior.floating,
-                                    content: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.signal_wifi_off,
-                                          color: Colors.white,
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                              left: 16.0,
-                                            ),
-                                            child: Text(
-                                              'No internet available',
-                                              textAlign: TextAlign.start,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    action: SnackBarAction(
-                                        textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-                                    backgroundColor: Colors.grey,
-                                  ));
+                                StudentAppWidgets.noInternetAvailable(context: context);
                                 }
                               },
                               child: Column(
@@ -242,9 +215,9 @@ class _SwitchProfileState extends State<SwitchProfile> {
                                 mediumSizedBox,
                                 Text("${loginController.siblingDetails[index][0].studentName}", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),),
                                 smallerSizedBox,
-                                Text("DOB: ${DateFormat('dd MMMM yyyy').format(loginController.siblingDetails[index][0].dob)}", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: Colors.grey),),
+                                Text("${Strings.dateOfBirth}: ${DateFormat('dd MMMM yyyy').format(loginController.siblingDetails[index][0].dob)}", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: Colors.grey),),
                                 smallerSizedBox,
-                                Text("Class: ${loginController.siblingDetails[index][0].className} ${loginController.siblingDetails[index][0].sectionName}", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: Colors.grey),),
+                                Text("${Strings.classStrings} ${loginController.siblingDetails[index][0].className} ${loginController.siblingDetails[index][0].sectionName}", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: Colors.grey),),
                               ],
                             ),)
                           )

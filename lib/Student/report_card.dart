@@ -12,6 +12,7 @@ import 'package:school_app/utils/animated_navigation.dart';
 import 'package:school_app/utils/colors.dart';
 import 'package:school_app/utils/constants.dart';
 import 'package:school_app/utils/network_handler.dart';
+import 'package:school_app/utils/student/app_widget.dart';
 import 'package:school_app/utils/widgets/custom_page.dart';
 import 'package:school_app/utils/images.dart';
 import 'package:school_app/utils/strings.dart';
@@ -47,35 +48,7 @@ class _ReportCardState extends State<ReportCard> {
       reportCardController.getStuReportCard();
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+      StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
   @override
@@ -87,7 +60,7 @@ class _ReportCardState extends State<ReportCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Report Card", style: titleTextStyle),
+            Text(Strings.reportCard, style: titleTextStyle),
             smallSizedBox,
             Text(
               DateFormat('dd MMMM yyyy').format(DateTime.now()),
@@ -101,31 +74,9 @@ class _ReportCardState extends State<ReportCard> {
             removeTop: true,
             child: Obx(
                   () => reportCardController.isLoading ==true?
-              Center(
-                child: Image.asset(
-                  "assets/loading.gif",
-                  height: 425.0,
-                  width: 425.0,
-                  fit: BoxFit.fitHeight,
-                ),
-              ):
-                  reportCardController.report_card.length==0?
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset("assets/no-data.gif"),
-                smallSizedBox,
-                Text("Report card not found", style: TextStyle(color: Colors.purple[800]),)
-              ],
-            ): reportCardController.status == "Report card not found"?
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset("assets/no-data.gif"),
-              smallSizedBox,
-              Text("Report card found", style: TextStyle(color: Colors.purple[800]),)
-            ],
-          ): ListView(
+              StudentAppWidgets.loadingWidget():
+                  (reportCardController.report_card.length==0 || reportCardController.status == Strings.reportCardNotFound )?
+            StudentAppWidgets.noDataFound(text: Strings.reportCardNotFound): ListView(
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GridView.builder(

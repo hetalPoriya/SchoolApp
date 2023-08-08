@@ -3052,35 +3052,7 @@ class _StudentHomeState extends State<StudentHome>
         dailyActivityController.getStuActivity();
       });
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(days: 1),
-        behavior: SnackBarBehavior.floating,
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const Icon(
-              Icons.signal_wifi_off,
-              color: Colors.white,
-            ),
-            const Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                ),
-                child: Text(
-                  'No internet available',
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ],
-        ),
-        action: SnackBarAction(
-            textColor: Colors.white, label: 'RETRY', onPressed: () async {}),
-        backgroundColor: Colors.grey,
-      ));
+      StudentAppWidgets.noInternetAvailable(context: context);
     }
   }
 
@@ -3128,20 +3100,20 @@ class _StudentHomeState extends State<StudentHome>
               context,
               MaterialPageRoute(
                   builder: (context) => const TodaysWork(
-                    name: "Today's Work",
+                    name:Strings.todayWork,
                   )),
             );
-          }, icon: AssetImages.todaysWork, text: "Today's Work", dailyActivityController: dailyActivityController,color: [Colors.orange, Color(0xFFFFCC80)]),
+          }, icon: AssetImages.todaysWork, text: Strings.todayWork, dailyActivityController: dailyActivityController,color: [Colors.orange, Color(0xFFFFCC80)]),
 
           StudentAppWidgets.homeScreenTabs(context: context, onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => const Video(
-                    name: "Video",
+                    name: Strings.video,
                   )),
             );
-          }, icon:  AssetImages.video,text:  "Video", dailyActivityController: dailyActivityController,color: [Colors.green, Color(0xFFA5D6A7)]),
+          }, icon:  AssetImages.video,text:  Strings.video, dailyActivityController: dailyActivityController,color: [Colors.green, Color(0xFFA5D6A7)]),
 
 
           StudentAppWidgets.homeScreenBadgeTabs(context: context, onTap: () {
@@ -3151,10 +3123,10 @@ class _StudentHomeState extends State<StudentHome>
               context,
               MaterialPageRoute(
                   builder: (context) => const Message(
-                    name: "Message",
+                    name: Strings.messages,
                   )),
             );
-          }, icon:  AssetImages.messages, text:  "Messages", dailyActivityController: dailyActivityController, showBadgeOrNot: dailyActivityController.messageCount != 0
+          }, icon:  AssetImages.messages, text:  Strings.messages, dailyActivityController: dailyActivityController, showBadgeOrNot: dailyActivityController.messageCount != 0
               ? true
               : false, badgeText: "${dailyActivityController.messageCount}",color: [Colors.red, Color(0xFFEF9A9A)]) ,
 
@@ -3169,7 +3141,7 @@ class _StudentHomeState extends State<StudentHome>
                     name: "Assignments",
                   )),
             );
-          }, icon:   AssetImages.messageAssignment, text:  "Assignments", dailyActivityController: dailyActivityController,
+          }, icon:   AssetImages.messageAssignment, text:  Strings.assignment, dailyActivityController: dailyActivityController,
             showBadgeOrNot: dailyActivityController.assignmentCount != 0
                 ? true
                 : false, badgeText: "${dailyActivityController.assignmentCount}",color: [Colors.blue, Color(0xFF90CAF9)]),
@@ -3179,20 +3151,20 @@ class _StudentHomeState extends State<StudentHome>
             context,
             MaterialPageRoute(
                 builder: (context) => const Attendance(
-                  name: "Attendance",
+                  name: Strings.attendance,
                 )),
           );
-        }, icon: AssetImages.drawerAttendence, text: "Attendance",isSvg: true, dailyActivityController: dailyActivityController,color:[Colors.deepPurple, Color(0xFFB39DDB)] ),
+        }, icon: AssetImages.drawerAttendence, text: Strings.attendance,isSvg: true, dailyActivityController: dailyActivityController,color:[Colors.deepPurple, Color(0xFFB39DDB)] ),
 
           StudentAppWidgets.homeScreenTabs(context: context, onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => const ViewEvents(
-                    name: "View Events",
+                    name: Strings.viewEvents,
                   )),
             );
-          }, icon:     AssetImages.assessmentCert, text:   "View Events", dailyActivityController: dailyActivityController, color:  [Colors.pink, Color(0xFFF48FB1)]),
+          }, icon:     AssetImages.assessmentCert, text: Strings.viewEvents, dailyActivityController: dailyActivityController, color:  [Colors.pink, Color(0xFFF48FB1)]),
 
           StudentAppWidgets.homeScreenBadgeTabs(context: context, onTap: () {
             dailyActivityController.stuUpdateCounter("event");
@@ -3203,7 +3175,7 @@ class _StudentHomeState extends State<StudentHome>
               context,
               MaterialPageRoute(builder: (context) => const Feeds()),
             );
-          }, icon:  AssetImages.newsFeeds, text:   "Feeds", dailyActivityController: dailyActivityController, showBadgeOrNot:  (dailyActivityController.otherCount !=
+          }, icon:  AssetImages.newsFeeds, text: Strings.feeds, dailyActivityController: dailyActivityController, showBadgeOrNot:  (dailyActivityController.otherCount !=
               0 ||
               dailyActivityController.eventCount != 0)
               ? true
@@ -3214,14 +3186,14 @@ class _StudentHomeState extends State<StudentHome>
               context,
               MaterialPageRoute(builder: (context) => const Documents()),
             );
-          }, icon:  AssetImages.documents, text: "Documents", dailyActivityController: dailyActivityController,color: [Colors.green, Color(0xFFA5D6A7)] ),
+          }, icon:  AssetImages.documents, text: Strings.document, dailyActivityController: dailyActivityController,color: [Colors.green, Color(0xFFA5D6A7)] ),
 
           StudentAppWidgets.homeScreenTabs(context: context, onTap:  () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const Pickupcard()),
             );
-          }, icon:   AssetImages.drawerPickUpCard, text:  "Pickup Card", dailyActivityController: dailyActivityController,isSvg: true,color:[Colors.red, Color(0xFFEF9A9A)] ),
+          }, icon:   AssetImages.drawerPickUpCard, text:  Strings.pickupCard, dailyActivityController: dailyActivityController,isSvg: true,color:[Colors.red, Color(0xFFEF9A9A)] ),
 
 
         ],
@@ -3244,11 +3216,11 @@ class _StudentHomeState extends State<StudentHome>
               ))
               : Container(
             height: dailyActivityController.status ==
-                "No activities found for today"
+                Strings.noActivitiesFoundForToday
                 ? 130
                 : 292.0,
             color:  dailyActivityController.status ==
-                "No activities found for today"
+                Strings.noActivitiesFoundForToday
                 ? ColorConstants.kGreyColor100 : Colors.transparent,
             child: Padding(
               padding: const EdgeInsets.only(
@@ -3296,7 +3268,7 @@ class _StudentHomeState extends State<StudentHome>
                       alignment: Alignment.topLeft,
                       child:
                       dailyActivityController.status ==
-                          "No activities found for today"
+                          Strings.noActivitiesFoundForToday
                           ? Column(
                         mainAxisAlignment:
                         MainAxisAlignment.start,
@@ -3306,7 +3278,7 @@ class _StudentHomeState extends State<StudentHome>
                           mediumSizedBox,
                           const Padding(
                             padding: EdgeInsets.only( left: 12,),
-                            child: Text("No activities found for today"),
+                            child: Text(Strings.noActivitiesFoundForToday),
                           )
                         ],
                       )
@@ -3325,10 +3297,10 @@ class _StudentHomeState extends State<StudentHome>
                                   // ignore: prefer_const_literals_to_create_immutables
                                   tabs: [
                                     const Tab(
-                                      text: "Sports",
+                                      text: Strings.sports,
                                     ),
                                     const Tab(
-                                      text: "Others",
+                                      text: Strings.others,
                                     )
                                   ],
                                   isScrollable: true,
@@ -3374,7 +3346,7 @@ class _StudentHomeState extends State<StudentHome>
                                               const Padding(
                                                 padding: EdgeInsets.only( left: 12,),
                                                 child: const Text(
-                                                    "No sports activities found for today"),
+                                                    Strings.noSportsActivitiesFoundForToday),
                                               )
                                             ],
                                           )
@@ -3473,7 +3445,7 @@ class _StudentHomeState extends State<StudentHome>
                                               const Padding(
                                                 padding: EdgeInsets.only( left: 12,),
                                                 child: Text(
-                                                    "No other activities found for today"),
+                                                    Strings.noOtherActivitiesFoundForToday),
                                               )
                                             ],
                                           )
